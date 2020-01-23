@@ -1,2 +1,2 @@
-# nvim
-My Vim / Neovim configuration
+# My Personal Vim / Neovim configuration
+## init.vim included...
