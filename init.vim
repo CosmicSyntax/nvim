@@ -23,6 +23,8 @@ let g:gruvbox_contrast_dark = 'soft'
 set background=dark
 colorscheme gruvbox
 
+let g:NERDTreeWinSize=60
+
 nnoremap <F7> :NERDTree <CR>
 
 " Coc Configurations
