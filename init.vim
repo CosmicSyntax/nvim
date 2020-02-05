@@ -14,18 +14,29 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 Plug 'matze/vim-move'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
-let g:gruvbox_contrast_dark = 'soft'
+" Theme Customization
+let g:gruvbox_contrast_dark='soft'
 set background=dark
 colorscheme gruvbox
 
-let g:NERDTreeWinSize=60
-
+" NERDTree Customization
+let g:NERDTreeWinSize=40
 nnoremap <F7> :NERDTree <CR>
+
+" Airline Customization
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
 
 " Coc Configurations
 " if hidden is not set, TextEdit might fail.
