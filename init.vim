@@ -21,6 +21,9 @@ Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
+" Enable mouse scroll
+set mouse=a
+
 " Theme Customization
 let g:gruvbox_contrast_dark='soft'
 set background=dark
