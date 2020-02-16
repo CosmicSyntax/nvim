@@ -16,6 +16,7 @@ Plug 'mattn/emmet-vim'
 Plug 'matze/vim-move'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/indentLine'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
 
