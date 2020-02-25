@@ -18,6 +18,7 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
+Plug 'wsdjeg/FlyGrep.vim'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
 
@@ -39,6 +40,20 @@ colorscheme gruvbox
 " NERDTree Customization
 let g:NERDTreeWinSize=40
 nnoremap <F7> :NERDTree <CR>
+
+" Clipboard config for manjaro
+let g:clipboard = {
+  \   'name': 'xclip-xfce4-clipman',
+  \   'copy': {
+  \      '+': 'xclip -selection clipboard',
+  \      '*': 'xclip -selection clipboard',
+  \    },
+  \   'paste': {
+  \      '+': 'xclip -selection clipboard -o',
+  \      '*': 'xclip -selection clipboard -o',
+  \   },
+  \   'cache_enabled': 1,
+  \ }
 
 " Airline Customization
 if !exists('g:airline_symbols')
