@@ -25,6 +25,9 @@ Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
+" Ignore vimgrep
+set wildignore+=target/**
+
 " Enable 24-bit colors if supported
 set termguicolors
 
