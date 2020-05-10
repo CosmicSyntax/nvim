@@ -18,7 +18,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
-Plug 'wsdjeg/FlyGrep.vim'
 Plug 'easymotion/vim-easymotion'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
