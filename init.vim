@@ -4,7 +4,7 @@ set ts=4 sw=4
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
