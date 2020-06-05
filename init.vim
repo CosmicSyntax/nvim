@@ -37,6 +37,9 @@ set wildignore+=target/**
 " Enable 24-bit colors if supported
 set termguicolors
 
+" Map fzf
+nnoremap <F8> :GFiles<CR>
+
 " Enable mouse scroll
 set mouse=a
 nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
