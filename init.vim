@@ -1,5 +1,8 @@
 set number
-set ts=4 sw=4
+set autoindent
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
 
 call plug#begin('~/.vim/plugged')
 
@@ -19,9 +22,12 @@ Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-rhubarb'
+Plug 'voldikss/vim-floaterm'
+"Plug 'puremourning/vimspector'
+"Plug 'mfussenegger/nvim-dap'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
-
 call plug#end()
 
 " show existing tab with 4 spaces width
@@ -44,15 +50,6 @@ nnoremap <F9> :Files<CR>
 " Copy remap
 vnoremap <C-c> "+y
 
-" Auto complete brackets
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap `` ``<Left>
-
 " Enable mouse scroll
 set mouse=a
 nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
@@ -63,23 +60,32 @@ let g:gruvbox_contrast_dark='soft'
 set background=dark
 colorscheme gruvbox
 
+hi Comment gui=italic
+
 " NERDTree Customization
 let g:NERDTreeWinSize=40
 nnoremap <F7> :NERDTree <CR>
 
-" Clipboard config for manjaro
-"let g:clipboard = {
-  "\   'name': 'xclip-xfce4-clipman',
-  "\   'copy': {
-  "\      '+': 'xclip -selection clipboard',
-  "\      '*': 'xclip -selection clipboard',
-  "\    },
-  "\   'paste': {
-  "\      '+': 'xclip -selection clipboard -o',
-  "\      '*': 'xclip -selection clipboard -o',
-  "\   },
-  "\   'cache_enabled': 1,
-  "\ }
+" Go Debug configuration
+"let g:vimspector_enable_mappings = 'HUMAN'
+"nmap <leader>vl :call vimspector#Launch()<CR>
+"nmap <leader>vr :VimspectorReset<CR>
+"nmap <leader>ve :VimspectorEval
+"nmap <leader>vw :VimspectorWatch
+"nmap <leader>vo :VimspectorShowOutput
+"nmap <leader>vi <Plug>VimspectorBalloonEval
+"xmap <leader>vi <Plug>VimspectorBalloonEval
+
+"" for normal mode - the word under the cursor
+"nmap <Leader>di <Plug>VimspectorBalloonEval
+"" for visual mode, the visually selected text
+"xmap <Leader>di <Plug>VimspectorBalloonEval
+"nmap <Leader>dt <Plug>VimspectorToggleBreakpoint
+"nmap <Leader>ds <Plug>VimspectorContinue
+"nmap <Leader>do <Plug>VimspectorStepOver
+"nmap <Leader>dg <Plug>VimspectorStepInto
+
+"let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-go', 'CodeLLDB', 'vscode-node-debug2' ]
 
 " Airline Customization
 if !exists('g:airline_symbols')
