@@ -24,6 +24,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
+Plug 'dominikduda/vim_current_word'
 "Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
@@ -55,8 +56,14 @@ set mouse=a
 nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
 nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
+" Open Coc Explorer... make sure this is installed
+nnoremap <space>p :CocCommand explorer<CR>
+
+" Get link to github
+nnoremap <space>g :.GBrowse!<CR>
+
 " Theme Customization
-let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_dark='medium'
 set background=dark
 colorscheme gruvbox
 
