@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gruvbox-community/gruvbox'
-Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdcommenter'
@@ -25,6 +24,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
 Plug 'dominikduda/vim_current_word'
+Plug 'sebdah/vim-delve'
+Plug 'jiangmiao/auto-pairs'
+"Plug 'dense-analysis/ale'
 "Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
@@ -57,7 +59,7 @@ nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
 nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
 " Open Coc Explorer... make sure this is installed
-nnoremap <space>p :CocCommand explorer<CR>
+nnoremap <space>i :CocCommand explorer<CR>
 
 " Get link to github
 nnoremap <space>g :.GBrowse!<CR>
