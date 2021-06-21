@@ -3,9 +3,13 @@ set autoindent
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+
+set foldmethod=indent
+"set foldlevel=1
+set nofoldenable
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
@@ -26,12 +30,26 @@ Plug 'voldikss/vim-floaterm'
 Plug 'dominikduda/vim_current_word'
 Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 "Plug 'dense-analysis/ale'
 "Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
 call plug#end()
+
+"Tree-sitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true,
+    },
+    indent = {
+        enable = true,
+    },
+}
+EOF
 
 " show existing tab with 4 spaces width
 set tabstop=4
