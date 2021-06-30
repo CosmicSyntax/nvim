@@ -1,9 +1,7 @@
 set number
-set autoindent
-set noexpandtab
 set tabstop=4
 set shiftwidth=4
-set softtabstop=4
+set noexpandtab
 
 set foldmethod=indent
 "set foldlevel=1
@@ -18,20 +16,20 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
-Plug 'matze/vim-move'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
-Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
-Plug 'dominikduda/vim_current_word'
 Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'matze/vim-move'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'tpope/vim-sleuth'
 "Plug 'dense-analysis/ale'
 "Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
@@ -51,18 +49,14 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces
-set expandtab
-
 " Ignore vimgrep
 set wildignore+=target/**
 
 " Enable 24-bit colors if supported
 set termguicolors
+
+" Indent Guide config
+let g:indent_guides_enable_on_vim_startup=1
 
 " Map fzf
 nnoremap <F8> :GFiles<CR>
@@ -83,7 +77,8 @@ nnoremap <space>i :CocCommand explorer<CR>
 nnoremap <space>g :.GBrowse!<CR>
 
 " Theme Customization
-let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_ark='medium'
+"let g:gruvbox_material_palette='material'
 set background=dark
 colorscheme gruvbox
 
