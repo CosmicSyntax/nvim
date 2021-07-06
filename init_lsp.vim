@@ -21,7 +21,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
@@ -38,6 +37,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+"Plug 'preservim/nerdtree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'matze/vim-move'
 "Plug 'easymotion/vim-easymotion'
@@ -153,9 +155,10 @@ colorscheme gruvbox
 
 hi Comment gui=italic
 
-" NERDTree Customization
-let g:NERDTreeWinSize=40
-nnoremap <F7> :NERDTree <CR>
+" Tree Customization
+nnoremap <F7> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " Airline Customization
 if !exists('g:airline_symbols')
