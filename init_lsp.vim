@@ -33,12 +33,13 @@ Plug 'sebdah/vim-delve'
 Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'folke/trouble.nvim'
 "Plug 'preservim/nerdtree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'matze/vim-move'
@@ -64,6 +65,7 @@ require'nvim-treesitter.configs'.setup {
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
+require("trouble").setup{}
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
@@ -85,39 +87,53 @@ nvim_lsp.rust_analyzer.setup({
             procMacro = {
                 enable = true
             },
-        }
-    }
+        },
+    },
 })
-nvim_lsp.gopls.setup({ on_attach=on_attach })
+
+-- Enable Gopls
+nvim_lsp.gopls.setup({
+	on_attach=on_attach,
+	settings = {
+		analyses = {
+			unusedparams = true,
+		},
+		staticcheck = true,
+	}
+})
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = true,
+		signs = true,
+		update_in_insert = true,
+	}
 )
 
+--[[
 do
-  local method = "textDocument/publishDiagnostics"
-  local default_handler = vim.lsp.handlers[method]
-  vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
-    default_handler(err, method, result, client_id, bufnr, config)
-    local diagnostics = vim.lsp.diagnostic.get_all()
-    local qflist = {}
-    for bufnr, diagnostic in pairs(diagnostics) do
-      for _, d in ipairs(diagnostic) do
-        d.bufnr = bufnr
-        d.lnum = d.range.start.line + 1
-        d.col = d.range.start.character + 1
-        d.text = d.message
-        table.insert(qflist, d)
-      end
-    end
-    vim.lsp.util.set_qflist(qflist)
-  end
+	local method = "textDocument/publishDiagnostics"
+	local default_handler = vim.lsp.handlers[method]
+	vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
+		default_handler(err, method, result, client_id, bufnr, config)
+		local diagnostics = vim.lsp.diagnostic.get_all()
+		print(vim.inspect(diagnostics))
+		local qflist = {}
+		for bufnr, diagnostic in pairs(diagnostics) do
+			for _, d in ipairs(diagnostic) do
+				d.bufnr = bufnr
+				d.lnum = d.range.start.line + 1
+				d.col = d.range.start.character + 1
+				d.text = d.message
+				table.insert(qflist, d)
+			end
+		end
+	vim.lsp.util.set_qflist(qflist)
+	end
 end
+--]]
+
 EOF
 
 " Show diagnostic popup on cursor hold
@@ -125,7 +141,7 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
 
 " Ignore vimgrep
 set wildignore+=target/**
@@ -148,7 +164,7 @@ vnoremap <C-c> "+y
 nnoremap <space>g :.GBrowse!<CR>
 
 " Theme Customization
-let g:gruvbox_contrast_ark='medium'
+let g:gruvbox_contrast_ark='soft'
 "let g:gruvbox_material_palette='material'
 set background=dark
 colorscheme gruvbox
@@ -160,6 +176,9 @@ nnoremap <F7> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
+" Trouble Customization
+nnoremap <space>a :TroubleToggle<CR>
+
 " Airline Customization
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -168,6 +187,8 @@ endif
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:gitgutter_enabled=0 " Just toggle it
+nmap <leader>dm :let g:gitgutter_diff_base = 'master'<CR>
+nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -188,6 +209,7 @@ nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " Goto previous/next diagnostic warning/error
