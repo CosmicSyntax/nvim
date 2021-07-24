@@ -164,7 +164,7 @@ vnoremap <C-c> "+y
 nnoremap <space>g :.GBrowse!<CR>
 
 " Theme Customization
-let g:gruvbox_contrast_ark='soft'
+let g:gruvbox_contrast_dark='soft'
 "let g:gruvbox_material_palette='material'
 set background=dark
 colorscheme gruvbox
@@ -189,6 +189,9 @@ let g:airline#extensions#tabline#enabled=1
 let g:gitgutter_enabled=0 " Just toggle it
 nmap <leader>dm :let g:gitgutter_diff_base = 'master'<CR>
 nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
+nmap <leader>dt :GitGutterToggle<CR>
+nmap <leader>dp <Plug>(GitGutterPreviewHunk)
+
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
