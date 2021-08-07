@@ -8,21 +8,21 @@ set signcolumn=yes
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
+set guicursor=n:block-blinkon250,v:block-blinkon250,i:ver100-blinkon250
+
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
-set updatetime=300
+set updatetime=1000
 
 set foldmethod=indent
 "set foldlevel=1
 set nofoldenable
 
 call plug#begin('~/.vim/plugged')
-Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
-Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
@@ -37,9 +37,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
+Plug 'wellle/context.vim'
+Plug 'gruvbox-community/gruvbox'
+"Plug 'mattn/emmet-vim'
 "Plug 'preservim/nerdtree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'matze/vim-move'
