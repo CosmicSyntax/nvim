@@ -30,7 +30,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'voldikss/vim-floaterm'
 Plug 'sebdah/vim-delve'
-Plug 'jiangmiao/auto-pairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -40,22 +39,22 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
-Plug 'wellle/context.vim'
 Plug 'gruvbox-community/gruvbox'
-"Plug 'mattn/emmet-vim'
+"Plug 'wellle/context.vim'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'puremourning/vimspector'
 "Plug 'preservim/nerdtree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'matze/vim-move'
 "Plug 'easymotion/vim-easymotion'
 "Plug 'tpope/vim-sleuth'
 "Plug 'dense-analysis/ale'
-"Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
 "Plug 'tomasr/molokai', {'as': 'molokai'}
 "Plug 'itchyny/lightline.vim'
 call plug#end()
 
-"NVIM CONFIG
+" NVIM CONFIG
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
     highlight = {
@@ -105,6 +104,12 @@ nvim_lsp.gopls.setup({
 	}
 })
 
+
+-- Enable Pyright
+nvim_lsp.pyright.setup({
+	on_attach=on_attach,
+})
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -138,6 +143,14 @@ end
 --]]
 
 EOF
+
+" Rust Debugging
+"nmap <Leader>vC <Plug>VimspectorContinue
+"nmap <Leader>vS <Plug>VimspectorStop
+"nmap <Leader>vB <Plug>VimspectorToggleBreakpoint
+"nmap <Leader>vN <Plug>VimspectorStepInto
+"nmap <Leader>vX <Plug>VimspectorStepOut
+"nmap <Leader>vS <Plug>VimspectorStepOver
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
