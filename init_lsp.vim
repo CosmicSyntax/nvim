@@ -40,6 +40,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'chrisbra/Colorizer'
 "Plug 'wellle/context.vim'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'puremourning/vimspector'
@@ -154,6 +155,9 @@ EOF
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+
+" Close copen upon selecting item
+autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
