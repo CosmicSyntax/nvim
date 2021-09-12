@@ -1,4 +1,4 @@
-set number
+set relativenumber
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
@@ -28,7 +28,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
-Plug 'voldikss/vim-floaterm'
+Plug 'numToStr/FTerm.nvim'
 Plug 'sebdah/vim-delve'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -41,8 +41,10 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'chrisbra/Colorizer'
-"Plug 'wellle/context.vim'
+Plug 'psliwka/vim-smoothie'
+Plug 'ellisonleao/glow.nvim'
 "Plug 'jiangmiao/auto-pairs'
+"Plug 'wellle/context.vim'
 "Plug 'puremourning/vimspector'
 "Plug 'preservim/nerdtree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -64,6 +66,9 @@ require'nvim-treesitter.configs'.setup {
     indent = {
         enable = true,
     },
+	autopairs = {
+		enable = true,
+	},
 }
 
 -- nvim_lsp object
@@ -120,38 +125,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	}
 )
 
---[[
-do
-	local method = "textDocument/publishDiagnostics"
-	local default_handler = vim.lsp.handlers[method]
-	vim.lsp.handlers[method] = function(err, method, result, client_id, bufnr, config)
-		default_handler(err, method, result, client_id, bufnr, config)
-		local diagnostics = vim.lsp.diagnostic.get_all()
-		print(vim.inspect(diagnostics))
-		local qflist = {}
-		for bufnr, diagnostic in pairs(diagnostics) do
-			for _, d in ipairs(diagnostic) do
-				d.bufnr = bufnr
-				d.lnum = d.range.start.line + 1
-				d.col = d.range.start.character + 1
-				d.text = d.message
-				table.insert(qflist, d)
-			end
-		end
-	vim.lsp.util.set_qflist(qflist)
-	end
-end
---]]
-
 EOF
-
-" Rust Debugging
-"nmap <Leader>vC <Plug>VimspectorContinue
-"nmap <Leader>vS <Plug>VimspectorStop
-"nmap <Leader>vB <Plug>VimspectorToggleBreakpoint
-"nmap <Leader>vN <Plug>VimspectorStepInto
-"nmap <Leader>vX <Plug>VimspectorStepOut
-"nmap <Leader>vS <Plug>VimspectorStepOver
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
@@ -195,6 +169,10 @@ hi Comment gui=italic
 nnoremap <F7> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" Inline Terminal Customization
+nnoremap <leader>to :lua require('FTerm').open()<CR>
+nnoremap <leader>tt :lua require('FTerm').toggle()<CR>
 
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
