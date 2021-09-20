@@ -85,14 +85,16 @@ require'lualine'.setup {
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {'branch'},
-		lualine_c = {'filename'},
+		lualine_c = {
+			{
+				'diagnostics',
+				sources = {'nvim_lsp'},
+				symbols = {error = 'E ', warn = 'W ', info = 'I '},
+			},
+		},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
-		lualine_y = {{
-		'diagnostics',
-		sources = {'nvim_lsp'},
-		symbols = {error = 'E ', warn = 'W ', info = 'I '},
-		}},
-	lualine_z = {'progress', 'location'}
+		lualine_y = {'progress'},
+		lualine_z = {'location'},
 	},
 	inactive_sections = {
 		lualine_a = {},
