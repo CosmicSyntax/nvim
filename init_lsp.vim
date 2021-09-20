@@ -20,6 +20,7 @@ set nofoldenable
 
 call plug#begin('~/.vim/plugged')
 Plug 'hoob3rt/lualine.nvim'
+Plug 'romgrk/barbar.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
@@ -62,13 +63,13 @@ call plug#end()
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
 	highlight = {
-	enable = true,
+		enable = true,
 	},
-indent = {
-enable = true,
+	indent = {
+	enable = true,
 },
 	autopairs = {
-	enable = true,
+		enable = true,
 	},
 }
 
@@ -105,14 +106,16 @@ require'lualine'.setup {
 	extensions = {'fzf', 'nvim-tree', 'fugitive'}
 }
 
--- nvim_lsp object
-local nvim_lsp = require'lspconfig'
+-- Trouble - dx
 require("trouble").setup{}
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
 require'completion'.on_attach(client)
 end
+
+-- nvim_lsp object
+local nvim_lsp = require'lspconfig'
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
@@ -159,6 +162,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	}
 )
 
+-- Tabline config
+vim.g.bufferline = {
+	icons = false,
+	icon_close_tab = 'x',
+}
+
 EOF
 
 " Show diagnostic popup on cursor hold
@@ -169,7 +178,7 @@ autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-			\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
 
 " Ignore vimgrep
 set wildignore+=target/**
