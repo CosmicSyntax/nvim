@@ -19,7 +19,7 @@ set foldmethod=indent
 set nofoldenable
 
 call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
@@ -43,6 +43,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
+"Plug 'vim-airline/vim-airline'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'wellle/context.vim'
 "Plug 'puremourning/vimspector'
@@ -60,15 +61,48 @@ call plug#end()
 " NVIM CONFIG
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true,
-    },
-    indent = {
-        enable = true,
-    },
-	autopairs = {
-		enable = true,
+	highlight = {
+	enable = true,
 	},
+indent = {
+enable = true,
+},
+	autopairs = {
+	enable = true,
+	},
+}
+
+-- Line Setup
+require'lualine'.setup {
+	options = {
+		icons_enabled = false,
+		theme = 'gruvbox',
+		component_separators = '',
+		section_separators = {'', ''},
+		disabled_filetypes = {}
+		},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {'branch'},
+		lualine_c = {'filename'},
+		lualine_x = {'encoding', 'fileformat', 'filetype'},
+		lualine_y = {{
+		'diagnostics',
+		sources = {'nvim_lsp'},
+		symbols = {error = 'E ', warn = 'W ', info = 'I '},
+		}},
+	lualine_z = {'progress', 'location'}
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {'filename'},
+		lualine_x = {'location'},
+		lualine_y = {},
+		lualine_z = {}
+		},
+	tabline = {},
+	extensions = {'fzf', 'nvim-tree', 'fugitive'}
 }
 
 -- nvim_lsp object
@@ -77,26 +111,26 @@ require("trouble").setup{}
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
-    require'completion'.on_attach(client)
+require'completion'.on_attach(client)
 end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
 	on_attach=on_attach,
 	settings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "by_self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-        },
-    },
+		["rust-analyzer"] = {
+			assist = {
+				importGranularity = "module",
+				importPrefix = "by_self",
+				},
+			cargo = {
+				loadOutDirsFromCheck = true
+				},
+			procMacro = {
+			enable = true
+			},
+		},
+	},
 })
 
 -- Enable Gopls
@@ -105,9 +139,9 @@ nvim_lsp.gopls.setup({
 	settings = {
 		analyses = {
 			unusedparams = true,
-		},
+			},
 		staticcheck = true,
-	}
+		}
 })
 
 
@@ -135,7 +169,7 @@ autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
+			\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
 
 " Ignore vimgrep
 set wildignore+=target/**
@@ -177,13 +211,7 @@ nnoremap <leader>tt :lua require('FTerm').toggle()<CR>
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
 
-" Airline Customization
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
+" Gitgutter config
 let g:gitgutter_enabled=0 " Just toggle it
 nmap <leader>dm :let g:gitgutter_diff_base = 'master'<CR>
 nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
