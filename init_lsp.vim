@@ -41,10 +41,10 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 Plug 'gruvbox-community/gruvbox'
-Plug 'chrisbra/Colorizer'
 Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
 Plug 'kevinhwang91/nvim-bqf'
+Plug 'chrisbra/Colorizer'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'vim-airline/vim-airline'
 "Plug 'wellle/context.vim'
@@ -150,12 +150,11 @@ require("trouble").setup {
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
-require'completion'.on_attach(client)
+	require'completion'.on_attach(client)
 end
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
-
 
 -- stop nvim_lsp auto jump for GI
 local log = require 'vim.lsp.log'
@@ -245,10 +244,6 @@ set wildignore+=target/**
 " Enable 24-bit colors if supported
 set termguicolors
 
-" Indent config
-let g:indent_guides_color_change_percent=5
-let g:indent_guides_start_level=2
-
 " Map fzf
 nnoremap <F8> :GFiles<CR>
 nnoremap <F9> :Files<CR>
@@ -268,7 +263,6 @@ colorscheme gruvbox
 hi Comment gui=italic
 
 " Tree Customization
-let g:nvim_tree_lsp_diagnostics = 1
 nnoremap <F7> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
