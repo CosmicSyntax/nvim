@@ -44,8 +44,9 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
-"Plug 'vim-airline/vim-airline'
+Plug 'kevinhwang91/nvim-bqf'
 "Plug 'jiangmiao/auto-pairs'
+"Plug 'vim-airline/vim-airline'
 "Plug 'wellle/context.vim'
 "Plug 'puremourning/vimspector'
 "Plug 'preservim/nerdtree'
@@ -61,6 +62,8 @@ call plug#end()
 
 " NVIM CONFIG
 lua <<EOF
+
+-- Nvim native treesitter configuration
 require'nvim-treesitter.configs'.setup {
 	highlight = {
 		enable = true,
@@ -71,6 +74,31 @@ require'nvim-treesitter.configs'.setup {
 	autopairs = {
 		enable = true,
 	},
+}
+
+-- Nvim tree navigator setup
+require'nvim-tree'.setup {}
+
+-- Better QF config
+require'bqf'.setup {
+	auto_enable = true,
+    preview = {
+        win_height = 12,
+        win_vheight = 12,
+        delay_syntax = 80,
+        border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'}
+    },
+    func_map = {
+        vsplit = '',
+        ptogglemode = 'z,',
+        stoggleup = ''
+    },
+    filter = {
+        fzf = {
+            action_for = {['ctrl-s'] = 'split'},
+            extra_opts = {'--bind', 'ctrl-o:toggle-all', '--prompt', '> '}
+        }
+    }
 }
 
 -- Line Setup
@@ -116,7 +144,9 @@ require'lualine'.setup {
 }
 
 -- Trouble - dx
-require("trouble").setup{}
+require("trouble").setup {
+	icons = false,
+}
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
@@ -125,6 +155,25 @@ end
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
+
+
+-- stop nvim_lsp auto jump for GI
+local log = require 'vim.lsp.log'
+local util = require 'vim.lsp.util'
+vim.lsp.handlers["textDocument/implementation"] = function(_, method, result)
+	if result == nil or vim.tbl_isempty(result) then
+		local _ = log.info() and log.info(method, 'No location found')
+		return nil
+	end
+	if vim.tbl_islist(result) then
+		if #result > 1 then
+			util.set_qflist(util.locations_to_items(result))
+			vim.api.nvim_command("copen")
+		end
+	else
+		util.jump_to_location(result)
+	end
+end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
@@ -153,7 +202,7 @@ nvim_lsp.gopls.setup({
 			unusedparams = true,
 			},
 		staticcheck = true,
-		}
+	}
 })
 
 
@@ -186,8 +235,9 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint"} }
+autocmd BufEnter,BufWinEnter,TabEnter *.rs
+	\ lua require'lsp_extensions'.inlay_hints{ prefix = '', aligned = true,
+	\ highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Ignore vimgrep
 set wildignore+=target/**
@@ -218,6 +268,7 @@ colorscheme gruvbox
 hi Comment gui=italic
 
 " Tree Customization
+let g:nvim_tree_lsp_diagnostics = 1
 nnoremap <F7> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
