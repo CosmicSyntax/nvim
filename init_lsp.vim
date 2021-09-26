@@ -43,7 +43,7 @@ Plug 'folke/trouble.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
-Plug 'kevinhwang91/nvim-bqf'
+Plug 'kevinhwang91/nvim-bqf', { 'branch': 'dev' } " dev fixes highlighting issue
 Plug 'chrisbra/Colorizer'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'vim-airline/vim-airline'
