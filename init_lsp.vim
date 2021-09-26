@@ -4,16 +4,12 @@ set shiftwidth=4
 set noexpandtab
 set mouse=a
 set signcolumn=yes
-
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
-
 set guicursor=n:block-blinkon250,v:block-blinkon250,i:ver100-blinkon250
-
 " Set updatetime for CursorHold
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=1000
-
 set foldmethod=indent
 "set foldlevel=1
 set nofoldenable
@@ -69,8 +65,8 @@ require'nvim-treesitter.configs'.setup {
 		enable = true,
 	},
 	indent = {
-	enable = true,
-},
+		enable = true,
+	},
 	autopairs = {
 		enable = true,
 	},
@@ -241,9 +237,6 @@ autocmd BufEnter,BufWinEnter,TabEnter *.rs
 " Ignore vimgrep
 set wildignore+=target/**
 
-" Enable 24-bit colors if supported
-set termguicolors
-
 " Map fzf
 nnoremap <F8> :GFiles<CR>
 nnoremap <F9> :Files<CR>
@@ -256,11 +249,13 @@ nnoremap <space>g :.GBrowse!<CR>
 
 " Theme Customization
 let g:gruvbox_contrast_dark='soft'
-"let g:gruvbox_material_palette='material'
 set background=dark
 colorscheme gruvbox
 
-hi Comment gui=italic
+" Enable 24-bit colors if supported and italic comments
+" This needs to be set after Theme, or the theme overrides it
+set termguicolors
+hi Comment gui=italic cterm=italic
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
