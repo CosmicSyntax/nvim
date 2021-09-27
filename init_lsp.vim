@@ -32,7 +32,10 @@ Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-cmp' " Completion plugins
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip' " End of Completion
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
@@ -41,6 +44,7 @@ Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
 Plug 'kevinhwang91/nvim-bqf', { 'branch': 'dev' } " dev fixes highlighting issue
 Plug 'chrisbra/Colorizer'
+"Plug 'nvim-lua/completion-nvim'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'vim-airline/vim-airline'
 "Plug 'wellle/context.vim'
@@ -144,10 +148,26 @@ require("trouble").setup {
 	icons = false,
 }
 
--- function to attach completion when setting up lsp
-local on_attach = function(client)
-	require'completion'.on_attach(client)
-end
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
+    },
+    mapping = {
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	},
+})
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
@@ -172,7 +192,7 @@ end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
-	on_attach=on_attach,
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	settings = {
 		["rust-analyzer"] = {
 			assist = {
@@ -191,7 +211,7 @@ nvim_lsp.rust_analyzer.setup({
 
 -- Enable Gopls
 nvim_lsp.gopls.setup({
-	on_attach=on_attach,
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 	settings = {
 		analyses = {
 			unusedparams = true,
@@ -203,7 +223,7 @@ nvim_lsp.gopls.setup({
 
 -- Enable Pyright
 nvim_lsp.pyright.setup({
-	on_attach=on_attach,
+	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 })
 
 -- Enable diagnostics
@@ -230,8 +250,7 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
-autocmd BufEnter,BufWinEnter,TabEnter *.rs
-	\ lua require'lsp_extensions'.inlay_hints{ prefix = '', aligned = true,
+autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = "➜",
 	\ highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Ignore vimgrep
@@ -281,10 +300,6 @@ nmap <leader>dp <Plug>(GitGutterPreviewHunk)
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" use <Tab> as trigger keys
-imap <Tab> <Plug>(completion_smart_tab)
-imap <S-Tab> <Plug>(completion_smart_s_tab)
 
 " Code navigation shortcuts
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
