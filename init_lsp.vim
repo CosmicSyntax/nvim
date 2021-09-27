@@ -22,7 +22,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rhubarb'
 Plug 'numToStr/FTerm.nvim'
@@ -32,6 +31,7 @@ Plug 'nvim-treesitter/playground'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'nvim-lua/lsp-status.nvim'
 Plug 'hrsh7th/nvim-cmp' " Completion plugins
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
@@ -43,7 +43,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'psliwka/vim-smoothie'
 Plug 'ellisonleao/glow.nvim'
 Plug 'kevinhwang91/nvim-bqf', { 'branch': 'dev' } " dev fixes highlighting issue
-Plug 'chrisbra/Colorizer'
+"Plug 'tpope/vim-surround'
 "Plug 'nvim-lua/completion-nvim'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'vim-airline/vim-airline'
@@ -101,6 +101,27 @@ require'bqf'.setup {
     }
 }
 
+-- Setup lsp_status
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup({
+	on_attach = lsp_status.on_attach,
+	capabilities = lsp_status.capabilities
+})
+lspconfig.gopls.setup({
+	on_attach = lsp_status.on_attach,
+	capabilities = lsp_status.capabilities
+})
+lsp_status.config ({
+	status_symbol = '⛩',
+	indicator_errors = 'E',
+	indicator_warnings = 'W',
+	indicator_info = 'i',
+	indicator_hint = '?',
+	indicator_ok = 'Ok',
+})
+
 -- Line Setup
 require'lualine'.setup {
 	options = {
@@ -120,12 +141,7 @@ require'lualine'.setup {
 				path = 1,
 			},
 		},
-		lualine_c = {
-			{
-				'diagnostics',
-				sources = {'nvim_lsp'},
-				symbols = {error = 'E ', warn = 'W ', info = 'I '},
-			},
+		lualine_c = {{lsp_status.status},
 		},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
