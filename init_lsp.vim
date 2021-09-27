@@ -155,19 +155,19 @@ local nvim_lsp = require'lspconfig'
 -- stop nvim_lsp auto jump for GI
 local log = require 'vim.lsp.log'
 local util = require 'vim.lsp.util'
-vim.lsp.handlers["textDocument/implementation"] = function(_, method, result)
-	if result == nil or vim.tbl_isempty(result) then
-		local _ = log.info() and log.info(method, 'No location found')
-		return nil
-	end
-	if vim.tbl_islist(result) then
-		if #result > 1 then
-			util.set_qflist(util.locations_to_items(result))
-			vim.api.nvim_command("copen")
-		end
-	else
-		util.jump_to_location(result)
-	end
+vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
+  if result == nil or vim.tbl_isempty(result) then
+    local _ = log.info() and log.info(ctx.method, 'No location found')
+    return nil
+  end
+  if vim.tbl_islist(result) then
+    if #result > 1 then
+      util.set_qflist(util.locations_to_items(result))
+      vim.api.nvim_command("copen")
+    end
+  else
+    util.jump_to_location(result)
+  end
 end
 
 -- Enable rust_analyzer
