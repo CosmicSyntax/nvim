@@ -156,7 +156,7 @@ require'lualine'.setup {
 		lualine_z = {}
 		},
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'fugitive'}
+	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
 }
 
 -- Trouble - dx
@@ -266,7 +266,7 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
-autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = "➜",
+autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = " ➜ ",
 	\ highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Ignore vimgrep
