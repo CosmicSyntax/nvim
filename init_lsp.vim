@@ -14,52 +14,6 @@ set foldmethod=indent
 "set foldlevel=1
 set nofoldenable
 
-call plug#begin('~/.vim/plugged')
-Plug 'hoob3rt/lualine.nvim'
-Plug 'romgrk/barbar.nvim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/fzf', { 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-rhubarb'
-Plug 'numToStr/FTerm.nvim'
-Plug 'sebdah/vim-delve'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'nvim-lua/lsp-status.nvim'
-Plug 'hrsh7th/nvim-cmp' " Completion plugins
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip' " End of Completion
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'psliwka/vim-smoothie'
-Plug 'ellisonleao/glow.nvim'
-Plug 'kevinhwang91/nvim-bqf', { 'branch': 'dev' } " dev fixes highlighting issue
-"Plug 'tpope/vim-surround'
-"Plug 'nvim-lua/completion-nvim'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'vim-airline/vim-airline'
-"Plug 'wellle/context.vim'
-"Plug 'puremourning/vimspector'
-"Plug 'preservim/nerdtree'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'matze/vim-move'
-"Plug 'easymotion/vim-easymotion'
-"Plug 'tpope/vim-sleuth'
-"Plug 'dense-analysis/ale'
-"Plug 'mfussenegger/nvim-dap'
-"Plug 'tomasr/molokai', {'as': 'molokai'}
-"Plug 'itchyny/lightline.vim'
-call plug#end()
-
 " NVIM CONFIG
 lua <<EOF
 
