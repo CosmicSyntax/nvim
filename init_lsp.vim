@@ -230,6 +230,9 @@ set wildignore+=target/**
 nnoremap <F8> :GFiles<CR>
 nnoremap <F9> :Files<CR>
 
+" Map Lua Packer
+nnoremap <leader>pp :lua require('plugins')<CR>
+
 " Copy remap
 vnoremap <C-c> "+y
 
