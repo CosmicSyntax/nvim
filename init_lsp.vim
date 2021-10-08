@@ -131,6 +131,8 @@ cmp.setup({
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.close(),
+		['<Tab>'] = cmp.mapping.select_next_item(),
+		['<Tab-Shift>'] = cmp.mapping.select_prev_item(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = {
@@ -239,17 +241,16 @@ vnoremap <C-c> "+y
 " Get link to github
 nnoremap <space>g :.GBrowse!<CR>
 
-" Theme Customization
-set background=dark
-colorscheme gruvbox8_hard
-let g:gruvbox_filetype_hi_groups = 1
-let g:gruvbox_italics = 1
-let g:gruvbox_italicize_strings = 0
-
 " Enable 24-bit colors if supported and italic comments
 " This needs to be set after Theme, or the theme overrides it
 set termguicolors
 hi Comment gui=italic cterm=italic
+
+" Theme Customization
+set background=dark
+colorscheme gruvbox8
+let g:gruvbox_italicize_strings = 0
+let g:gruvbox_filetype_hi_groups = 1
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
