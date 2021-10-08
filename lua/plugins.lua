@@ -24,7 +24,7 @@ use { 'saadparwaiz1/cmp_luasnip' }
 use { 'kyazdani42/nvim-tree.lua' }
 use { 'kyazdani42/nvim-web-devicons' }
 use { 'folke/trouble.nvim' }
-use { 'gruvbox-community/gruvbox' }
+use { 'lifepillar/vim-gruvbox8' }
 use { 'psliwka/vim-smoothie' }
 use { 'ellisonleao/glow.nvim' }
 use { 'kevinhwang91/nvim-bqf', branch = 'dev' }
