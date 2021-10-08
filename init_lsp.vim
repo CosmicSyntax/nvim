@@ -132,7 +132,7 @@ cmp.setup({
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.close(),
 		['<Tab>'] = cmp.mapping.select_next_item(),
-		['<Tab-Shift>'] = cmp.mapping.select_prev_item(),
+		['<S-Tab>'] = cmp.mapping.select_prev_item(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = {
