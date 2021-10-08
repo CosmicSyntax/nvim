@@ -240,9 +240,11 @@ vnoremap <C-c> "+y
 nnoremap <space>g :.GBrowse!<CR>
 
 " Theme Customization
-let g:gruvbox_contrast_dark='soft'
 set background=dark
-colorscheme gruvbox8
+colorscheme gruvbox8_hard
+let g:gruvbox_filetype_hi_groups = 1
+let g:gruvbox_italics = 0
+let g:gruvbox_italicize_strings = 0
 
 " Enable 24-bit colors if supported and italic comments
 " This needs to be set after Theme, or the theme overrides it
