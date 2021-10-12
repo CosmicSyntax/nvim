@@ -2,7 +2,7 @@ return require('packer').startup(function()
 use 'wbthomason/packer.nvim'
 use { 'hoob3rt/lualine.nvim' }
 use { 'romgrk/barbar.nvim' }
-use { 'terryma/vim-multiple-cursors' }
+use { 'mg979/vim-visual-multi', branch = 'master' }
 use { 'preservim/nerdcommenter' }
 use { 'tpope/vim-fugitive' }
 use { 'junegunn/fzf',  run = './install --bin' }
