@@ -213,6 +213,14 @@ vim.g.bufferline = {
 	icon_close_tab = 'x',
 }
 
+-- Nord
+vim.g.nord_contrast = true
+vim.g.nord_borders = true
+vim.g.nord_disable_background = false
+vim.g.nord_italic = false
+require('nord').set()
+vim.cmd[[colorscheme nord]]
+
 EOF
 
 " Show diagnostic popup on cursor hold
@@ -245,9 +253,6 @@ nnoremap <space>g :.GBrowse!<CR>
 " This needs to be set after Theme, or the theme overrides it
 set termguicolors
 hi Comment gui=italic cterm=italic
-
-" Theme Customization
-colorscheme nord
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
