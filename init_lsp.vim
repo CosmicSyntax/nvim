@@ -68,12 +68,12 @@ lspconfig.gopls.setup({
 	capabilities = lsp_status.capabilities
 })
 lsp_status.config ({
-	status_symbol = '⛩',
-	indicator_errors = 'E',
-	indicator_warnings = 'W',
-	indicator_info = 'i',
-	indicator_hint = '?',
-	indicator_ok = 'Ok',
+	status_symbol = '상태:',
+	indicator_errors = '오류',
+	indicator_warnings = '경고',
+	indicator_info = '정보',
+	indicator_hint = '힌트',
+	indicator_ok = '정상',
 })
 
 -- Line Setup
