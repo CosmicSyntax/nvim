@@ -110,7 +110,7 @@ require'lualine'.setup {
 		lualine_z = {}
 		},
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
+	extensions = {'fzf', 'nvim-tree', 'quickfix'},
 }
 
 -- Trouble - dx
@@ -221,6 +221,58 @@ vim.g.nord_disable_background = false
 vim.g.nord_italic = false
 require('nord').set()
 
+-- Neogit
+local neogit = require('neogit')
+neogit.setup {
+	disable_signs = false,
+	disable_hint = false,
+	disable_context_highlighting = false,
+	disable_commit_confirmation = false,
+	auto_refresh = true,
+	disable_builtin_notifications = false,
+	commit_popup = {
+		kind = "split",
+	},
+	-- customize displayed signs
+	signs = {
+		-- { CLOSED, OPENED }
+		section = { ">", "v" },
+		item = { ">", "v" },
+		hunk = { "", "" },
+	},
+	integrations = {
+		diffview = true
+	},
+} 
+
+-- DiffView Config
+local cb = require'diffview.config'.diffview_callback
+
+require'diffview'.setup {
+	diff_binaries = false,
+	enhanced_diff_hl = false,
+	use_icons = false,
+	file_panel = {
+		position = "left",
+		width = 20,
+		height = 10,
+		listing_style = "tree",
+	},
+	file_history_panel = {
+		position = "bottom",
+		width = 20,
+		height = 16,
+		log_options = {
+			max_count = 256,
+			follow = false,
+			all = false,
+			merges = false,
+			no_merges = false,
+			reverse = false,
+		},
+	},
+}
+
 EOF
 
 " Show diagnostic popup on cursor hold
@@ -273,6 +325,8 @@ nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
 nmap <leader>dt :GitGutterToggle<CR>
 nmap <leader>dp <Plug>(GitGutterPreviewHunk)
 
+" Neogit config
+nnoremap <leader>n :Neogit<CR>
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
