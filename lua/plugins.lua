@@ -24,7 +24,7 @@ use 'saadparwaiz1/cmp_luasnip'
 use 'kyazdani42/nvim-tree.lua'
 use 'kyazdani42/nvim-web-devicons'
 use 'folke/trouble.nvim'
-use 'arcticicestudio/nord-vim'
+use 'shaunsingh/nord.nvim'
 use 'psliwka/vim-smoothie'
 use 'ellisonleao/glow.nvim'
 use { 'kevinhwang91/nvim-bqf', branch = 'dev' }
