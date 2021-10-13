@@ -4,7 +4,7 @@ use 'hoob3rt/lualine.nvim'
 use 'romgrk/barbar.nvim'
 use { 'mg979/vim-visual-multi', branch = 'master' }
 use 'preservim/nerdcommenter'
-use 'tpope/vim-fugitive'
+use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 use { 'junegunn/fzf',  run = './install --bin' }
 use 'junegunn/fzf.vim'
 use 'airblade/vim-gitgutter'
