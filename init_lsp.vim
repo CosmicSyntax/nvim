@@ -80,7 +80,7 @@ lsp_status.config ({
 require'lualine'.setup {
 	options = {
 		icons_enabled = false,
-		theme = 'gruvbox',
+		theme = 'nord',
 		component_separators = {'▚', '▞'},
 		section_separators = {'', ''},
 		disabled_filetypes = {}
@@ -247,10 +247,7 @@ set termguicolors
 hi Comment gui=italic cterm=italic
 
 " Theme Customization
-set background=dark
-colorscheme gruvbox8
-let g:gruvbox_italicize_strings = 0
-let g:gruvbox_filetype_hi_groups = 1
+colorscheme nord
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
