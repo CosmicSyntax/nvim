@@ -80,7 +80,7 @@ lsp_status.config ({
 require'lualine'.setup {
 	options = {
 		icons_enabled = false,
-		theme = 'nord',
+		theme = 'nightfox',
 		component_separators = {'▚', '▞'},
 		section_separators = {'', ''},
 		disabled_filetypes = {}
@@ -213,13 +213,24 @@ vim.g.bufferline = {
 	icon_close_tab = 'x',
 }
 
--- Nord
-vim.cmd[[colorscheme nord]]
-vim.g.nord_contrast = true
-vim.g.nord_borders = false
-vim.g.nord_disable_background = false
-vim.g.nord_italic = false
-require('nord').set()
+-- NightFox
+local nightfox = require('nightfox')
+nightfox.setup({
+	fox = "nordfox",
+	styles = {
+		comments = "italic",
+		functions = "bold"
+	},
+	colors = {
+		red = "#FF000",
+		bg_alt = "#000000",
+	},
+	hlgroups = {
+		TSPunctDelimiter = { fg = "${red}" },
+		LspCodeLens = { bg = "#000000", style = "italic" },
+	}
+})
+nightfox.load()
 
 -- Neogit
 local neogit = require('neogit')
@@ -241,37 +252,9 @@ neogit.setup {
 		hunk = { "", "" },
 	},
 	integrations = {
-		diffview = true
+		diffview = false
 	},
 } 
-
--- DiffView Config
-local cb = require'diffview.config'.diffview_callback
-
-require'diffview'.setup {
-	diff_binaries = false,
-	enhanced_diff_hl = false,
-	use_icons = false,
-	file_panel = {
-		position = "left",
-		width = 20,
-		height = 10,
-		listing_style = "tree",
-	},
-	file_history_panel = {
-		position = "bottom",
-		width = 20,
-		height = 16,
-		log_options = {
-			max_count = 256,
-			follow = false,
-			all = false,
-			merges = false,
-			no_merges = false,
-			reverse = false,
-		},
-	},
-}
 
 EOF
 
