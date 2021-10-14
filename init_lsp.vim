@@ -110,7 +110,7 @@ require'lualine'.setup {
 		lualine_z = {}
 		},
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'quickfix'},
+	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
 }
 
 -- Trouble - dx
@@ -232,29 +232,37 @@ nightfox.setup({
 })
 nightfox.load()
 
--- Neogit
-local neogit = require('neogit')
-neogit.setup {
-	disable_signs = false,
-	disable_hint = false,
-	disable_context_highlighting = false,
-	disable_commit_confirmation = false,
-	auto_refresh = true,
-	disable_builtin_notifications = false,
-	commit_popup = {
-		kind = "split",
+-- Diffview Config
+local cb = require'diffview.config'.diffview_callback
+
+require'diffview'.setup {
+	diff_binaries = false,
+	enhanced_diff_hl = false,
+	use_icons = false,
+	file_panel = {
+		position = "left",
+		width = 35,
+		height = 10,
+		listing_style = "tree",
+		tree_options = {
+			flatten_dirs = true,
+			folder_statuses = "always"
+		}
 	},
-	-- customize displayed signs
-	signs = {
-		-- { CLOSED, OPENED }
-		section = { ">", "v" },
-		item = { ">", "v" },
-		hunk = { "", "" },
+	file_history_panel = {
+		position = "bottom",
+		width = 35,
+		height = 16,
+		log_options = {
+			max_count = 256,
+			follow = false,
+			all = false,
+			merges = false,
+			no_merges = false,
+			reverse = false,
+		},
 	},
-	integrations = {
-		diffview = false
-	},
-} 
+}
 
 EOF
 
@@ -308,8 +316,9 @@ nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
 nmap <leader>dt :GitGutterToggle<CR>
 nmap <leader>dp <Plug>(GitGutterPreviewHunk)
 
-" Neogit config
-nnoremap <leader>n :Neogit<CR>
+" Fugitive Config
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
