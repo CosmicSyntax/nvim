@@ -4,11 +4,12 @@ use 'hoob3rt/lualine.nvim'
 use 'romgrk/barbar.nvim'
 use { 'mg979/vim-visual-multi', branch = 'master' }
 use 'preservim/nerdcommenter'
-use { 'TimUntersberger/neogit', requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' } }
+use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 use { 'junegunn/fzf',  run = './install --bin' }
 use 'junegunn/fzf.vim'
 use 'airblade/vim-gitgutter'
 use 'tpope/vim-rhubarb'
+use 'tpope/vim-fugitive'
 use 'numToStr/FTerm.nvim'
 use 'sebdah/vim-delve'
 use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
@@ -24,7 +25,7 @@ use 'saadparwaiz1/cmp_luasnip'
 use 'kyazdani42/nvim-tree.lua'
 use 'kyazdani42/nvim-web-devicons'
 use 'folke/trouble.nvim'
-use 'shaunsingh/nord.nvim'
+use 'EdenEast/nightfox.nvim'
 use 'psliwka/vim-smoothie'
 use 'ellisonleao/glow.nvim'
 use { 'kevinhwang91/nvim-bqf', branch = 'dev' }
