@@ -4,12 +4,12 @@ use 'hoob3rt/lualine.nvim'
 use 'romgrk/barbar.nvim'
 use { 'mg979/vim-visual-multi', branch = 'master' }
 use 'preservim/nerdcommenter'
-use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 use { 'junegunn/fzf',  run = './install --bin' }
 use 'junegunn/fzf.vim'
 use 'airblade/vim-gitgutter'
 use 'tpope/vim-rhubarb'
 use 'tpope/vim-fugitive'
+use 'sindrets/diffview.nvim'
 use 'numToStr/FTerm.nvim'
 use 'sebdah/vim-delve'
 use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
