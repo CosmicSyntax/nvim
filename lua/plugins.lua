@@ -10,10 +10,11 @@ use 'airblade/vim-gitgutter'
 use 'tpope/vim-rhubarb'
 use 'tpope/vim-fugitive'
 use 'sindrets/diffview.nvim'
+use 'nvim-lua/plenary.nvim'
 use 'numToStr/FTerm.nvim'
 use 'sebdah/vim-delve'
 use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-use 'nvim-treesitter/playground'
+--use 'nvim-treesitter/playground'
 use 'lukas-reineke/indent-blankline.nvim'
 use 'neovim/nvim-lspconfig'
 use 'nvim-lua/lsp_extensions.nvim'
@@ -29,4 +30,5 @@ use 'EdenEast/nightfox.nvim'
 use 'psliwka/vim-smoothie'
 use 'ellisonleao/glow.nvim'
 use { 'kevinhwang91/nvim-bqf', branch = 'dev' }
+use 'szw/vim-maximizer'
 end)
