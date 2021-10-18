@@ -233,8 +233,6 @@ nightfox.setup({
 nightfox.load()
 
 -- Diffview Config
-local cb = require'diffview.config'.diffview_callback
-
 require'diffview'.setup {
 	diff_binaries = false,
 	enhanced_diff_hl = false,
@@ -305,6 +303,9 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 " Inline Terminal Customization
 nnoremap <leader>to :lua require('FTerm').open()<CR>
 nnoremap <leader>tt :lua require('FTerm').toggle()<CR>
+
+" Vim Maximizer Toggle Keybind
+nnoremap <leader>mm :MaximizerToggle<CR>
 
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
