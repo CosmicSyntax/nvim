@@ -8,11 +8,11 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 set guicursor=n:block-blinkon250,v:block-blinkon250,i:ver100-blinkon250
 " Set updatetime for CursorHold
-" 300ms of no cursor movement to trigger CursorHold
 set updatetime=1000
 set foldmethod=indent
 "set foldlevel=1
 set nofoldenable
+set winblend=20
 
 " NVIM CONFIG
 lua <<EOF
@@ -262,6 +262,15 @@ require'diffview'.setup {
 	},
 }
 
+-- Terminal Config
+require("toggleterm").setup {
+	direction = "float",
+	float_opts = {
+		winblend= 20,
+		border = "curved",
+	},
+}
+
 EOF
 
 " Show diagnostic popup on cursor hold
@@ -301,8 +310,7 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " Inline Terminal Customization
-nnoremap <leader>to :lua require('FTerm').open()<CR>
-nnoremap <leader>tt :lua require('FTerm').toggle()<CR>
+nnoremap <leader>tt :ToggleTerm<CR>
 
 " Vim Maximizer Toggle Keybind
 nnoremap <leader>mm :MaximizerToggle<CR>
