@@ -10,7 +10,7 @@ use 'airblade/vim-gitgutter'
 use 'tpope/vim-rhubarb'
 use 'tpope/vim-fugitive'
 use 'sindrets/diffview.nvim'
-use 'numToStr/FTerm.nvim'
+use 'akinsho/toggleterm.nvim'
 use 'sebdah/vim-delve'
 use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 use 'lukas-reineke/indent-blankline.nvim'
