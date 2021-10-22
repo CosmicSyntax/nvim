@@ -15,7 +15,7 @@ set nofoldenable
 set winblend=20
 
 " NVIM CONFIG
-lua <<EOF
+lua << END
 
 -- Nvim native treesitter configuration
 require'nvim-treesitter.configs'.setup {
@@ -58,15 +58,6 @@ require'bqf'.setup {
 -- Setup lsp_status
 local lsp_status = require('lsp-status')
 lsp_status.register_progress()
-local lspconfig = require('lspconfig')
-lspconfig.rust_analyzer.setup({
-	on_attach = lsp_status.on_attach,
-	capabilities = lsp_status.capabilities
-})
-lspconfig.gopls.setup({
-	on_attach = lsp_status.on_attach,
-	capabilities = lsp_status.capabilities
-})
 lsp_status.config ({
 	status_symbol = '상태:',
 	indicator_errors = '오류',
@@ -118,9 +109,6 @@ require("trouble").setup {
 	icons = false,
 }
 
--- nvim_lsp object
-local nvim_lsp = require'lspconfig'
-
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 cmp.setup({
@@ -162,9 +150,15 @@ vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
 	end
 end
 
+-- nvim_lsp object
+local nvim_lsp = require'lspconfig'
+local cmp = require('cmp_nvim_lsp')
+local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities = cmp.update_capabilities(lsp_status.capabilities);
+
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
 			assist = {
@@ -179,23 +173,19 @@ nvim_lsp.rust_analyzer.setup({
 			},
 		},
 	},
+	on_attach = lsp_status.on_attach,
 })
 
 -- Enable Gopls
 nvim_lsp.gopls.setup({
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	capabilities = capabilities,
 	settings = {
 		analyses = {
 			unusedparams = true,
 			},
 		staticcheck = true,
-	}
-})
-
-
--- Enable Pyright
-nvim_lsp.pyright.setup({
-	capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	},
+	on_attach = lsp_status.on_attach,
 })
 
 -- Enable diagnostics
@@ -271,7 +261,7 @@ require("toggleterm").setup {
 	},
 }
 
-EOF
+END
 
 " Show diagnostic popup on cursor hold
 autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
