@@ -118,6 +118,9 @@ require("trouble").setup {
 	icons = false,
 }
 
+-- nvim_lsp object
+local nvim_lsp = require'lspconfig'
+
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 cmp.setup({
@@ -140,9 +143,6 @@ cmp.setup({
 		{ name = 'luasnip' },
 	},
 })
-
--- nvim_lsp object
-local nvim_lsp = require'lspconfig'
 
 -- stop nvim_lsp auto jump for GI
 local log = require 'vim.lsp.log'
