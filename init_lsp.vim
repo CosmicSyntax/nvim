@@ -86,7 +86,7 @@ require'lualine'.setup {
 				path = 1,
 			},
 		},
-		lualine_c = {"tostring(require'lsp-status'.status())"},
+		lualine_c = {"require('lsp-status').status()"},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
