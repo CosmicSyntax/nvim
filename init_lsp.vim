@@ -55,18 +55,6 @@ require'bqf'.setup {
     }
 }
 
--- Setup lsp_status
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
-lsp_status.config ({
-	status_symbol = '상태:',
-	indicator_errors = '오류',
-	indicator_warnings = '경고',
-	indicator_info = '정보',
-	indicator_hint = '힌트',
-	indicator_ok = '정상',
-})
-
 -- Line Setup
 require'lualine'.setup {
 	options = {
@@ -75,7 +63,7 @@ require'lualine'.setup {
 		component_separators = {'|', '|'},
 		section_separators = {'', ''},
 		disabled_filetypes = {}
-		},
+	},
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {
@@ -86,7 +74,7 @@ require'lualine'.setup {
 				path = 1,
 			},
 		},
-		lualine_c = {"require('lsp-status').status()"},
+		lualine_c = {'lsp_progress'},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
@@ -98,7 +86,7 @@ require'lualine'.setup {
 		lualine_x = {'location'},
 		lualine_y = {},
 		lualine_z = {}
-		},
+	},
 	tabline = {},
 	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
 }
@@ -153,7 +141,7 @@ end
 local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities = cmp.update_capabilities(lsp_status.capabilities);
+	-- capabilities = cmp.update_capabilities(lsp_status.capabilities);
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
@@ -172,7 +160,6 @@ nvim_lsp.rust_analyzer.setup({
 			},
 		},
 	},
-	on_attach = lsp_status.on_attach,
 })
 
 -- Enable Gopls
@@ -184,7 +171,6 @@ nvim_lsp.gopls.setup({
 			},
 		staticcheck = true,
 	},
-	on_attach = lsp_status.on_attach,
 })
 
 -- Enable diagnostics
@@ -197,9 +183,71 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Tabline config
-vim.g.bufferline = {
-	icons = false,
-	icon_close_tab = 'x',
+require('bufferline').setup {
+	highlights = {
+		buffer_selected = {
+			gui = "bold",
+		},
+		error_selected = {
+			gui = "bold",
+		},
+		error_diagnostic_selected = {
+			gui = "bold",
+		},
+		info_selected = {
+			gui = "bold",
+		},
+		info_diagnostic_selected = {
+			gui = "bold",
+		},
+		warning_selected = {
+			gui = "bold",
+		},
+		warning_diagnostic_selected = {
+			gui = "bold",
+		},
+	},
+	options = {
+		diagnostics = "nvim_lsp",
+		diagnostics_update_in_insert = false,
+		diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			return "("..count..")"
+		end,
+		offsets = {{filetype = "NvimTree", text = "Navigation", text_align = "left"}},
+		buffer_close_icon = 'x',
+		show_buffer_icons = false,
+		show_close_icon = false,
+		show_buffer_close_icons = true,
+		show_tab_indicators = false,
+		persist_buffer_sort = true,
+		separator_style = "thin",
+		custom_areas = {
+			right = function()
+				local result = {}
+				local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+				local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+				local info = vim.lsp.diagnostic.get_count(0, [[Information]])
+				local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+
+				if error ~= 0 then
+					table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
+				end
+
+				if warning ~= 0 then
+					table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
+				end
+
+				if hint ~= 0 then
+					table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
+				end
+
+				if info ~= 0 then
+					table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
+				end
+				return result
+			end,
+		}
+	},
 }
 
 -- NightFox
@@ -258,6 +306,11 @@ require("toggleterm").setup {
 		winblend= 20,
 		border = "curved",
 	},
+}
+
+-- Smooth scrolling
+require('neoscroll').setup {
+	easing_function = "quadratic",
 }
 
 END
@@ -341,5 +394,5 @@ nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Tab navigation
-nnoremap <C-h> :BufferPrevious<CR>
-nnoremap <C-l> :BufferNext<CR>
+nnoremap <C-l> :BufferLineCycleNext<CR>
+nnoremap <C-h> :BufferLineCyclePrev<CR>
