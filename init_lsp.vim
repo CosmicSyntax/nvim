@@ -206,6 +206,16 @@ require('bufferline').setup {
 		warning_diagnostic_selected = {
 			gui = "bold",
 		},
+		duplicate_selected = {
+			gui = "",
+		},
+		duplicate_visible = {
+			gui = "",
+		},
+		duplicate = {
+			gui = "",
+		},
+
 	},
 	options = {
 		diagnostics = "nvim_lsp",
