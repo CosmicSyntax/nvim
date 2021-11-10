@@ -1,6 +1,7 @@
 return require('packer').startup(function()
 use 'wbthomason/packer.nvim'
 use 'nvim-lualine/lualine.nvim'
+use 'kyazdani42/nvim-web-devicons'
 use 'akinsho/bufferline.nvim'
 use { 'mg979/vim-visual-multi', branch = 'master' }
 use 'preservim/nerdcommenter'
@@ -25,7 +26,7 @@ use 'kyazdani42/nvim-tree.lua'
 use 'folke/trouble.nvim'
 use 'EdenEast/nightfox.nvim'
 use 'karb94/neoscroll.nvim'
-use 'ellisonleao/glow.nvim'
 use 'kevinhwang91/nvim-bqf'
 use 'szw/vim-maximizer'
+use 'buoto/gotests-vim'
 end)
