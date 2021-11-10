@@ -58,7 +58,7 @@ require'bqf'.setup {
 -- Line Setup
 require'lualine'.setup {
 	options = {
-		icons_enabled = false,
+		-- icons_enabled = false,
 		theme = 'nightfox',
 		component_separators = {'|', '|'},
 		section_separators = {'', ''},
@@ -93,7 +93,7 @@ require'lualine'.setup {
 
 -- Trouble - dx
 require("trouble").setup {
-	icons = false,
+	-- icons = false,
 }
 
 -- Setup nvim-cmp.
@@ -225,10 +225,10 @@ require('bufferline').setup {
 		end,
 		offsets = {{filetype = "NvimTree", text = "Navigation", text_align = "left"}},
 		buffer_close_icon = 'x',
-		show_buffer_icons = false,
+		show_buffer_icons = true,
+		show_buffer_close_icons = false,
 		show_close_icon = false,
-		show_buffer_close_icons = true,
-		show_tab_indicators = false,
+		show_tab_indicators = true,
 		persist_buffer_sort = true,
 		separator_style = "thin",
 		custom_areas = {
@@ -313,9 +313,9 @@ require'diffview'.setup {
 require("toggleterm").setup {
 	direction = "float",
 	float_opts = {
-		winblend= 20,
 		border = "curved",
-	},
+		winblend = 3,
+	}
 }
 
 -- Smooth scrolling
