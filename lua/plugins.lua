@@ -1,6 +1,7 @@
 return require('packer').startup(function()
 use 'wbthomason/packer.nvim'
 use 'nvim-lualine/lualine.nvim' 
+use 'windwp/nvim-autopairs'
 use 'akinsho/bufferline.nvim'
 use { 'mg979/vim-visual-multi', branch = 'master' }
 use 'preservim/nerdcommenter'
