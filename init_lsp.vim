@@ -62,7 +62,7 @@ require'lualine'.setup {
 		theme = 'nightfox',
 		component_separators = {'|', '|'},
 		section_separators = {'', ''},
-		disabled_filetypes = {}
+		disabled_filetypes = {'minimap'}
 	},
 	sections = {
 		lualine_a = {'mode'},
@@ -311,12 +311,19 @@ require'diffview'.setup {
 
 -- Terminal Config
 require("toggleterm").setup {
-	direction = "float",
-	float_opts = {
-		border = "curved",
-		winblend = 3,
-	}
+	direction = "horizontal",
 }
+function _G.set_terminal_keymaps()
+  local opts = {noremap = true}
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 -- Smooth scrolling
 require('neoscroll').setup {
@@ -357,6 +364,11 @@ nnoremap <space>g :.GBrowse!<CR>
 " This needs to be set after Theme, or the theme overrides it
 set termguicolors
 hi Comment gui=italic cterm=italic
+
+" Mini-map config
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+"let g:minimap_auto_start_win_enter = 1
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
