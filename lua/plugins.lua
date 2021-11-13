@@ -29,4 +29,5 @@ use 'karb94/neoscroll.nvim'
 use 'kevinhwang91/nvim-bqf'
 use 'szw/vim-maximizer'
 use 'buoto/gotests-vim'
+use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap'}
 end)
