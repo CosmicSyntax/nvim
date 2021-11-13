@@ -88,7 +88,7 @@ require'lualine'.setup {
 		lualine_z = {}
 	},
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
+	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix', 'toggleterm'},
 }
 
 -- Trouble - dx
@@ -283,7 +283,7 @@ nightfox.load()
 require'diffview'.setup {
 	diff_binaries = false,
 	enhanced_diff_hl = false,
-	use_icons = false,
+	use_icons = true,
 	file_panel = {
 		position = "left",
 		width = 35,
@@ -322,6 +322,8 @@ require("toggleterm").setup {
 require('neoscroll').setup {
 	easing_function = "quadratic",
 }
+
+require('nvim-autopairs').setup{}
 
 END
 
