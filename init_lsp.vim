@@ -30,9 +30,6 @@ require'nvim-treesitter.configs'.setup {
 	},
 }
 
--- Nvim tree navigator setup
-require'nvim-tree'.setup {}
-
 -- Better QF config
 require'bqf'.setup {
 	auto_enable = true,
@@ -93,7 +90,7 @@ require'lualine'.setup {
 
 -- Trouble - dx
 require("trouble").setup {
-	-- icons = false,
+	icons = true,
 }
 
 -- Setup nvim-cmp.
@@ -119,7 +116,7 @@ cmp.setup({
 		{ name = 'luasnip' },
 	},
 	formatting = {
-		format = lspkind.cmp_format({with_text = true, maxwidth = 50})
+		format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
 	},
 })
 
@@ -333,8 +330,6 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 require('neoscroll').setup {
 	easing_function = "quadratic",
 }
-
-require('nvim-autopairs').setup{}
 
 END
 
