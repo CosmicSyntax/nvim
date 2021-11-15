@@ -98,6 +98,7 @@ require("trouble").setup {
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
+local lspkind = require('lspkind')
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -116,6 +117,9 @@ cmp.setup({
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+	},
+	formatting = {
+		format = lspkind.cmp_format({with_text = true, maxwidth = 50})
 	},
 })
 
