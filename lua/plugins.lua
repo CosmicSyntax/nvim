@@ -27,7 +27,6 @@ return require('packer').startup(function()
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'szw/vim-maximizer'
-	use { 'wfxr/minimap.vim', run = ':!cargo install --locked code-minimap'}
 	use 'onsails/lspkind-nvim'
 	-- Development Specific Plugins
 	use 'sebdah/vim-delve'
