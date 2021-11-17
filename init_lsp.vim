@@ -128,10 +128,13 @@ vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
 		local _ = log.info() and log.info(ctx.method, 'No location found')
 		return nil
 	end
+
 	if vim.tbl_islist(result) then
 		if #result > 1 then
 			util.set_qflist(util.locations_to_items(result))
 			vim.api.nvim_command("copen")
+		else
+			util.jump_to_location(result[1])
 		end
 	else
 		util.jump_to_location(result)
@@ -363,11 +366,6 @@ nnoremap <space>g :.GBrowse!<CR>
 " This needs to be set after Theme, or the theme overrides it
 set termguicolors
 hi Comment gui=italic cterm=italic
-
-" Mini-map config
-let g:minimap_width = 10
-let g:minimap_auto_start = 1
-"let g:minimap_auto_start_win_enter = 1
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
