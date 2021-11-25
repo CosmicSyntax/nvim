@@ -1,4 +1,4 @@
-set relativenumber
+set number relativenumber
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
@@ -160,7 +160,7 @@ nvim_lsp.rust_analyzer.setup({
 				loadOutDirsFromCheck = true
 				},
 			procMacro = {
-			enable = true
+				enable = true
 			},
 		},
 	},
@@ -337,7 +337,7 @@ require('neoscroll').setup {
 END
 
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Close copen upon selecting item
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
