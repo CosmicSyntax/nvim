@@ -270,7 +270,7 @@ nightfox.setup({
 	fox = "nordfox",
 	styles = {
 		comments = "italic",
-		functions = "bold"
+		functions = "bold",
 	},
 	colors = {
 		red = "#FF000",
@@ -338,6 +338,7 @@ END
 
 " Show diagnostic popup on cursor hold
 " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+nnoremap <space>d :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " Close copen upon selecting item
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
@@ -362,10 +363,9 @@ vnoremap <C-c> "+y
 " Get link to github
 nnoremap <space>g :.GBrowse!<CR>
 
-" Enable 24-bit colors if supported and italic comments
+" Enable 24-bit colors if supported
 " This needs to be set after Theme, or the theme overrides it
 set termguicolors
-hi Comment gui=italic cterm=italic
 
 " Tree Customization
 nnoremap <F7> :NvimTreeToggle<CR>
