@@ -56,7 +56,7 @@ require'bqf'.setup {
 require'lualine'.setup {
 	options = {
 		-- icons_enabled = false,
-		theme = 'nightfox',
+		theme = 'onenord',
 		component_separators = {'|', '|'},
 		section_separators = {'', ''},
 		disabled_filetypes = {'minimap'}
@@ -185,6 +185,9 @@ nvim_lsp.solargraph.setup({
 	},
 })
 
+-- Enable PyLsp
+nvim_lsp.pylsp.setup{}
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -273,24 +276,29 @@ require('bufferline').setup {
 	},
 }
 
--- NightFox
-local nightfox = require('nightfox')
-nightfox.setup({
-	fox = "nordfox",
+-- OneDark
+local colortheme = require('onenord')
+colortheme.setup({
+	theme = nil,
+	borders = true,
+	fade_nc = false,
 	styles = {
 		comments = "italic",
+		strings = "NONE",
+		keywords = "NONE",
 		functions = "bold",
-	},
-	colors = {
-		red = "#FF000",
-		bg_alt = "#000000",
-	},
-	hlgroups = {
-		TSPunctDelimiter = { fg = "${red}" },
-		LspCodeLens = { bg = "#000000", style = "italic" },
-	}
+		variables = "NONE",
+		diagnostics = "underline",
+		},
+	disable = {
+		background = false,
+		cursorline = false,
+		eob_lines = true,
+		},
+	custom_highlights = {},
+	custom_colors = {},
 })
-nightfox.load()
+colortheme.load()
 
 -- Diffview Config
 require'diffview'.setup {
