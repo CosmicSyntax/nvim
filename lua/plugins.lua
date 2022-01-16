@@ -23,7 +23,7 @@ return require('packer').startup(function()
 	use 'saadparwaiz1/cmp_luasnip'
 	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
 	use 'folke/trouble.nvim'
-	use 'EdenEast/nightfox.nvim'
+	use 'rmehri01/onenord.nvim'
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'szw/vim-maximizer'
