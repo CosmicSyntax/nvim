@@ -11,7 +11,6 @@ return require('packer').startup(function()
 	use 'tpope/vim-rhubarb'
 	use 'tpope/vim-fugitive'
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-	use 'akinsho/toggleterm.nvim'
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function() require'nvim-tree'.setup() end }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
