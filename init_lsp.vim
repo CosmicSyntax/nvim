@@ -57,8 +57,8 @@ require'lualine'.setup {
 	options = {
 		-- icons_enabled = false,
 		theme = 'onenord',
-		component_separators = {'|', '|'},
-		section_separators = {'', ''},
+		component_separators = { left = '', right = ''},
+		section_separators = { left = '', right = ''},
 		disabled_filetypes = {'minimap'}
 	},
 	sections = {
@@ -85,7 +85,7 @@ require'lualine'.setup {
 		lualine_z = {}
 	},
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix', 'toggleterm'},
+	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
 }
 
 -- Trouble - dx
@@ -329,22 +329,6 @@ require'diffview'.setup {
 		},
 	},
 }
-
--- Terminal Config
-require("toggleterm").setup {
-	direction = "horizontal",
-}
-function _G.set_terminal_keymaps()
-  local opts = {noremap = true}
-  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 -- Smooth scrolling
 require('neoscroll').setup {
