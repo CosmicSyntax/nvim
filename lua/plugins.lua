@@ -7,7 +7,7 @@ return require('packer').startup(function()
 	use { 'numToStr/Comment.nvim', config = function() require'Comment'.setup() end }
 	use { 'junegunn/fzf',  run = './install --bin' }
 	use 'junegunn/fzf.vim'
-	use 'airblade/vim-gitgutter'
+	use 'lewis6991/gitsigns.nvim'
 	use 'tpope/vim-rhubarb'
 	use 'tpope/vim-fugitive'
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -30,4 +30,5 @@ return require('packer').startup(function()
 	-- Development Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
+	use { 'michaelb/sniprun', run = 'bash ./install.sh'}
 end)
