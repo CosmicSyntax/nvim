@@ -162,6 +162,9 @@ nvim_lsp.rust_analyzer.setup({
 			procMacro = {
 				enable = true,
 			},
+			checkOnSave = {
+				command = "clippy"
+			},
 		},
 	},
 })
@@ -276,6 +279,17 @@ require('bufferline').setup {
 	},
 }
 
+-- Gitsigns
+require('gitsigns').setup({
+	current_line_blame = false,
+	current_line_blame_opts = {
+		virt_text = true,
+		virt_text_pos = 'eol',
+		delay = 1000,
+		ignore_whitespace = false,
+	},
+})
+
 -- OneDark
 local colortheme = require('onenord')
 colortheme.setup({
@@ -373,25 +387,22 @@ nnoremap <F7> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-" Inline Terminal Customization
-nnoremap <leader>tt :ToggleTerm<CR>
-
 " Vim Maximizer Toggle Keybind
 nnoremap <leader>mm :MaximizerToggle<CR>
 
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
 
-" Gitgutter config
-let g:gitgutter_enabled=0 " Just toggle it
-nmap <leader>dm :let g:gitgutter_diff_base = 'master'<CR>
-nmap <leader>db :let g:gitgutter_diff_base = 'head'<CR>
-nmap <leader>dt :GitGutterToggle<CR>
-nmap <leader>dp <Plug>(GitGutterPreviewHunk)
-
 " Fugitive Config
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+
+" Gitsigns Config
+nnoremap ]c :Gitsigns next_hunk<CR>
+nnoremap [c :Gitsigns prev_hunk<CR>
+nnoremap <leader>hs :Gitsigns stage_hunk<CR>
+nnoremap <leader>hr :Gitsigns reset_hunk<CR>
+nnoremap <leader>hp :Gitsigns preview_hunk<CR>
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
