@@ -30,5 +30,5 @@ return require('packer').startup(function()
 	-- Development Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
-	use { 'michaelb/sniprun', run = 'bash ./install.sh'}
+	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 end)
