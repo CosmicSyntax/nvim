@@ -432,7 +432,7 @@ END
 
 " Show diagnostic popup on cursor hold
 " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-nnoremap <space>d :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <space>d :lua vim.diagnostic.open_float()<CR>
 
 " Close copen upon selecting item
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
