@@ -195,10 +195,6 @@ nvim_lsp.gopls.setup({
 -- Enable Solargraph
 nvim_lsp.solargraph.setup({
 	capabilities = capabilities,
-	on_attach = on_attach,
-	flags = {
-		debounce_text_changes = 150,
-	},
 	flags = {
 		debounce_text_changes = 150,
 	},
