@@ -30,6 +30,9 @@ require'nvim-treesitter.configs'.setup {
 	},
 }
 
+-- Nvim tree lua
+require'nvim-tree'.setup {}
+
 -- Better QF config
 require'bqf'.setup {
 	auto_enable = true,
