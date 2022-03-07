@@ -1,17 +1,17 @@
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 	use 'nvim-lualine/lualine.nvim' 
-	use { 'windwp/nvim-autopairs', config = function() require'nvim-autopairs'.setup() end }
+	use 'windwp/nvim-autopairs'
 	use 'akinsho/bufferline.nvim'
 	use { 'mg979/vim-visual-multi', branch = 'master' }
-	use { 'numToStr/Comment.nvim', config = function() require'Comment'.setup() end }
+	use 'numToStr/Comment.nvim'
 	use { 'junegunn/fzf',  run = './install --bin' }
 	use 'junegunn/fzf.vim'
 	use 'lewis6991/gitsigns.nvim'
 	use 'tpope/vim-rhubarb'
 	use 'tpope/vim-fugitive'
 	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function() require'nvim-tree'.setup() end }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
 	use 'nvim-lua/lsp_extensions.nvim'
