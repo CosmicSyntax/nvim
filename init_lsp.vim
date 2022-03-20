@@ -33,6 +33,12 @@ require'nvim-treesitter.configs'.setup {
 -- Nvim tree lua
 require'nvim-tree'.setup {}
 
+-- Nvim autopair
+require'nvim-autopairs'.setup {}
+
+-- Nvim Comment
+require('Comment').setup()
+
 -- Better QF config
 require'bqf'.setup {
 	auto_enable = true,
@@ -56,13 +62,15 @@ require'bqf'.setup {
 }
 
 -- Line Setup
-require'lualine'.setup {
+require('lualine').setup {
 	options = {
-		-- icons_enabled = false,
-		theme = 'onenord',
+		icons_enabled = true,
+		theme = 'nord',
 		component_separators = { left = '', right = ''},
 		section_separators = { left = '', right = ''},
-		disabled_filetypes = {'minimap'}
+		disabled_filetypes = {},
+		always_divide_middle = true,
+		globalstatus = false,
 	},
 	sections = {
 		lualine_a = {'mode'},
