@@ -61,17 +61,41 @@ require'bqf'.setup {
     }
 }
 
+-- OneNord
+local colortheme = require('onenord')
+colortheme.setup({
+	theme = nil,
+	borders = true,
+	fade_nc = false,
+	styles = {
+		comments = "italic",
+		strings = "NONE",
+		keywords = "NONE",
+		functions = "bold",
+		variables = "NONE",
+		diagnostics = "underline",
+		},
+	disable = {
+		background = false,
+		cursorline = false,
+		eob_lines = true,
+		},
+	custom_highlights = {},
+	custom_colors = {},
+})
+colortheme.load()
+
 -- Line Setup
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
-		theme = 'nord',
-		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
+		theme = 'onenord',
+		section_separators = { left = '', right = '' },
+		component_separators = { left = '', right = '' },
 		disabled_filetypes = {},
 		always_divide_middle = true,
-		globalstatus = false,
-	},
+		globalstatus = true,
+	};
 	sections = {
 		lualine_a = {'mode'},
 		lualine_b = {
@@ -86,7 +110,7 @@ require('lualine').setup {
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
-	},
+	};
 	inactive_sections = {
 		lualine_a = {},
 		lualine_b = {},
@@ -94,7 +118,7 @@ require('lualine').setup {
 		lualine_x = {'location'},
 		lualine_y = {},
 		lualine_z = {}
-	},
+	};
 	tabline = {},
 	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
 }
@@ -379,30 +403,6 @@ require('gitsigns').setup({
 		ignore_whitespace = false,
 	},
 })
-
--- OneDark
-local colortheme = require('onenord')
-colortheme.setup({
-	theme = nil,
-	borders = true,
-	fade_nc = false,
-	styles = {
-		comments = "italic",
-		strings = "NONE",
-		keywords = "NONE",
-		functions = "bold",
-		variables = "NONE",
-		diagnostics = "underline",
-		},
-	disable = {
-		background = false,
-		cursorline = false,
-		eob_lines = true,
-		},
-	custom_highlights = {},
-	custom_colors = {},
-})
-colortheme.load()
 
 -- Diffview Config
 require'diffview'.setup {
