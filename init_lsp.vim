@@ -517,5 +517,7 @@ nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
 " Tab navigation
-nnoremap <C-l> :BufferLineCycleNext<CR>
-nnoremap <C-h> :BufferLineCyclePrev<CR>
+nnoremap <silent><C-l> :BufferLineCycleNext<CR>
+nnoremap <silent><C-h> :BufferLineCyclePrev<CR>
+nnoremap <silent><C-j> :BufferLineMoveNext<CR>
+nnoremap <silent><C-k> :BufferLineMovePrev<CR>
