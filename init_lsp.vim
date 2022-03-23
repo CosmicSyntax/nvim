@@ -168,16 +168,20 @@ vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
 		local _ = log.info() and log.info(ctx.method, 'No location found')
 		return nil
 	end
+	local client = vim.lsp.get_client_by_id(ctx.client_id)
 
 	if vim.tbl_islist(result) then
 		if #result > 1 then
-			util.set_qflist(util.locations_to_items(result))
-			vim.api.nvim_command("copen")
-		else
-			util.jump_to_location(result[1])
+			vim.fn.setqflist({}, ' ', {
+				title = 'LSP locations',
+				items = util.locations_to_items(result, client.offset_encoding)
+				})
+			vim.api.nvim_command("botright copen")
+		else 
+			util.jump_to_location(result[1], client.offset_encoding)
 		end
 	else
-		util.jump_to_location(result)
+		util.jump_to_location(result, client.offset_encoding)
 	end
 end
 
@@ -454,8 +458,7 @@ nnoremap <space>d :lua vim.diagnostic.open_float()<CR>
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
 " Enable type inlay hints
-autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = " ➜ ",
-	\ highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' //', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}
 
 " Ignore vimgrep
 set wildignore+=target/**
