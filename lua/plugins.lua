@@ -1,20 +1,17 @@
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
-	use 'nvim-lualine/lualine.nvim' 
+	use {'nvim-lualine/lualine.nvim'}
 	use 'windwp/nvim-autopairs'
 	use 'akinsho/bufferline.nvim'
 	use { 'mg979/vim-visual-multi', branch = 'master' }
 	use 'numToStr/Comment.nvim'
-	use { 'junegunn/fzf',  run = './install --bin' }
-	use 'junegunn/fzf.vim'
 	use 'lewis6991/gitsigns.nvim'
 	use 'tpope/vim-rhubarb'
 	use 'tpope/vim-fugitive'
-	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+	use 'sindrets/diffview.nvim' 
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
-	use 'nvim-lua/lsp_extensions.nvim'
 	use 'arkav/lualine-lsp-progress'
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -27,8 +24,13 @@ return require('packer').startup(function()
 	use 'kevinhwang91/nvim-bqf'
 	use 'szw/vim-maximizer'
 	use 'onsails/lspkind-nvim'
+	use 'nvim-telescope/telescope.nvim'
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+	use 'nvim-telescope/telescope-ui-select.nvim'
+	use 'nvim-lua/plenary.nvim'
 	-- Development Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+	use 'nvim-lua/lsp_extensions.nvim'
 end)
