@@ -310,6 +310,12 @@ nvim_lsp.tsserver.setup({
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
     end,
 })
+require("null-ls").setup({
+    sources = {
+        require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.diagnostics.eslint,
+    },
+})
 
 -- Enable PyLsp
 nvim_lsp.pylsp.setup{}
