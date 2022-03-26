@@ -192,26 +192,42 @@ local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabi
 	-- capabilities = cmp.update_capabilities(lsp_status.capabilities);
 
 -- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup({
-	capabilities = capabilities,
-	settings = {
-		["rust-analyzer"] = {
-			assist = {
-				importGranularity = "module",
-				importPrefix = "by_self",
-			},
-			cargo = {
-				loadOutDirsFromCheck = true,
-			},
-			procMacro = {
-				enable = true,
-			},
-			checkOnSave = {
-				command = "clippy"
+local opts = {
+	tools = {
+		autoSetHints = true,
+		hover_with_actions = true,
+		inlay_hints = {
+			show_parameter_hints = false,
+			parameter_hints_prefix = "		// ",
+			other_hints_prefix = "		// ",
+		},
+		hover_actions = {
+			border = "none",
+			auto_focus = false,
+		},
+	},
+	server = {
+		capabilities = capabilities,
+		settings = {
+			["rust-analyzer"] = {
+				assist = {
+					importGranularity = "module",
+					importPrefix = "by_self",
+				},
+				cargo = {
+					loadOutDirsFromCheck = true,
+				},
+				procMacro = {
+					enable = true,
+				},
+				checkOnSave = {
+					command = "clippy"
+				},
 			},
 		},
 	},
-})
+}
+require('rust-tools').setup(opts)
 
 -- Enable ClangD
 nvim_lsp.clangd.setup({
@@ -309,12 +325,6 @@ nvim_lsp.tsserver.setup({
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
     end,
-})
-require("null-ls").setup({
-    sources = {
-        require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.diagnostics.eslint,
-    },
 })
 
 -- Enable PyLsp
@@ -462,9 +472,6 @@ nnoremap <space>d :lua vim.diagnostic.open_float()<CR>
 
 " Close copen upon selecting item
 autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
-
-" Enable type inlay hints
-autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' //', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"}}
 
 " Ignore vimgrep
 set wildignore+=target/**
