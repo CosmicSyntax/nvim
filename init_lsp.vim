@@ -41,6 +41,14 @@ require('Comment').setup()
 
 -- Nvim Telescope
 require("telescope").setup {
+	pickers = {
+		find_files = {
+			theme = "dropdown",
+		},
+		live_grep = {
+			theme = "dropdown",
+		}
+	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {}
@@ -202,7 +210,16 @@ local opts = {
 			other_hints_prefix = "		// ",
 		},
 		hover_actions = {
-			border = "none",
+			border = {
+				{"", "FloatBorder"},
+				{"", "FloatBorder"},
+				{"", "FloatBorder"},
+				{"▕", "FloatBorder"},
+				{"", "FloatBorder"},
+				{"", "FloatBorder"},
+				{"", "FloatBorder"},
+				{"▏", "FloatBorder"},
+			},
 			auto_focus = false,
 		},
 	},
