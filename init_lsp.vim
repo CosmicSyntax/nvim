@@ -560,3 +560,16 @@ nnoremap <silent><C-l> :BufferLineCycleNext<CR>
 nnoremap <silent><C-h> :BufferLineCyclePrev<CR>
 nnoremap <silent><C-j> :BufferLineMoveNext<CR>
 nnoremap <silent><C-k> :BufferLineMovePrev<CR>
+
+" vimspector mapping and setup
+nmap <leader>vl :call vimspector#Launch()<CR>
+nmap <leader>vr :VimspectorReset<CR>
+nmap <leader>ve :VimspectorEval
+nmap <leader>vw :VimspectorWatch
+nmap <leader>vo :VimspectorShowOutput
+nmap <leader>vi <Plug>VimspectorBalloonEval
+xmap <leader>vi <Plug>VimspectorBalloonEval
+nnoremap <leader>vb :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>vn :call vimspector#StepOver()<CR>
+nnoremap <leader>vs :call vimspector#StepInto()<CR>
+let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
