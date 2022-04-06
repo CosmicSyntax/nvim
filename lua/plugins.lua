@@ -34,4 +34,5 @@ return require('packer').startup(function()
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use 'simrat39/rust-tools.nvim'
+	use 'puremourning/vimspector' -- Ensure you have python3 imported
 end)
