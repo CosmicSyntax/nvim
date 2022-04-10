@@ -133,7 +133,7 @@ require('lualine').setup {
 		lualine_z = {}
 	};
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'fugitive', 'quickfix'},
+	extensions = {'fzf', 'nvim-tree', 'quickfix'},
 }
 
 -- Trouble - dx
@@ -315,16 +315,14 @@ nvim_lsp.tsserver.setup({
             inlay_hints_priority = 200, -- priority of the hint extmarks
             inlay_hints_throttle = 150, -- throttle the inlay hint request
             inlay_hints_format = { -- format options for individual hint kind
-                Type = {},
                 Parameter = {},
                 Enum = {},
-                -- Example format customization for `Type` kind:
-                -- Type = {
-                --     highlight = "Comment",
-                --     text = function(text)
-                --         return "->" .. text:sub(2)
-                --     end,
-                -- },
+				Type = {
+					highlight = "Comment",
+					text = function(text)
+					return "->" .. text:sub(2)
+					end,
+				},
             },
 
             -- update imports on file move
@@ -522,10 +520,6 @@ nnoremap <leader>mm :MaximizerToggle<CR>
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
 
-" Fugitive Config
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-
 " Gitsigns Config
 nnoremap ]c :Gitsigns next_hunk<CR>
 nnoremap [c :Gitsigns prev_hunk<CR>
@@ -572,4 +566,6 @@ xmap <leader>vi <Plug>VimspectorBalloonEval
 nnoremap <leader>vb :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <leader>vn :call vimspector#StepOver()<CR>
 nnoremap <leader>vs :call vimspector#StepInto()<CR>
+nnoremap <leader>vh :call vimspector#GoToCurrentLine()<CR>
+nnoremap <leader>vc :call vimspector#Continue()<CR>
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
