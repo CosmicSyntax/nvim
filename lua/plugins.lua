@@ -7,7 +7,6 @@ return require('packer').startup(function()
 	use 'numToStr/Comment.nvim'
 	use 'lewis6991/gitsigns.nvim'
 	use 'tpope/vim-rhubarb'
-	use 'tpope/vim-fugitive'
 	use 'sindrets/diffview.nvim' 
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
