@@ -27,6 +27,7 @@ return require('packer').startup(function()
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 	use 'nvim-telescope/telescope-ui-select.nvim'
 	use 'nvim-lua/plenary.nvim'
+	use 'kdheepak/lazygit.nvim'
 	-- use 'jose-elias-alvarez/null-ls.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
