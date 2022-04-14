@@ -41,14 +41,14 @@ require('Comment').setup()
 
 -- Nvim Telescope
 require("telescope").setup {
-	pickers = {
-		find_files = {
-			theme = "dropdown",
-		},
-		live_grep = {
-			theme = "dropdown",
-		}
-	},
+	-- pickers = {
+	-- 	find_files = {
+	-- 		theme = "dropdown",
+	-- 	},
+	-- 	live_grep = {
+	-- 		theme = "dropdown",
+	-- 	}
+	-- },
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {}
@@ -171,7 +171,7 @@ cmp.setup({
 -- stop nvim_lsp auto jump for GI
 local log = require 'vim.lsp.log'
 local util = require 'vim.lsp.util'
-vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
+local jump_handle = function(_, result, ctx, _)
 	if result == nil or vim.tbl_isempty(result) then
 		local _ = log.info() and log.info(ctx.method, 'No location found')
 		return nil
@@ -192,6 +192,9 @@ vim.lsp.handlers["textDocument/implementation"] = function(_, result, ctx, _)
 		util.jump_to_location(result, client.offset_encoding)
 	end
 end
+vim.lsp.handlers["textDocument/implementation"] = jump_handle
+vim.lsp.handlers["textDocument/definition"] = jump_handle
+vim.lsp.handlers["textDocument/typeDefinition"] = jump_handle
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
@@ -206,8 +209,8 @@ local opts = {
 		hover_with_actions = true,
 		inlay_hints = {
 			show_parameter_hints = false,
-			parameter_hints_prefix = "		// ",
-			other_hints_prefix = "		// ",
+			parameter_hints_prefix = "	// ",
+			other_hints_prefix = "	// ",
 		},
 		hover_actions = {
 			border = {
@@ -523,9 +526,10 @@ nnoremap <space>a :TroubleToggle<CR>
 " Gitsigns Config
 nnoremap ]c :Gitsigns next_hunk<CR>
 nnoremap [c :Gitsigns prev_hunk<CR>
-nnoremap <leader>hs :Gitsigns stage_hunk<CR>
-nnoremap <leader>hr :Gitsigns reset_hunk<CR>
-nnoremap <leader>hp :Gitsigns preview_hunk<CR>
+nnoremap <leader>gs :Gitsigns stage_hunk<CR>
+nnoremap <leader>gr :Gitsigns reset_hunk<CR>
+nnoremap <leader>gp :Gitsigns preview_hunk<CR>
+nnoremap <leader>gb :Git blame_line<CR>
 
 " LSP configuration
 " Use <Tab> and <S-Tab> to navigate through popup menu
