@@ -41,14 +41,25 @@ require('Comment').setup()
 
 -- Nvim Telescope
 require("telescope").setup {
-	-- pickers = {
-	-- 	find_files = {
-	-- 		theme = "dropdown",
-	-- 	},
-	-- 	live_grep = {
-	-- 		theme = "dropdown",
-	-- 	}
-	-- },
+	defaults = {
+		vimgrep_arguments = {
+			'rg',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case',
+			'-.'
+		},
+	},
+	pickers = {
+		find_files = {
+			-- theme = "dropdown",
+		},
+		live_grep = {
+			-- theme = "dropdown",
+		}
+	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {}
@@ -78,7 +89,7 @@ require'bqf'.setup {
 local colortheme = require('onenord')
 colortheme.setup({
 	theme = nil,
-	borders = true,
+	borders = false,
 	fade_nc = false,
 	styles = {
 		comments = "italic",
@@ -398,7 +409,7 @@ require('bufferline').setup {
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
 			return "("..count..")"
 		end,
-		offsets = {{filetype = "NvimTree", text = "Navigation", text_align = "left"}},
+		offsets = {{filetype = "NvimTree", text = "Navigation", highlight = "Directory", text_align = "left"}},
 		buffer_close_icon = 'x',
 		show_buffer_icons = true,
 		show_buffer_close_icons = false,
