@@ -382,13 +382,13 @@ require('bufferline').setup {
 			gui = "bold",
 		},
 		duplicate_selected = {
-			gui = "",
+			gui = None,
 		},
 		duplicate_visible = {
-			gui = "",
+			gui = None,
 		},
 		duplicate = {
-			gui = "",
+			gui = None,
 		},
 
 	},
