@@ -6,7 +6,6 @@ return require('packer').startup(function()
 	use { 'mg979/vim-visual-multi', branch = 'master' }
 	use 'numToStr/Comment.nvim'
 	use 'lewis6991/gitsigns.nvim'
-	use 'tpope/vim-rhubarb'
 	use 'sindrets/diffview.nvim' 
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
@@ -28,6 +27,8 @@ return require('packer').startup(function()
 	use 'nvim-telescope/telescope-ui-select.nvim'
 	use 'nvim-lua/plenary.nvim'
 	use 'kdheepak/lazygit.nvim'
+	use 'ruifm/gitlinker.nvim'
+	use 'sbdchd/neoformat'
 	-- use 'jose-elias-alvarez/null-ls.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
