@@ -29,7 +29,6 @@ return require('packer').startup(function()
 	use 'kdheepak/lazygit.nvim'
 	use 'ruifm/gitlinker.nvim'
 	use 'sbdchd/neoformat'
-	-- use 'jose-elias-alvarez/null-ls.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
