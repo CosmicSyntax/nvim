@@ -31,13 +31,20 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- Nvim tree lua
-require'nvim-tree'.setup {}
+require'nvim-tree'.setup {
+	view = {
+		width = 40,
+	},
+}
 
 -- Nvim autopair
 require'nvim-autopairs'.setup {}
 
 -- Nvim Comment
 require('Comment').setup()
+
+-- Nvim Git linker
+require("gitlinker").setup()
 
 -- Nvim Telescope
 require("telescope").setup {
@@ -252,7 +259,7 @@ local opts = {
 					enable = true,
 				},
 				checkOnSave = {
-					command = "clippy"
+					command = "clippy",
 				},
 			},
 		},
@@ -351,7 +358,7 @@ nvim_lsp.tsserver.setup({
         -- no default maps, so you may want to define some here
         local opts = { silent = true }
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
     end,
 })
@@ -508,16 +515,14 @@ set wildignore+=target/**
 " Map Telescope
 nnoremap <F9> :Telescope find_files<CR>
 nnoremap <F8> :Telescope live_grep<CR>
-nnoremap <F10> :Telescope buffers<CR>
+nnoremap <F10> :Telescope quickfix<CR>
+nnoremap <F11> :Telescope buffers<CR>
 
 " Map Lua Packer
 nnoremap <leader>pp :lua require('plugins')<CR>
 
 " Copy remap
 vnoremap <C-c> "+y
-
-" Get link to github
-nnoremap <space>g :.GBrowse!<CR>
 
 " Enable 24-bit colors if supported
 " This needs to be set after Theme, or the theme overrides it
@@ -533,6 +538,7 @@ nnoremap <leader>mm :MaximizerToggle<CR>
 
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
+nnoremap <space>q :TroubleToggle quickfix<CR>
 
 " Gitsigns Config
 nnoremap ]c :Gitsigns next_hunk<CR>
@@ -587,3 +593,9 @@ nnoremap <leader>vs :call vimspector#StepInto()<CR>
 nnoremap <leader>vh :call vimspector#GoToCurrentLine()<CR>
 nnoremap <leader>vc :call vimspector#Continue()<CR>
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
+
+ " typescript spacing
+nnoremap <leader>ts :set shiftwidth=2 \| set tabstop=2<CR>
+
+" Formatting files
+nnoremap <leader>f :Neoformat<CR>
