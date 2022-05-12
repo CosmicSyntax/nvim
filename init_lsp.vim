@@ -226,9 +226,9 @@ local opts = {
 		autoSetHints = true,
 		hover_with_actions = true,
 		inlay_hints = {
-			show_parameter_hints = false,
-			parameter_hints_prefix = "	// ",
-			other_hints_prefix = "	// ",
+			parameter_hints_prefix = "",
+			other_hints_prefix = "",
+			highlight = "StatusLineTermNC",
 		},
 		hover_actions = {
 			border = {
@@ -332,16 +332,16 @@ nvim_lsp.tsserver.setup({
 
             -- inlay hints
             auto_inlay_hints = true,
-            inlay_hints_highlight = "Comment",
+            inlay_hints_highlight = "StatusLineTermNC",
             inlay_hints_priority = 200, -- priority of the hint extmarks
             inlay_hints_throttle = 150, -- throttle the inlay hint request
             inlay_hints_format = { -- format options for individual hint kind
                 Parameter = {},
                 Enum = {},
 				Type = {
-					highlight = "Comment",
+					highlight = "StatusLineTermNC",
 					text = function(text)
-					return "->" .. text:sub(2)
+					return text:sub(3)
 					end,
 				},
             },
@@ -359,7 +359,7 @@ nvim_lsp.tsserver.setup({
         local opts = { silent = true }
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
         -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
     end,
 })
 
@@ -590,6 +590,7 @@ xmap <leader>vi <Plug>VimspectorBalloonEval
 nnoremap <leader>vb :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <leader>vn :call vimspector#StepOver()<CR>
 nnoremap <leader>vs :call vimspector#StepInto()<CR>
+nnoremap <leader>vo :call vimspector#StepOut()<CR>
 nnoremap <leader>vh :call vimspector#GoToCurrentLine()<CR>
 nnoremap <leader>vc :call vimspector#Continue()<CR>
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
