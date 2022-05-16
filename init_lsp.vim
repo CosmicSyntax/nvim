@@ -96,7 +96,7 @@ require'bqf'.setup {
 local colortheme = require('onenord')
 colortheme.setup({
 	theme = nil,
-	borders = false,
+	borders = true,
 	fade_nc = false,
 	styles = {
 		comments = "italic",
@@ -110,7 +110,7 @@ colortheme.setup({
 		background = false,
 		cursorline = false,
 		eob_lines = true,
-		},
+	},
 	custom_highlights = {},
 	custom_colors = {},
 })
@@ -416,7 +416,14 @@ require('bufferline').setup {
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
 			return "("..count..")"
 		end,
-		offsets = {{filetype = "NvimTree", text = "Navigation", highlight = "Directory", text_align = "left"}},
+		offsets = {
+			{
+				filetype = "NvimTree",
+				text = "Navigation", 
+				text_align = "center",
+				padding = 1,
+			}
+		},
 		buffer_close_icon = 'x',
 		show_buffer_icons = true,
 		show_buffer_close_icons = false,
