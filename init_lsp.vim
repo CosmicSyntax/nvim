@@ -228,7 +228,7 @@ local opts = {
 		inlay_hints = {
 			parameter_hints_prefix = "",
 			other_hints_prefix = "",
-			highlight = "StatusLineTermNC",
+			highlight = "BufferLineDiagnosticVisible",
 		},
 		hover_actions = {
 			border = {
@@ -332,7 +332,7 @@ nvim_lsp.tsserver.setup({
 
             -- inlay hints
             auto_inlay_hints = true,
-            inlay_hints_highlight = "StatusLineTermNC",
+            inlay_hints_highlight = "BufferLineDiagnosticVisible",
             inlay_hints_priority = 200, -- priority of the hint extmarks
             inlay_hints_throttle = 150, -- throttle the inlay hint request
             inlay_hints_format = { -- format options for individual hint kind
@@ -478,9 +478,11 @@ require'diffview'.setup {
 	enhanced_diff_hl = false,
 	use_icons = true,
 	file_panel = {
-		position = "left",
-		width = 35,
-		height = 10,
+		win_config = {
+			position = "left",
+			width = 35,
+			height = 10,
+		},
 		listing_style = "tree",
 		tree_options = {
 			flatten_dirs = true,
@@ -488,9 +490,11 @@ require'diffview'.setup {
 		}
 	},
 	file_history_panel = {
-		position = "bottom",
-		width = 35,
-		height = 16,
+		win_config = {
+			position = "bottom",
+			width = 35,
+			height = 16,
+		},
 		log_options = {
 			max_count = 256,
 			follow = false,
@@ -603,7 +607,7 @@ nnoremap <leader>vc :call vimspector#Continue()<CR>
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
 
  " typescript spacing
-nnoremap <leader>ts :set shiftwidth=2 \| set tabstop=2<CR>
+nnoremap <leader>ts :set shiftwidth=2 \| set tabstop=2 \| set expandtab<CR>
 
 " Formatting files
 nnoremap <leader>f :Neoformat<CR>
