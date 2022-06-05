@@ -1,6 +1,6 @@
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
-	use {'nvim-lualine/lualine.nvim'}
+	use { 'nvim-lualine/lualine.nvim' }
 	use 'windwp/nvim-autopairs'
 	use 'akinsho/bufferline.nvim'
 	use { 'mg979/vim-visual-multi', branch = 'master' }
@@ -13,6 +13,7 @@ return require('packer').startup(function()
 	use 'arkav/lualine-lsp-progress'
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-path'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
 	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
@@ -33,6 +34,6 @@ return require('packer').startup(function()
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-	use 'simrat39/rust-tools.nvim'
+	use { 'simrat39/rust-tools.nvim', branch = "modularize_and_inlay_rewrite" }
 	use 'puremourning/vimspector' -- Ensure you have python3 imported
 end)
