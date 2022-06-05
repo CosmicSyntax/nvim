@@ -6,7 +6,7 @@ set mouse=a
 set signcolumn=yes
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
-set guicursor=n:block-blinkon250,v:block-blinkon250,i:ver100-blinkon250
+set guicursor=n:block-blinkon250,v:hor100-blinkon250,i:ver100-blinkon250
 " Set updatetime for CursorHold
 set updatetime=1000
 set foldmethod=indent
@@ -180,6 +180,7 @@ cmp.setup({
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'path' },
 	},
 	formatting = {
 		format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
@@ -339,7 +340,7 @@ nvim_lsp.tsserver.setup({
                 Parameter = {},
                 Enum = {},
 				Type = {
-					highlight = "StatusLineTermNC",
+					highlight = "BufferLineDiagnosticVisible",
 					text = function(text)
 					return text:sub(3)
 					end,
