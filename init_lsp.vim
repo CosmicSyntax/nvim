@@ -1,3 +1,4 @@
+set cmdheight=0
 set number relativenumber
 set tabstop=4
 set shiftwidth=4
