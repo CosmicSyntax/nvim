@@ -259,6 +259,9 @@ local opts = {
 				},
 				procMacro = {
 					enable = true,
+					attributes = {
+						enable = true,
+					},
 				},
 				checkOnSave = {
 					command = "clippy",
