@@ -1,4 +1,3 @@
-set cmdheight=0
 set number relativenumber
 set tabstop=4
 set shiftwidth=4
@@ -229,6 +228,8 @@ local opts = {
 		hover_with_actions = true,
 		inlay_hints = {
 			parameter_hints_prefix = "",
+			-- show_parameter_hints = true,
+			-- show_variable_name = false,
 			other_hints_prefix = "",
 			highlight = "BufferLineDiagnosticVisible",
 		},
@@ -237,11 +238,11 @@ local opts = {
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
-				{"▕", "FloatBorder"},
+				{" ", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
-				{"▏", "FloatBorder"},
+				{" ", "FloatBorder"},
 			},
 			auto_focus = false,
 		},
@@ -259,9 +260,6 @@ local opts = {
 				},
 				procMacro = {
 					enable = true,
-					attributes = {
-						enable = true,
-					},
 				},
 				checkOnSave = {
 					command = "clippy",
@@ -271,6 +269,11 @@ local opts = {
 	},
 }
 require('rust-tools').setup(opts)
+
+-- Enable LSP Signature
+require "lsp_signature".setup({
+	floating_window = false
+})
 
 -- Enable ClangD
 nvim_lsp.clangd.setup({
@@ -523,9 +526,9 @@ require'diffview'.setup {
 }
 
 -- Smooth scrolling
-require('neoscroll').setup {
-	easing_function = "quadratic",
-}
+-- require('neoscroll').setup {
+-- 	easing_function = "quadratic",
+-- }
 
 END
 
