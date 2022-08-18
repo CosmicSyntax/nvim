@@ -136,8 +136,9 @@ require('lualine').setup {
 				file_status = true,
 				path = 1,
 			},
+			'diff',
 		},
-		lualine_c = {'lsp_progress'},
+		lualine_c = {'diagnostics', 'lsp_progress'},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
@@ -151,8 +152,9 @@ require('lualine').setup {
 		lualine_z = {}
 	};
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'quickfix'},
+	extensions = {'nvim-tree', 'quickfix'},
 }
+vim.o.laststatus = 3
 
 -- Trouble - dx
 require("trouble").setup {
@@ -219,18 +221,26 @@ vim.lsp.handlers["textDocument/typeDefinition"] = jump_handle
 local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-	-- capabilities = cmp.update_capabilities(lsp_status.capabilities);
+-- capabilities = cmp.update_capabilities(lsp_status.capabilities)
 
 -- Enable rust_analyzer
+local rt = require('rust-tools')
 local opts = {
 	tools = {
-		autoSetHints = true,
-		hover_with_actions = true,
+		auto = false,
+		on_initialized = nil,
+
+		-- These apply to the default RustSetInlayHints command
 		inlay_hints = {
+			auto = true,
+			only_current_line = false,
+			show_parameter_hints = true,
 			parameter_hints_prefix = "",
-			-- show_parameter_hints = true,
-			-- show_variable_name = false,
-			other_hints_prefix = "",
+			other_hints_prefix = "-> ",
+			max_len_align = false,
+			max_len_align_padding = 1,
+			right_align = false,
+			right_align_padding = 7,
 			highlight = "BufferLineDiagnosticVisible",
 		},
 		hover_actions = {
@@ -249,6 +259,12 @@ local opts = {
 	},
 	server = {
 		capabilities = capabilities,
+		on_attach = function(_, bufnr)
+			-- Hover actions
+			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+			-- Code action groups
+			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+		end,
 		settings = {
 			["rust-analyzer"] = {
 				assist = {
@@ -268,7 +284,7 @@ local opts = {
 		},
 	},
 }
-require('rust-tools').setup(opts)
+rt.setup(opts)
 
 -- Enable LSP Signature
 require "lsp_signature".setup({
@@ -387,43 +403,42 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 require('bufferline').setup {
 	highlights = {
 		buffer_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		error_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		error_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		info_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		info_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		warning_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		warning_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
-		duplicate_selected = {
-			gui = None,
-		},
-		duplicate_visible = {
-			gui = None,
-		},
-		duplicate = {
-			gui = None,
-		},
-
+		-- duplicate_selected = {
+		-- 	gui = None,
+		-- },
+		-- duplicate_visible = {
+		-- 	gui = None,
+		-- },
+		-- duplicate = {
+		-- 	gui = None,
+		-- },
 	},
 	options = {
-		diagnostics = "nvim_lsp",
-		diagnostics_update_in_insert = false,
-		diagnostics_indicator = function(count, level, diagnostics_dict, context)
-			return "("..count..")"
-		end,
+		-- diagnostics = "nvim_lsp",
+		-- diagnostics_update_in_insert = false,
+		-- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+		-- 	return "("..count..")"
+		-- end,
 		offsets = {
 			{
 				filetype = "NvimTree",
@@ -439,33 +454,33 @@ require('bufferline').setup {
 		show_tab_indicators = true,
 		persist_buffer_sort = true,
 		separator_style = "thin",
-		custom_areas = {
-			right = function()
-				local result = {}
-
-				local error = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})
-				local warning = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})
-				local info = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})
-				local hint = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT})
-
-				if error ~= 0 then
-					table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
-				end
-
-				if warning ~= 0 then
-					table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
-				end
-
-				if hint ~= 0 then
-					table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
-				end
-
-				if info ~= 0 then
-					table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
-				end
-				return result
-			end,
-		}
+		-- custom_areas = {
+		-- 	right = function()
+		-- 		local result = {}
+  --
+		-- 		local error = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})
+		-- 		local warning = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})
+		-- 		local info = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})
+		-- 		local hint = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT})
+  --
+		-- 		if error ~= 0 then
+		-- 			table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
+		-- 		end
+  --
+		-- 		if warning ~= 0 then
+		-- 			table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
+		-- 		end
+  --
+		-- 		if hint ~= 0 then
+		-- 			table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
+		-- 		end
+  --
+		-- 		if info ~= 0 then
+		-- 			table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
+		-- 		end
+		-- 		return result
+		-- 	end,
+		-- }
 	},
 }
 
