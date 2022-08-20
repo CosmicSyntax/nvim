@@ -1,15 +1,15 @@
 return require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
-	use { 'nvim-lualine/lualine.nvim' }
 	use 'windwp/nvim-autopairs'
 	use 'akinsho/bufferline.nvim'
 	use { 'mg979/vim-visual-multi', branch = 'master' }
 	use 'numToStr/Comment.nvim'
 	use 'lewis6991/gitsigns.nvim'
-	use 'sindrets/diffview.nvim' 
+	use { 'sindrets/diffview.nvim' }
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
+	use { 'nvim-lualine/lualine.nvim' }
 	use 'arkav/lualine-lsp-progress'
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -19,7 +19,7 @@ return require('packer').startup(function()
 	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
 	use 'folke/trouble.nvim'
 	use 'rmehri01/onenord.nvim'
-	use 'karb94/neoscroll.nvim'
+	-- use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'szw/vim-maximizer'
 	use 'onsails/lspkind-nvim'
@@ -30,10 +30,11 @@ return require('packer').startup(function()
 	use 'kdheepak/lazygit.nvim'
 	use 'ruifm/gitlinker.nvim'
 	use 'sbdchd/neoformat'
+	use 'ray-x/lsp_signature.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-	use { 'simrat39/rust-tools.nvim', branch = "modularize_and_inlay_rewrite" }
+	use { 'simrat39/rust-tools.nvim' }
 	use 'puremourning/vimspector' -- Ensure you have python3 imported
 end)
