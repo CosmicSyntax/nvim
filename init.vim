@@ -6,7 +6,7 @@ set mouse=a
 set signcolumn=yes
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
-set guicursor=n:block-blinkon250,v:block-blinkon250,i:ver100-blinkon250
+set guicursor=n:block-blinkon250,v:hor100-blinkon250,i:ver100-blinkon250
 " Set updatetime for CursorHold
 set updatetime=1000
 set foldmethod=indent
@@ -31,7 +31,11 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- Nvim tree lua
-require'nvim-tree'.setup {}
+require'nvim-tree'.setup {
+	view = {
+		width = 40,
+	},
+}
 
 -- Nvim autopair
 require'nvim-autopairs'.setup {}
@@ -92,7 +96,7 @@ require'bqf'.setup {
 local colortheme = require('onenord')
 colortheme.setup({
 	theme = nil,
-	borders = false,
+	borders = true,
 	fade_nc = false,
 	styles = {
 		comments = "italic",
@@ -106,7 +110,7 @@ colortheme.setup({
 		background = false,
 		cursorline = false,
 		eob_lines = true,
-		},
+	},
 	custom_highlights = {},
 	custom_colors = {},
 })
@@ -132,8 +136,9 @@ require('lualine').setup {
 				file_status = true,
 				path = 1,
 			},
+			'diff',
 		},
-		lualine_c = {'lsp_progress'},
+		lualine_c = {'diagnostics', 'lsp_progress'},
 		lualine_x = {'encoding', 'fileformat', 'filetype'},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
@@ -147,8 +152,9 @@ require('lualine').setup {
 		lualine_z = {}
 	};
 	tabline = {},
-	extensions = {'fzf', 'nvim-tree', 'quickfix'},
+	extensions = {'nvim-tree', 'quickfix'},
 }
+vim.o.laststatus = 3
 
 -- Trouble - dx
 require("trouble").setup {
@@ -176,6 +182,7 @@ cmp.setup({
 	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		{ name = 'path' },
 	},
 	formatting = {
 		format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
@@ -214,34 +221,50 @@ vim.lsp.handlers["textDocument/typeDefinition"] = jump_handle
 local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
-	-- capabilities = cmp.update_capabilities(lsp_status.capabilities);
+-- capabilities = cmp.update_capabilities(lsp_status.capabilities)
 
 -- Enable rust_analyzer
+local rt = require('rust-tools')
 local opts = {
 	tools = {
-		autoSetHints = true,
-		hover_with_actions = true,
+		auto = false,
+		on_initialized = nil,
+
+		-- These apply to the default RustSetInlayHints command
 		inlay_hints = {
-			show_parameter_hints = false,
-			parameter_hints_prefix = "	// ",
-			other_hints_prefix = "	// ",
+			auto = true,
+			only_current_line = false,
+			show_parameter_hints = true,
+			parameter_hints_prefix = "",
+			other_hints_prefix = "-> ",
+			max_len_align = false,
+			max_len_align_padding = 1,
+			right_align = false,
+			right_align_padding = 7,
+			highlight = "BufferLineDiagnosticVisible",
 		},
 		hover_actions = {
 			border = {
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
-				{"▕", "FloatBorder"},
+				{" ", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
 				{"", "FloatBorder"},
-				{"▏", "FloatBorder"},
+				{" ", "FloatBorder"},
 			},
 			auto_focus = false,
 		},
 	},
 	server = {
 		capabilities = capabilities,
+		on_attach = function(_, bufnr)
+			-- Hover actions
+			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+			-- Code action groups
+			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+		end,
 		settings = {
 			["rust-analyzer"] = {
 				assist = {
@@ -261,7 +284,12 @@ local opts = {
 		},
 	},
 }
-require('rust-tools').setup(opts)
+rt.setup(opts)
+
+-- Enable LSP Signature
+require "lsp_signature".setup({
+	floating_window = false
+})
 
 -- Enable ClangD
 nvim_lsp.clangd.setup({
@@ -328,16 +356,16 @@ nvim_lsp.tsserver.setup({
 
             -- inlay hints
             auto_inlay_hints = true,
-            inlay_hints_highlight = "Comment",
+            inlay_hints_highlight = "BufferLineDiagnosticVisible",
             inlay_hints_priority = 200, -- priority of the hint extmarks
             inlay_hints_throttle = 150, -- throttle the inlay hint request
             inlay_hints_format = { -- format options for individual hint kind
                 Parameter = {},
                 Enum = {},
 				Type = {
-					highlight = "Comment",
+					highlight = "BufferLineDiagnosticVisible",
 					text = function(text)
-					return "->" .. text:sub(2)
+					return text:sub(3)
 					end,
 				},
             },
@@ -355,7 +383,7 @@ nvim_lsp.tsserver.setup({
         local opts = { silent = true }
         vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
         -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+        -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
     end,
 })
 
@@ -375,44 +403,50 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 require('bufferline').setup {
 	highlights = {
 		buffer_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		error_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		error_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		info_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		info_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		warning_selected = {
-			gui = "bold",
+			bold = true,
 		},
 		warning_diagnostic_selected = {
-			gui = "bold",
+			bold = true,
 		},
-		duplicate_selected = {
-			gui = None,
-		},
-		duplicate_visible = {
-			gui = None,
-		},
-		duplicate = {
-			gui = None,
-		},
-
+		-- duplicate_selected = {
+		-- 	gui = None,
+		-- },
+		-- duplicate_visible = {
+		-- 	gui = None,
+		-- },
+		-- duplicate = {
+		-- 	gui = None,
+		-- },
 	},
 	options = {
-		diagnostics = "nvim_lsp",
-		diagnostics_update_in_insert = false,
-		diagnostics_indicator = function(count, level, diagnostics_dict, context)
-			return "("..count..")"
-		end,
-		offsets = {{filetype = "NvimTree", text = "Navigation", highlight = "Directory", text_align = "left"}},
+		-- diagnostics = "nvim_lsp",
+		-- diagnostics_update_in_insert = false,
+		-- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+		-- 	return "("..count..")"
+		-- end,
+		offsets = {
+			{
+				filetype = "NvimTree",
+				text = "Navigation", 
+				text_align = "center",
+				padding = 1,
+			}
+		},
 		buffer_close_icon = 'x',
 		show_buffer_icons = true,
 		show_buffer_close_icons = false,
@@ -420,33 +454,33 @@ require('bufferline').setup {
 		show_tab_indicators = true,
 		persist_buffer_sort = true,
 		separator_style = "thin",
-		custom_areas = {
-			right = function()
-				local result = {}
-
-				local error = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})
-				local warning = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})
-				local info = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})
-				local hint = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT})
-
-				if error ~= 0 then
-					table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
-				end
-
-				if warning ~= 0 then
-					table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
-				end
-
-				if hint ~= 0 then
-					table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
-				end
-
-				if info ~= 0 then
-					table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
-				end
-				return result
-			end,
-		}
+		-- custom_areas = {
+		-- 	right = function()
+		-- 		local result = {}
+  --
+		-- 		local error = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})
+		-- 		local warning = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})
+		-- 		local info = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})
+		-- 		local hint = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT})
+  --
+		-- 		if error ~= 0 then
+		-- 			table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
+		-- 		end
+  --
+		-- 		if warning ~= 0 then
+		-- 			table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
+		-- 		end
+  --
+		-- 		if hint ~= 0 then
+		-- 			table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
+		-- 		end
+  --
+		-- 		if info ~= 0 then
+		-- 			table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
+		-- 		end
+		-- 		return result
+		-- 	end,
+		-- }
 	},
 }
 
@@ -467,9 +501,11 @@ require'diffview'.setup {
 	enhanced_diff_hl = false,
 	use_icons = true,
 	file_panel = {
-		position = "left",
-		width = 35,
-		height = 10,
+		win_config = {
+			position = "left",
+			width = 35,
+			height = 10,
+		},
 		listing_style = "tree",
 		tree_options = {
 			flatten_dirs = true,
@@ -477,24 +513,37 @@ require'diffview'.setup {
 		}
 	},
 	file_history_panel = {
-		position = "bottom",
-		width = 35,
-		height = 16,
+		win_config = {
+			position = "bottom",
+			width = 35,
+			height = 16,
+		},
 		log_options = {
-			max_count = 256,
-			follow = false,
-			all = false,
-			merges = false,
-			no_merges = false,
-			reverse = false,
+			single_file = {
+
+				max_count = 256,
+				follow = false,
+				all = false,
+				merges = false,
+				no_merges = false,
+				reverse = false,
+			},
+			multi_file = {
+				max_count = 256,
+				follow = false,
+				all = false,
+				merges = false,
+				no_merges = false,
+				reverse = false,
+			},
 		},
 	},
 }
 
 -- Smooth scrolling
-require('neoscroll').setup {
-	easing_function = "quadratic",
-}
+-- require('neoscroll').setup {
+-- 	easing_function = "quadratic",
+-- }
 
 END
 
@@ -511,16 +560,14 @@ set wildignore+=target/**
 " Map Telescope
 nnoremap <F9> :Telescope find_files<CR>
 nnoremap <F8> :Telescope live_grep<CR>
-nnoremap <F10> :Telescope buffers<CR>
+nnoremap <F10> :Telescope quickfix<CR>
+nnoremap <F11> :Telescope buffers<CR>
 
 " Map Lua Packer
 nnoremap <leader>pp :lua require('plugins')<CR>
 
 " Copy remap
 vnoremap <C-c> "+y
-
-" Get link to github
-nnoremap <space>g :.GBrowse!<CR>
 
 " Enable 24-bit colors if supported
 " This needs to be set after Theme, or the theme overrides it
@@ -536,6 +583,7 @@ nnoremap <leader>mm :MaximizerToggle<CR>
 
 " Trouble Customization
 nnoremap <space>a :TroubleToggle<CR>
+nnoremap <space>q :TroubleToggle quickfix<CR>
 
 " Gitsigns Config
 nnoremap ]c :Gitsigns next_hunk<CR>
@@ -587,12 +635,13 @@ xmap <leader>vi <Plug>VimspectorBalloonEval
 nnoremap <leader>vb :call vimspector#ToggleBreakpoint()<CR>
 nnoremap <leader>vn :call vimspector#StepOver()<CR>
 nnoremap <leader>vs :call vimspector#StepInto()<CR>
+nnoremap <leader>vo :call vimspector#StepOut()<CR>
 nnoremap <leader>vh :call vimspector#GoToCurrentLine()<CR>
 nnoremap <leader>vc :call vimspector#Continue()<CR>
 let g:vimspector_install_gadgets = [ 'CodeLLDB' ]
 
  " typescript spacing
-nnoremap <leader>ts :set shiftwidth=2 \| set tabstop=2<CR>
+nnoremap <leader>ts :set shiftwidth=2 \| set tabstop=2 \| set expandtab<CR>
 
 " Formatting files
 nnoremap <leader>f :Neoformat<CR>
