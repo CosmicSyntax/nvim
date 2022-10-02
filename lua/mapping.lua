@@ -78,4 +78,4 @@ g.vimspector_install_gadgets = [['CodeLLDB']]
 map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
 
 -- Mapping for Neoformat
-map("n", "<leader>f", ':Neoformat<CR>', defo)
+map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)

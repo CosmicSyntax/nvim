@@ -524,3 +524,6 @@ require'diffview'.setup {
 require('neoscroll').setup {
 	easing_function = "quadratic",
 }
+
+-- Window management
+require('windows').setup()

@@ -21,7 +21,8 @@ return require('packer').startup(function()
 	use 'rmehri01/onenord.nvim'
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
-	use 'szw/vim-maximizer'
+	use 'anuvyklack/windows.nvim'
+	use 'anuvyklack/middleclass'
 	use 'onsails/lspkind-nvim'
 	use 'nvim-telescope/telescope.nvim'
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -29,7 +30,6 @@ return require('packer').startup(function()
 	use 'nvim-lua/plenary.nvim'
 	use 'kdheepak/lazygit.nvim'
 	use 'ruifm/gitlinker.nvim'
-	use 'sbdchd/neoformat'
 	use 'ray-x/lsp_signature.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
