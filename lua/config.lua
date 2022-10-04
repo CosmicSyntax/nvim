@@ -98,44 +98,44 @@ colortheme.setup({
 colortheme.load()
 
 -- Line Setup
-require('lualine').setup {
-	options = {
-		icons_enabled = true,
-		theme = 'onenord',
-		section_separators = { left = '', right = '' },
-		component_separators = { left = '', right = '' },
-		disabled_filetypes = {},
-		always_divide_middle = true,
-		globalstatus = true,
-	};
-	sections = {
-		lualine_a = {'mode'},
-		lualine_b = {
-			'branch',
-			{
-				'filename',
-				file_status = true,
-				path = 1,
-			},
-			'diff',
-		},
-		lualine_c = {'diagnostics', 'lsp_progress'},
-		lualine_x = {'encoding', 'fileformat', 'filetype'},
-		lualine_y = {'progress'},
-		lualine_z = {'location'},
-	};
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {'filename'},
-		lualine_x = {'location'},
-		lualine_y = {},
-		lualine_z = {}
-	};
-	tabline = {},
-	extensions = {'nvim-tree', 'quickfix'},
-}
-vim.o.laststatus = 3
+-- require('lualine').setup {
+-- 	options = {
+-- 		icons_enabled = true,
+-- 		theme = 'onenord',
+-- 		section_separators = { left = '', right = '' },
+-- 		component_separators = { left = '', right = '' },
+-- 		disabled_filetypes = {},
+-- 		always_divide_middle = true,
+-- 		globalstatus = true,
+-- 	};
+-- 	sections = {
+-- 		lualine_a = {'mode'},
+-- 		lualine_b = {
+-- 			'branch',
+-- 			{
+-- 				'filename',
+-- 				file_status = true,
+-- 				path = 1,
+-- 			},
+-- 			'diff',
+-- 		},
+-- 		lualine_c = {'diagnostics', 'lsp_progress'},
+-- 		lualine_x = {'encoding', 'fileformat', 'filetype'},
+-- 		lualine_y = {'progress'},
+-- 		lualine_z = {'location'},
+-- 	};
+-- 	inactive_sections = {
+-- 		lualine_a = {},
+-- 		lualine_b = {},
+-- 		lualine_c = {'filename'},
+-- 		lualine_x = {'location'},
+-- 		lualine_y = {},
+-- 		lualine_z = {}
+-- 	};
+-- 	tabline = {},
+-- 	extensions = {'nvim-tree', 'quickfix'},
+-- }
+-- vim.o.laststatus = 3
 
 -- Trouble - dx
 require("trouble").setup {

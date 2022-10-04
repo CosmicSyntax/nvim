@@ -24,3 +24,5 @@ cmd([[set nofoldenable]])
 require("config")
 -- Key Mapping
 require("mapping")
+-- Statusline
+require("statusline")

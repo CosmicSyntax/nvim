@@ -9,8 +9,8 @@ return require('packer').startup(function()
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
-	use { 'nvim-lualine/lualine.nvim' }
-	use 'arkav/lualine-lsp-progress'
+	-- use { 'nvim-lualine/lualine.nvim' }
+	-- use 'arkav/lualine-lsp-progress'
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-path'
