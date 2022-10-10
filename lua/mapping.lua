@@ -73,6 +73,7 @@ map("n", "<leader>vh", ':call vimspector#RunToCursor()<CR>', defo)
 map("n", "<leader>vc", ':call vimspector#Continue()<CR>', defo)
 local g = vim.g
 g.vimspector_install_gadgets = [['CodeLLDB']]
+g.vimspector_variables_display_mode = 'full'
 
 -- Mapping for TS spacing
 map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
