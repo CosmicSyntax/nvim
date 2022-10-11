@@ -140,6 +140,10 @@ colortheme.load()
 -- Trouble - dx
 require("trouble").setup {
 	icons = true,
+	action_keys = {
+        close_folds = "ca",
+        open_folds = "oa",
+    },
 }
 
 -- Setup nvim-cmp.
