@@ -31,7 +31,7 @@ map("n", "<leader>mm", ':MaximizerToggle<CR>', defo)
 
 -- Mapping Trouble diagnostics
 map("n", "<space>a", ':TroubleToggle<CR>', defo)
-map("n", "<space>q", ':TroubleToggle quickfix', defo)
+map("n", "<space>q", ':TroubleToggle quickfix<CR>', defo)
 
 -- Mapping for Gitsigns
 map("n", "]c", ':Gitsigns next_hunk<CR>', defo)
