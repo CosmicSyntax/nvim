@@ -141,8 +141,8 @@ colortheme.load()
 require("trouble").setup {
 	icons = true,
 	action_keys = {
-        close_folds = "ca",
-        open_folds = "oa",
+        close_folds = "tc",
+        open_folds = "to",
     },
 }
 
