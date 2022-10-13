@@ -152,13 +152,12 @@ local function vcs()
 		removed = ""
 	end
 	return table.concat {
+		"%#GitSignsAdd# ",
+		git_info.head,
 		" ",
 		added,
 		changed,
 		removed,
-		" ",
-		"%#GitSignsAdd# ",
-		git_info.head,
 		" %#Normal#",
 	}
 end
@@ -246,9 +245,9 @@ Statusline.active = function()
 		update_mode_colors(),
 		mode(),
 		"%#Normal# ",
+		vcs(),
 		filepath(),
 		filename(),
-		vcs(),
 		"%#Normal#",
 		lsp(),
 		"%=%#StatusLineExtra#",
