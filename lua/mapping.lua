@@ -27,7 +27,7 @@ map("n", "<leader>r", ':NvimTreeRefresh<CR>', defo)
 map("n", "<leader>n", ':NvimTreeFindFile<CR>', defo)
 
 -- Mapping for maximizing buffer
-map("n", "<leader>mm", ':MaximizerToggle<CR>', defo)
+map("n", "<leader>mm", ':WindowsMaximize<CR>', defo)
 
 -- Mapping Trouble diagnostics
 map("n", "<space>a", ':TroubleToggle<CR>', defo)
