@@ -40,6 +40,8 @@ local highlights = {
 	{'StatusLineRed', { fg = '#4c566a', bg = '#bf616a', gui= 'bold' }},
 	{'StatusLineBlue', { fg = '#4c566a', bg = '#5e81ac', gui= 'bold' }},
 	{'StatusLineYellow', { fg = '#4c566a', bg = '#ebcb8b', gui= 'bold' }},
+	{'StatusLinePurple', { fg = '#4c566a', bg = '#b48ead', gui= 'bold' }},
+	{'StatusLineGreen', { fg = '#4c566a', bg = '#a3be8c', gui= 'bold' }},
 	{'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
 	{'StatusLineExtra', { fg = '#d8dee9', bg = '#4c566a' }},
 }
@@ -52,17 +54,17 @@ local function update_mode_colors()
 	local current_mode = vim.api.nvim_get_mode().mode
 	local mode_color = "%#StatusLine#"
 	if current_mode == "n" then
-		mode_color = "%#Statusline#"
+		mode_color = "%#StatusLine#"
 	elseif current_mode == "i" or current_mode == "ic" then
-		mode_color = "%#StatuslineYellow#"
+		mode_color = "%#StatusLineYellow#"
 	elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
-		mode_color = "%#StatuslineBlue#"
+		mode_color = "%#StatusLineBlue#"
 	elseif current_mode == "R" then
-		mode_color = "%#StatuslineRed#"
+		mode_color = "%#StatusLineRed#"
 	elseif current_mode == "c" then
-		mode_color = "%#StatusLine#"
+		mode_color = "%#StatusLinePurple#"
 	elseif current_mode == "t" then
-		mode_color = "%#StatusLine#"
+		mode_color = "%#StatusLineGreen#"
 	end
 	return mode_color
 end
