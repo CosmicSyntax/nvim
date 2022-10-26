@@ -36,5 +36,12 @@ return require('packer').startup(function()
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use { 'simrat39/rust-tools.nvim' }
+	use {
+		'saecki/crates.nvim',
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require('crates').setup()
+		end,
+	}
 	use 'puremourning/vimspector' -- Ensure you have python3 imported
 end)
