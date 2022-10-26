@@ -168,6 +168,7 @@ cmp.setup({
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
 		{ name = 'path' },
+		{ name = 'crates' },
 	},
 	formatting = {
 		format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
