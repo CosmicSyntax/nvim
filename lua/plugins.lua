@@ -31,6 +31,7 @@ return require('packer').startup(function()
 	use 'kdheepak/lazygit.nvim'
 	use 'ruifm/gitlinker.nvim'
 	use 'ray-x/lsp_signature.nvim'
+	use 'petertriho/nvim-scrollbar'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'

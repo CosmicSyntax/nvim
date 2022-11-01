@@ -535,3 +535,6 @@ require('neoscroll').setup {
 
 -- Window management
 require('windows').setup()
+
+-- Scrollbar
+require("scrollbar").setup()
