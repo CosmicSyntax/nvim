@@ -534,7 +534,11 @@ require('neoscroll').setup {
 }
 
 -- Window management
-require('windows').setup()
+require('windows').setup({
+	autowidth = {
+		winwidth = 15,
+	}
+})
 
 -- Scrollbar
 require("scrollbar").setup()
