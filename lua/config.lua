@@ -379,6 +379,10 @@ nvim_lsp.tsserver.setup({
 -- Enable PyLsp
 nvim_lsp.pylsp.setup{}
 
+
+-- Enable R LSP
+nvim_lsp.r_language_server.setup{}
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
