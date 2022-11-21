@@ -545,4 +545,4 @@ require('windows').setup({
 })
 
 -- Scrollbar
-require("scrollbar").setup()
+require('scrollview').setup()
