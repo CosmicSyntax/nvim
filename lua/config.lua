@@ -295,6 +295,8 @@ nvim_lsp.clangd.setup({
 -- Enable Gopls
 nvim_lsp.gopls.setup({
 	capabilities = capabilities,
+	filetypes = { "go", "gomod" },
+	cmd = {'gopls', '--remote=auto'},
 	settings = {
 		analyses = {
 			unusedparams = true,
@@ -381,7 +383,9 @@ nvim_lsp.pylsp.setup{}
 
 
 -- Enable R LSP
-nvim_lsp.r_language_server.setup{}
+nvim_lsp.r_language_server.setup{
+	capabilities = capabilities,
+}
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
