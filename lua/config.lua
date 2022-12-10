@@ -149,10 +149,12 @@ require("trouble").setup {
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 local lspkind = require('lspkind')
+require("luasnip.loaders.from_vscode").lazy_load()
+local snip = require('luasnip')
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
+			snip.lsp_expand(args.body)
 		end,
     },
     mapping = {
@@ -547,6 +549,3 @@ require('windows').setup({
 		winwidth = 15,
 	}
 })
-
--- Scrollbar
-require('scrollview').setup()

@@ -15,6 +15,7 @@ return require('packer').startup(function()
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-path'
 	use 'L3MON4D3/LuaSnip'
+	use 'rafamadriz/friendly-snippets'
 	use 'saadparwaiz1/cmp_luasnip'
 	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
 	use 'folke/trouble.nvim'
@@ -31,7 +32,6 @@ return require('packer').startup(function()
 	use 'kdheepak/lazygit.nvim'
 	use 'ruifm/gitlinker.nvim'
 	use 'ray-x/lsp_signature.nvim'
-	use 'dstein64/nvim-scrollview'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'

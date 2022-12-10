@@ -78,5 +78,5 @@ g.vimspector_variables_display_mode = 'full'
 -- Mapping for TS spacing
 map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
 
--- Mapping for Neoformat
+-- Mapping for formatting
 map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)
