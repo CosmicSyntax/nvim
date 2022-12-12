@@ -14,10 +14,19 @@ return require('packer').startup(function()
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-path'
-	use 'L3MON4D3/LuaSnip'
+	use {
+		'L3MON4D3/LuaSnip',
+		event = "BufRead",
+		config = "require('configs/luasnip')",
+	}
 	use 'rafamadriz/friendly-snippets'
 	use 'saadparwaiz1/cmp_luasnip'
-	use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
+	use {
+		'kyazdani42/nvim-tree.lua', 
+		requires = 'kyazdani42/nvim-web-devicons',
+		event = "BufWinEnter",
+		config = "require('configs/nvimtree')",
+	}
 	use 'folke/trouble.nvim'
 	use 'rmehri01/onenord.nvim'
 	use 'karb94/neoscroll.nvim'
@@ -30,13 +39,21 @@ return require('packer').startup(function()
 	use 'nvim-telescope/telescope-ui-select.nvim'
 	use 'nvim-lua/plenary.nvim'
 	use 'kdheepak/lazygit.nvim'
-	use 'ruifm/gitlinker.nvim'
+	use {
+		'ruifm/gitlinker.nvim',
+		event = "BufRead",
+		config = "require('configs/tools')",
+	}
 	use 'ray-x/lsp_signature.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-	use { 'simrat39/rust-tools.nvim' }
+	use {
+		'simrat39/rust-tools.nvim',
+		event = "BufRead **/*.rs",
+		config = { "require('configs/rust')", "vim.cmd[[:e]]" },
+	j}
 	use {
 		'saecki/crates.nvim',
 		event = { "BufRead Cargo.toml" },
