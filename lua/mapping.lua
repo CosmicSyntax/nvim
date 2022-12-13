@@ -30,7 +30,7 @@ map("n", "<leader>n", ':NvimTreeFindFile<CR>', defo)
 map("n", "<leader>mm", ':WindowsMaximize<CR>', defo)
 
 -- Mapping Trouble diagnostics
-map("n", "<space>a", ':TroubleToggle<CR>', defo)
+map("n", "<space>a", ':TroubleToggle workspace_diagnostics<CR>', defo)
 map("n", "<space>q", ':TroubleToggle quickfix<CR>', defo)
 
 -- Mapping for Gitsigns
