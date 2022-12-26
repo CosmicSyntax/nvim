@@ -175,7 +175,7 @@ local function statusline_lsp()
 	-- vim.g.spinner_frames = {'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 
 	-- local base_status = "S"
-	local status_symbol = ' 🇻'
+	local status_symbol = ' '
 	-- local indicator_ok = '✅'
 	-- vim.g.indicator_errors = ''
 	-- vim.g.indicator_warnings = ''

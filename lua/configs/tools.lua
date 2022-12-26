@@ -42,22 +42,24 @@ require'diffview'.setup {
 			height = 16,
 		},
 		log_options = {
-			single_file = {
-				max_count = 256,
-				follow = false,
-				all = false,
-				merges = false,
-				no_merges = false,
-				reverse = false,
-			},
-			multi_file = {
-				max_count = 256,
-				follow = false,
-				all = false,
-				merges = false,
-				no_merges = false,
-				reverse = false,
-			},
+			git = {
+				single_file = {
+					max_count = 256,
+					follow = false,
+					all = false,
+					merges = false,
+					no_merges = false,
+					reverse = false,
+				},
+				multi_file = {
+					max_count = 256,
+					follow = false,
+					all = false,
+					merges = false,
+					no_merges = false,
+					reverse = false,
+				},
+			}
 		},
 	},
 }
