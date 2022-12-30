@@ -45,6 +45,7 @@ return require('packer').startup(function()
 		config = "require('configs/tools')",
 	}
 	use 'ray-x/lsp_signature.nvim'
+	use 'lvimuser/lsp-inlayhints.nvim'
 	-- Tech Stack Specific Plugins
 	use 'sebdah/vim-delve'
 	use 'buoto/gotests-vim'

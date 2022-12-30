@@ -6,6 +6,7 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 
 -- Enable rust_analyzer
 local rt = require('rust-tools')
+require("lsp-inlayhints").setup()
 local opts = {
 	tools = {
 		auto = false,
@@ -13,16 +14,16 @@ local opts = {
 
 		-- These apply to the default RustSetInlayHints command
 		inlay_hints = {
-			auto = true,
-			only_current_line = false,
-			show_parameter_hints = true,
-			parameter_hints_prefix = "",
-			other_hints_prefix = "-> ",
-			max_len_align = false,
-			max_len_align_padding = 1,
-			right_align = false,
-			right_align_padding = 7,
-			highlight = "BufferLineDiagnosticVisible",
+			auto = false,
+			-- only_current_line = false,
+			-- show_parameter_hints = true,
+			-- parameter_hints_prefix = "",
+			-- other_hints_prefix = "-> ",
+			-- max_len_align = false,
+			-- max_len_align_padding = 1,
+			-- right_align = false,
+			-- right_align_padding = 7,
+			-- highlight = "BufferLineDiagnosticVisible",
 		},
 		hover_actions = {
 			border = {
@@ -40,7 +41,8 @@ local opts = {
 	},
 	server = {
 		capabilities = capabilities,
-		on_attach = function(_, bufnr)
+		on_attach = function(client, bufnr)
+			require("lsp-inlayhints").on_attach(client, bufnr)
 			-- Hover actions
 			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
 			-- Code action groups
