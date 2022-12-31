@@ -47,7 +47,11 @@ return require('packer').startup(function()
 	use 'ray-x/lsp_signature.nvim'
 	use 'lvimuser/lsp-inlayhints.nvim'
 	-- Tech Stack Specific Plugins
-	use 'sebdah/vim-delve'
+	use {
+		'sebdah/vim-delve',
+		event = "BufRead **/*.go",
+		config = { "require('configs/go')", "vim.cmd[[:e]]" },
+	}
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use {

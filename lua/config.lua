@@ -172,19 +172,6 @@ nvim_lsp.clangd.setup({
 	filetypes = {"c", "cpp", "objc", "objcpp"},
 })
 
--- Enable Gopls
-nvim_lsp.gopls.setup({
-	capabilities = capabilities,
-	filetypes = { "go", "gomod" },
-	cmd = {'gopls', '--remote=auto'},
-	settings = {
-		analyses = {
-			unusedparams = true,
-		},
-		staticcheck = true,
-	},
-})
-
 -- Enable Solargraph
 nvim_lsp.solargraph.setup({
 	capabilities = capabilities,
