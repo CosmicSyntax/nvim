@@ -261,6 +261,7 @@ require('bufferline').setup {
 	highlights = {
 		buffer_selected = {
 			bold = true,
+			italic = false,
 		},
 		error_selected = {
 			bold = true,
