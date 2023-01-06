@@ -58,26 +58,19 @@ require'bqf'.setup {
 }
 
 -- OneNord
-local colortheme = require('onenord')
+local colortheme = require('nord')
 colortheme.setup({
-	theme = nil,
+	transparent = false,
+	terminal_colors = true,
+	diff = { mode = "bg" },
 	borders = true,
-	fade_nc = false,
+	errors = { mode = "bg" },
 	styles = {
-		comments = "italic",
-		strings = "NONE",
-		keywords = "NONE",
-		functions = "bold",
-		variables = "NONE",
-		diagnostics = "underline",
-		},
-	disable = {
-		background = false,
-		cursorline = false,
-		eob_lines = true,
+		comments = { italic = true },
+		keywords = {},
+		functions = { bold = true },
+		variables = {},
 	},
-	custom_highlights = {},
-	custom_colors = {},
 })
 colortheme.load()
 
