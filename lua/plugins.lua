@@ -28,8 +28,8 @@ return require('packer').startup(function()
 		config = "require('configs/nvimtree')",
 	}
 	use 'folke/trouble.nvim'
-	-- use 'rmehri01/onenord.nvim'
-	use 'gbprod/nord.nvim'
+	use 'rmehri01/onenord.nvim'
+	-- use 'gbprod/nord.nvim'
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'anuvyklack/windows.nvim'
