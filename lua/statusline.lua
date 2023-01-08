@@ -43,6 +43,10 @@ local highlights = {
 	{'StatusLinePurple', { fg = '#4c566a', bg = '#b48ead', gui= 'bold' }},
 	{'StatusLineGreen', { fg = '#4c566a', bg = '#a3be8c', gui= 'bold' }},
 	{'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
+	{'LspDiagnosticsSignError', { fg = '#bf616a', bg = '#2e3440', gui = 'bold' }},
+	{'LspDiagnosticsSignWarning', { fg = '#d08770', bg = '#2e3440', gui = 'bold' }},
+	{'LspDiagnosticsSignHint', { fg = '#ebcb8b', bg = '#2e3440', gui = 'bold' }},
+	{'LspDiagnosticsSignInformation', { fg = '#b48ead', bg = '#2e3440', gui = 'bold' }},
 	{'StatusLineExtra', { fg = '#d8dee9', bg = '#4c566a' }},
 }
 
@@ -246,11 +250,10 @@ Statusline.active = function()
 	return table.concat {
 		update_mode_colors(),
 		mode(),
-		"%#Normal# ",
+		"%#Normal#",
 		vcs(),
 		filepath(),
 		filename(),
-		"%#Normal#",
 		lsp(),
 		"%=%#StatusLineExtra#",
 		statusline_lsp(),
