@@ -119,3 +119,89 @@ require('Comment').setup()
 
 -- Nvim Git linker
 require("gitlinker").setup()
+
+-- Tabline config
+require('bufferline').setup {
+	highlights = {
+		buffer_selected = {
+			bold = true,
+			italic = false,
+		},
+		error_selected = {
+			bold = true,
+		},
+		error_diagnostic_selected = {
+			bold = true,
+		},
+		info_selected = {
+			bold = true,
+		},
+		info_diagnostic_selected = {
+			bold = true,
+		},
+		warning_selected = {
+			bold = true,
+		},
+		warning_diagnostic_selected = {
+			bold = true,
+		},
+		-- duplicate_selected = {
+		-- 	gui = None,
+		-- },
+		-- duplicate_visible = {
+		-- 	gui = None,
+		-- },
+		-- duplicate = {
+		-- 	gui = None,
+		-- },
+	},
+	options = {
+		-- diagnostics = "nvim_lsp",
+		-- diagnostics_update_in_insert = false,
+		-- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+		-- 	return "("..count..")"
+		-- end,
+		offsets = {
+			{
+				filetype = "NvimTree",
+				text = "Navigation", 
+				text_align = "center",
+				padding = 1,
+			}
+		},
+		buffer_close_icon = 'x',
+		show_buffer_icons = true,
+		show_buffer_close_icons = false,
+		show_close_icon = false,
+		show_tab_indicators = true,
+		persist_buffer_sort = true,
+		separator_style = "thin",
+		-- custom_areas = {
+		-- 	right = function()
+		-- 		local result = {}
+  --
+		-- 		local error = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})
+		-- 		local warning = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})
+		-- 		local info = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})
+		-- 		local hint = #vim.diagnostic.get(0, {severity = vim.diagnostic.severity.HINT})
+  --
+		-- 		if error ~= 0 then
+		-- 			table.insert(result, {text = " E " .. error, guifg = "#EC5241"})
+		-- 		end
+  --
+		-- 		if warning ~= 0 then
+		-- 			table.insert(result, {text = " W " .. warning, guifg = "#EFB839"})
+		-- 		end
+  --
+		-- 		if hint ~= 0 then
+		-- 			table.insert(result, {text = " H " .. hint, guifg = "#A3BA5E"})
+		-- 		end
+  --
+		-- 		if info ~= 0 then
+		-- 			table.insert(result, {text = " I " .. info, guifg = "#7EA9A7"})
+		-- 		end
+		-- 		return result
+		-- 	end,
+		-- }
+	},
+}
