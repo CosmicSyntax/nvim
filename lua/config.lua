@@ -58,29 +58,34 @@ require'bqf'.setup {
 }
 
 -- OneNord
--- OneNord
-local colortheme = require('onenord')
-colortheme.setup({
-	theme = nil,
-	borders = true,
-	fade_nc = false,
-	styles = {
-		comments = "italic",
-		strings = "NONE",
-		keywords = "NONE",
-		functions = "bold",
-		variables = "NONE",
-		diagnostics = "underline",
-		},
-	disable = {
-		background = false,
-		cursorline = false,
-		eob_lines = true,
-	},
-	custom_highlights = {},
-	custom_colors = {},
-})
-colortheme.load()
+-- local colortheme = require('onenord')
+-- colortheme.setup({
+-- 	theme = nil,
+-- 	borders = true,
+-- 	fade_nc = false,
+-- 	styles = {
+-- 		comments = "italic",
+-- 		strings = "NONE",
+-- 		keywords = "NONE",
+-- 		functions = "bold",
+-- 		variables = "NONE",
+-- 		diagnostics = "underline",
+-- 		},
+-- 	disable = {
+-- 		background = false,
+-- 		cursorline = false,
+-- 		eob_lines = true,
+-- 	},
+-- 	custom_highlights = {},
+-- 	custom_colors = {},
+-- })
+-- colortheme.load()
+
+-- Nord
+local cmd = vim.cmd
+cmd([[colorscheme nord]])
+cmd([[highlight Comment cterm=italic gui=italic]])
+cmd([[highlight Function cterm=bold gui=bold]])
 
 -- Line Setup
 -- require('lualine').setup {
