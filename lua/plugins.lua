@@ -29,7 +29,7 @@ return require('packer').startup(function()
 	}
 	use 'folke/trouble.nvim'
 	-- use 'rmehri01/onenord.nvim'
-	use 'arcticicestudio/nord-vim'
+	use 'rebelot/kanagawa.nvim'
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'anuvyklack/windows.nvim'

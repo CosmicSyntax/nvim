@@ -57,35 +57,28 @@ require'bqf'.setup {
     },
 }
 
--- OneNord
--- local colortheme = require('onenord')
--- colortheme.setup({
--- 	theme = nil,
--- 	borders = true,
--- 	fade_nc = false,
--- 	styles = {
--- 		comments = "italic",
--- 		strings = "NONE",
--- 		keywords = "NONE",
--- 		functions = "bold",
--- 		variables = "NONE",
--- 		diagnostics = "underline",
--- 		},
--- 	disable = {
--- 		background = false,
--- 		cursorline = false,
--- 		eob_lines = true,
--- 	},
--- 	custom_highlights = {},
--- 	custom_colors = {},
--- })
--- colortheme.load()
-
--- Nord
-local cmd = vim.cmd
-cmd([[colorscheme nord]])
-cmd([[highlight Comment cterm=italic gui=italic]])
-cmd([[highlight Function cterm=bold gui=bold]])
+-- Kanagawa
+require('kanagawa').setup({
+    undercurl = true,
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = false},
+    statementStyle = { bold = true },
+    typeStyle = {},
+    variablebuiltinStyle = { italic = true},
+    specialReturn = true,
+    specialException = true,
+    transparent = false,
+    dimInactive = false,
+    globalStatus = false,
+    terminalColors = true,
+    colors = {},
+    overrides = {},
+    theme = "default"
+})
+vim.cmd("colorscheme kanagawa")
+-- cmd([[highlight Comment cterm=italic gui=italic]])
+-- cmd([[highlight Function cterm=bold gui=bold]])
 
 -- Line Setup
 -- require('lualine').setup {

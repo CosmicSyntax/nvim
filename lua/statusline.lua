@@ -36,18 +36,18 @@ local set_hl = function(group, options)
 end
 
 local highlights = {
-	{'StatusLine', { fg = '#4c566a', bg = '#8fbcbb', gui= 'bold' }},
-	{'StatusLineRed', { fg = '#4c566a', bg = '#bf616a', gui= 'bold' }},
-	{'StatusLineBlue', { fg = '#4c566a', bg = '#5e81ac', gui= 'bold' }},
-	{'StatusLineYellow', { fg = '#4c566a', bg = '#ebcb8b', gui= 'bold' }},
-	{'StatusLinePurple', { fg = '#4c566a', bg = '#b48ead', gui= 'bold' }},
-	{'StatusLineGreen', { fg = '#4c566a', bg = '#a3be8c', gui= 'bold' }},
-	{'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
-	{'LspDiagnosticsSignError', { fg = '#bf616a', bg = '#2e3440', gui = 'bold' }},
-	{'LspDiagnosticsSignWarning', { fg = '#d08770', bg = '#2e3440', gui = 'bold' }},
-	{'LspDiagnosticsSignHint', { fg = '#ebcb8b', bg = '#2e3440', gui = 'bold' }},
-	{'LspDiagnosticsSignInformation', { fg = '#b48ead', bg = '#2e3440', gui = 'bold' }},
-	{'StatusLineExtra', { fg = '#d8dee9', bg = '#4c566a' }},
+	{'StatusLine', { fg = '#16161d', bg = '#7fb4ca', gui= 'bold' }},
+	{'StatusLineRed', { fg = '#16161d', bg = '#c34043', gui= 'bold' }},
+	{'StatusLineBlue', { fg = '#16161d', bg = '#7e9cd8', gui= 'bold' }},
+	{'StatusLineYellow', { fg = '#16161d', bg = '#dca561', gui= 'bold' }},
+	{'StatusLinePurple', { fg = '#16161d', bg = '#938aa9', gui= 'bold' }},
+	{'StatusLineGreen', { fg = '#16161d', bg = '#98bb6c', gui= 'bold' }},
+	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
+	{'LspDiagnosticsSignError', { fg = '#e82424', gui = 'bold' }},
+	{'LspDiagnosticsSignWarning', { fg = '#ff9e3b', gui = 'bold' }},
+	{'LspDiagnosticsSignHint', { fg = '#658594', gui = 'bold' }},
+	{'LspDiagnosticsSignInformation', { fg = '#6a9589', gui = 'bold' }},
+	{'StatusLineExtra', { fg = '#16161d', bg = '#6a9589' }},
 }
 
 for _, highlight in ipairs(highlights) do
