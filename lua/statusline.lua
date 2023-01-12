@@ -36,18 +36,18 @@ local set_hl = function(group, options)
 end
 
 local highlights = {
-	{'StatusLine', { fg = '#16161d', bg = '#7fb4ca', gui= 'bold' }},
-	{'StatusLineRed', { fg = '#16161d', bg = '#c34043', gui= 'bold' }},
-	{'StatusLineBlue', { fg = '#16161d', bg = '#7e9cd8', gui= 'bold' }},
-	{'StatusLineYellow', { fg = '#16161d', bg = '#dca561', gui= 'bold' }},
-	{'StatusLinePurple', { fg = '#16161d', bg = '#938aa9', gui= 'bold' }},
-	{'StatusLineGreen', { fg = '#16161d', bg = '#98bb6c', gui= 'bold' }},
+	{'StatusLine', { fg = '#2e3440', bg = '#81a1c1', gui= 'bold' }},
+	{'StatusLineRed', { fg = '#2e3440', bg = '#bf616a', gui= 'bold' }},
+	{'StatusLineBlue', { fg = '#2e3440', bg = '#5e81ac', gui= 'bold' }},
+	{'StatusLineYellow', { fg = '#2e3440', bg = '#ebcb8b', gui= 'bold' }},
+	{'StatusLinePurple', { fg = '#2e3440', bg = '#b48ead', gui= 'bold' }},
+	{'StatusLineGreen', { fg = '#2e3440', bg = '#a3be8c', gui= 'bold' }},
 	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
-	{'LspDiagnosticsSignError', { fg = '#e82424', gui = 'bold' }},
-	{'LspDiagnosticsSignWarning', { fg = '#ff9e3b', gui = 'bold' }},
-	{'LspDiagnosticsSignHint', { fg = '#658594', gui = 'bold' }},
-	{'LspDiagnosticsSignInformation', { fg = '#6a9589', gui = 'bold' }},
-	{'StatusLineExtra', { fg = '#16161d', bg = '#6a9589' }},
+	{'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
+	{'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
+	{'LspDiagnosticsSignHint', { fg = '#a3be8c', gui = 'bold' }},
+	{'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
+	{'StatusLineExtra', { bg = '#232634' }},
 }
 
 for _, highlight in ipairs(highlights) do
@@ -137,7 +137,7 @@ local function lineinfo()
 	if vim.bo.filetype == "alpha" then
 		return ""
 	end
-	return " %P Ln:%l Col:%c "
+	return "%P Ln:%l Col:%c "
 end
 
 local function vcs()
@@ -179,7 +179,7 @@ local function statusline_lsp()
 
 	-- local base_status = "S"
 	local status_symbol = ' '
-	-- local indicator_ok = '✅'
+	local indicator_ok = ' OK'
 	-- vim.g.indicator_errors = ''
 	-- vim.g.indicator_warnings = ''
 	-- vim.g.indicator_info = '🛈'
@@ -227,7 +227,7 @@ local function statusline_lsp()
 		table.insert(msgs, client_name .. ' ' .. contents)
 	end
 	-- vim.trim(table.concat(status_parts, ' ') ..
-	local base_status =  ' ' .. table.concat(msgs, ' ')
+	local base_status = table.concat(msgs, ' ')
 	local symbol = status_symbol
 	-- .. ((some_diagnostics and only_hint) and '' or ' ')
 	local current_function = vim.b.lsp_current_function
@@ -236,10 +236,10 @@ local function statusline_lsp()
 	end
 
 	if base_status ~= '' then
-		return symbol .. base_status .. ' '
+		return symbol .. base_status
 	end
 
-	return symbol .. indicator_ok .. ' '
+	return symbol .. indicator_ok
 	-- return 'test'
 end
 

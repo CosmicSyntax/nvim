@@ -28,8 +28,7 @@ return require('packer').startup(function()
 		config = "require('configs/nvimtree')",
 	}
 	use 'folke/trouble.nvim'
-	-- use 'rmehri01/onenord.nvim'
-	use 'rebelot/kanagawa.nvim'
+	use 'rmehri01/onenord.nvim'
 	use 'karb94/neoscroll.nvim'
 	use 'kevinhwang91/nvim-bqf'
 	use 'anuvyklack/windows.nvim'
@@ -50,15 +49,15 @@ return require('packer').startup(function()
 	-- Tech Stack Specific Plugins
 	use {
 		'sebdah/vim-delve',
-		event = "BufRead **/*.go",
-		config = { "require('configs/go')", "vim.cmd[[:e]]" },
+		ft = {'go'},
+		config = { "require('configs/go')" },
 	}
 	use 'buoto/gotests-vim'
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	use {
 		'simrat39/rust-tools.nvim',
-		event = "BufRead **/*.rs",
-		config = { "require('configs/rust')", "vim.cmd[[:e]]" },
+		ft = {'rust'},
+		config = { "require('configs/rust')" },
 	j}
 	use {
 		'saecki/crates.nvim',
