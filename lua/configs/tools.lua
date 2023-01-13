@@ -166,7 +166,7 @@ require('bufferline').setup {
 				filetype = "NvimTree",
 				text = "Navigation", 
 				text_align = "center",
-				padding = 1,
+				padding = 0,
 			}
 		},
 		buffer_close_icon = 'x',
