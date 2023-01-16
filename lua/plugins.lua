@@ -9,8 +9,6 @@ return require('packer').startup(function()
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'neovim/nvim-lspconfig'
-	-- use { 'nvim-lualine/lualine.nvim' }
-	-- use 'arkav/lualine-lsp-progress'
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-path'
@@ -24,9 +22,10 @@ return require('packer').startup(function()
 	use {
 		'kyazdani42/nvim-tree.lua', 
 		requires = 'kyazdani42/nvim-web-devicons',
-		event = "BufWinEnter",
+		event = "VimEnter",
 		config = "require('configs/nvimtree')",
 	}
+	use 'elihunter173/dirbuf.nvim'
 	use 'folke/trouble.nvim'
 	use 'rmehri01/onenord.nvim'
 	use 'karb94/neoscroll.nvim'
