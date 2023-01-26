@@ -83,3 +83,6 @@ map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', 
 
 -- Mapping for formatting
 map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)
+
+-- Mapping for Dirbuf
+map("n", "<leader>dd", ':Dirbuf<CR>', defo)
