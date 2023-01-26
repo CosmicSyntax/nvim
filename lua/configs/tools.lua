@@ -11,10 +11,10 @@ require("lsp-inlayhints").setup({
 		type_hints = {
 		-- type and other hints
 			show = true,
-			prefix = "",
-			separator = "",
-			remove_colon_start = false,
-			remove_colon_end = false,
+			prefix = "-> ",
+			separator = ", ",
+			remove_colon_start = true,
+			remove_colon_end = true,
 		},
 		only_current_line = false,
 		-- separator between types and parameter hints. Note that type hints are
