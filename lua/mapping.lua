@@ -18,6 +18,9 @@ map("n", "<F8>", ':Telescope live_grep<CR>', defo)
 map("n", "<F10>", ':Telescope quickfix<CR>', defo)
 map("n", "<F11>", ':Telescope buffers<CR>', defo)
 
+-- Maaping for Lazy
+map("n", "<leader>pp", ':Lazy show<CR>', defo)
+
 -- Mapping for copy into clipboard
 map("v", "<C-c>", '"+y', defo)
 
