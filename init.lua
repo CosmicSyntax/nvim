@@ -20,6 +20,8 @@ cmd([[set noexpandtab]])
 cmd([[set nofoldenable]])
 -- End of UI Setting
 
+-- Plugin Manager
+require("plugins")
 -- Plugin Configuration
 require("config")
 -- Key Mapping

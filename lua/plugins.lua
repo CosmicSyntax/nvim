@@ -1,69 +1,84 @@
-return require('packer').startup(function()
-	use 'wbthomason/packer.nvim'
-	use 'windwp/nvim-autopairs'
-	use 'akinsho/bufferline.nvim'
-	use { 'mg979/vim-visual-multi', branch = 'master' }
-	use 'numToStr/Comment.nvim'
-	use 'lewis6991/gitsigns.nvim'
-	use { 'sindrets/diffview.nvim' }
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'lukas-reineke/indent-blankline.nvim'
-	use 'neovim/nvim-lspconfig'
-	use 'hrsh7th/nvim-cmp'
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-path'
-	use {
+-- Bootstrap Lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	'windwp/nvim-autopairs',
+	'akinsho/bufferline.nvim',
+	{ 'mg979/vim-visual-multi', branch = 'master' },
+	'numToStr/Comment.nvim',
+	'lewis6991/gitsigns.nvim',
+	{ 'sindrets/diffview.nvim' },
+	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+	'lukas-reineke/indent-blankline.nvim',
+	'neovim/nvim-lspconfig',
+	'hrsh7th/nvim-cmp',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/cmp-path',
+	{
 		'L3MON4D3/LuaSnip',
 		event = "BufRead",
 		config = "require('configs/luasnip')",
-	}
-	use 'rafamadriz/friendly-snippets'
-	use 'saadparwaiz1/cmp_luasnip'
-	use {
+	},
+	'rafamadriz/friendly-snippets',
+	'saadparwaiz1/cmp_luasnip',
+	{
 		'kyazdani42/nvim-tree.lua', 
-		requires = 'kyazdani42/nvim-web-devicons',
+		dependencies = {
+			'kyazdani42/nvim-web-devicons',
+		},
 		event = "VimEnter",
 		config = "require('configs/nvimtree')",
-	}
-	use 'elihunter173/dirbuf.nvim'
-	use 'folke/trouble.nvim'
-	use 'rmehri01/onenord.nvim'
-	use 'karb94/neoscroll.nvim'
-	use 'kevinhwang91/nvim-bqf'
-	use 'anuvyklack/windows.nvim'
-	use 'anuvyklack/middleclass'
-	use 'onsails/lspkind-nvim'
-	use 'nvim-telescope/telescope.nvim'
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-	use 'nvim-telescope/telescope-ui-select.nvim'
-	use 'nvim-lua/plenary.nvim'
-	use 'kdheepak/lazygit.nvim'
-	use {
+	},
+	'elihunter173/dirbuf.nvim',
+	'folke/trouble.nvim',
+	'rmehri01/onenord.nvim',
+	'karb94/neoscroll.nvim',
+	'kevinhwang91/nvim-bqf',
+	'anuvyklack/windows.nvim',
+	'anuvyklack/middleclass',
+	'onsails/lspkind-nvim',
+	'nvim-telescope/telescope.nvim',
+	{'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+	'nvim-telescope/telescope-ui-select.nvim',
+	'nvim-lua/plenary.nvim',
+	'kdheepak/lazygit.nvim',
+	{
 		'ruifm/gitlinker.nvim',
 		event = "BufRead",
-		config = "require('configs/tools')",
-	}
-	use 'ray-x/lsp_signature.nvim'
-	use 'lvimuser/lsp-inlayhints.nvim'
+		config = function() require('configs/tools') end,
+	},
+	'ray-x/lsp_signature.nvim',
+	'lvimuser/lsp-inlayhints.nvim',
 	-- Tech Stack Specific Plugins
-	use {
+	{
 		'sebdah/vim-delve',
 		ft = {'go'},
-		config = { "require('configs/go')" },
-	}
-	use 'buoto/gotests-vim'
-	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-	use {
+		config = function() require('configs/go') end,
+	},
+	'buoto/gotests-vim',
+	'jose-elias-alvarez/nvim-lsp-ts-utils',
+	{
 		'simrat39/rust-tools.nvim',
 		ft = {'rust'},
-		config = { "require('configs/rust')" },
-	j}
-	use {
+		config = function() require('configs/rust') end,
+	},
+	{
 		'saecki/crates.nvim',
 		event = { "BufRead Cargo.toml" },
 		config = function()
 			require('crates').setup()
 		end,
-	}
-	use 'puremourning/vimspector' -- Ensure you have python3 imported
-end)
+	},
+	'puremourning/vimspector' -- Ensure you have python3 imported
+})

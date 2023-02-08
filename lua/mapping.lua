@@ -18,9 +18,6 @@ map("n", "<F8>", ':Telescope live_grep<CR>', defo)
 map("n", "<F10>", ':Telescope quickfix<CR>', defo)
 map("n", "<F11>", ':Telescope buffers<CR>', defo)
 
--- Mapping for Packer
-map("n", "<leader>pp", ':lua require("plugins")<CR>', defo)
-
 -- Mapping for copy into clipboard
 map("v", "<C-c>", '"+y', defo)
 
