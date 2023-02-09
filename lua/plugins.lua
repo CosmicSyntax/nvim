@@ -28,7 +28,7 @@ require("lazy").setup({
 	{
 		'L3MON4D3/LuaSnip',
 		event = "BufRead",
-		config = "require('configs/luasnip')",
+		config = function() require('configs/luasnip') end,
 	},
 	'rafamadriz/friendly-snippets',
 	'saadparwaiz1/cmp_luasnip',
@@ -38,7 +38,7 @@ require("lazy").setup({
 			'kyazdani42/nvim-web-devicons',
 		},
 		event = "VimEnter",
-		config = "require('configs/nvimtree')",
+		config = function() require('configs/nvimtree') end,
 	},
 	'elihunter173/dirbuf.nvim',
 	'folke/trouble.nvim',
