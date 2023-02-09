@@ -67,7 +67,11 @@ require("lazy").setup({
 		config = function() require('configs/go') end,
 	},
 	'buoto/gotests-vim',
-	'jose-elias-alvarez/nvim-lsp-ts-utils',
+	{
+		'jose-elias-alvarez/typescript.nvim',
+		ft = {'typescript'},
+		config = function() require('configs/ts') end,
+	},
 	{
 		'simrat39/rust-tools.nvim',
 		ft = {'rust'},
