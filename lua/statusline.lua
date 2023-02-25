@@ -45,7 +45,7 @@ local highlights = {
 	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
 	{'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
 	{'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
-	{'LspDiagnosticsSignHint', { fg = '#a3be8c', gui = 'bold' }},
+	{'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
 	{'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
 	{'StatusLineExtra', { bg = '#232634' }},
 }
