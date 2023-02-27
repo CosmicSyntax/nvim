@@ -43,10 +43,10 @@ local highlights = {
 	{'StatusLinePurple', { fg = '#2e3440', bg = '#b48ead', gui= 'bold' }},
 	{'StatusLineGreen', { fg = '#2e3440', bg = '#a3be8c', gui= 'bold' }},
 	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
-	{'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
-	{'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
-	{'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
-	{'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
+	-- {'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
+	-- {'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
+	-- {'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
+	-- {'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
 	{'StatusLineExtra', { bg = '#232634' }},
 }
 
@@ -109,16 +109,16 @@ local function lsp()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#LspDiagnosticsSignError# " .. count["errors"]
+		errors = " %#DiagnosticError# " .. count["errors"]
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#LspDiagnosticsSignWarning# " .. count["warnings"]
+		warnings = " %#DiagnosticWarn# " .. count["warnings"]
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#LspDiagnosticsSignHint# " .. count["hints"]
+		hints = " %#DiagnosticHint# " .. count["hints"]
 	end
 	if count["info"] ~= 0 then
-		info = " %#LspDiagnosticsSignInformation# " .. count["info"]
+		info = " %#DiagnosticInfo# " .. count["info"]
 	end
 
 	return errors .. warnings .. hints .. info .. "%#Normal#"

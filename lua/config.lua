@@ -57,33 +57,10 @@ require'bqf'.setup {
     },
 }
 
--- One Nord... because there is nothing better
-require('onenord').setup({
-		theme = nil,
-		borders = false,
-		fade_nc = false,
-		styles = {
-		comments = "italic",
-		strings = "NONE",
-		keywords = "NONE",
-		functions = "bold",
-		variables = "NONE",
-		diagnostics = "underline",
-	},
-	disable = {
-		background = false,
-		cursorline = false,
-		eob_lines = true,
-	},
-	inverse = {
-		match_paren = false,
-	},
-	custom_highlights = {},
-	custom_colors = {},
-})
-vim.cmd("colorscheme onenord")
--- cmd([[highlight Comment cterm=italic gui=italic]])
--- cmd([[highlight Function cterm=bold gui=bold]])
+-- Nord... because there is nothing better
+vim.cmd("colorscheme nord")
+vim.cmd([[highlight Comment cterm=italic gui=italic]])
+vim.cmd([[highlight Function cterm=bold gui=bold]])
 
 -- Line Setup
 -- require('lualine').setup {
