@@ -85,5 +85,10 @@ require("lazy").setup({
 			require('crates').setup()
 		end,
 	},
+	{
+		dir = '~/.config/nvim/lua/configs/python.lua',
+		ft = {'python'},
+		config = function() require('configs/python') end,
+	},
 	'puremourning/vimspector' -- Ensure you have python3 imported
 })
