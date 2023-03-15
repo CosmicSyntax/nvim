@@ -90,5 +90,10 @@ require("lazy").setup({
 		ft = {'python'},
 		config = function() require('configs/python') end,
 	},
+	{
+		dir = '~/.config/nvim/lua/configs/bash.lua',
+		ft = {'sh'},
+		config = function() require('configs/bash') end,
+	},
 	'puremourning/vimspector' -- Ensure you have python3 imported
 })
