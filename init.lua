@@ -13,6 +13,9 @@ opt.foldmethod = "indent"
 opt.winblend = 20
 opt.termguicolors = true
 
+local g = vim.g
+g.python3_host_prog = "~/.pyenv/shims/python"
+
 local cmd = vim.cmd
 
 cmd([[set shortmess+=c]])
