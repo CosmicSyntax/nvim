@@ -141,18 +141,6 @@ require "lsp_signature".setup({
 	floating_window = false
 })
 
--- Enable ClangD
--- nvim_lsp.clangd.setup({
--- 	capabilities = capabilities,
--- 	cmd = {
--- 		"clangd",
--- 		"--background-index",
--- 		"--suggest-missing-includes",
--- 		'--query-driver="/usr/local/opt/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-gcc"'
--- 		},
--- 	filetypes = {"c", "cpp", "objc", "objcpp"},
--- })
-
 -- Enable Solargraph
 -- nvim_lsp.solargraph.setup({
 -- 	capabilities = capabilities,
