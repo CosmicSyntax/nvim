@@ -67,7 +67,10 @@ require("lazy").setup({
 		ft = {'go'},
 		config = function() require('configs/go') end,
 	},
-	'buoto/gotests-vim',
+	{
+		'buoto/gotests-vim',
+		ft = {'go'},
+	},
 	{
 		'jose-elias-alvarez/typescript.nvim',
 		ft = {'typescript'},
