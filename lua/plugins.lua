@@ -59,6 +59,11 @@ require("lazy").setup({
 		event = "BufRead",
 		config = function() require('configs/tools') end,
 	},
+	{
+		'ggandor/leap.nvim',
+		event = "BufRead",
+		config = function() require('configs/leap') end,
+	},
 	'ray-x/lsp_signature.nvim',
 	'lvimuser/lsp-inlayhints.nvim',
 	{
