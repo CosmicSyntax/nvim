@@ -82,7 +82,7 @@ require("lazy").setup({
 	},
 	{
 		'jose-elias-alvarez/typescript.nvim',
-		ft = {'typescript'},
+		ft = {'typescript', 'javascript'},
 		config = function() require('configs/ts') end,
 	},
 	{
