@@ -66,12 +66,14 @@ map("n", "<C-k>", ':BufferLineMovePrev<CR>', defo)
 map("n", "<leader>gg", ':LazyGit<CR>', defo)
 
 -- Mapping for vimspector debugging
-map("n", "<leader>vr", ':DapTerminate<CR>', defo)
-map("n", "<leader>vb", ':DapToggleBreakpoint<CR>', defo)
-map("n", "<leader>vn", ':DapStepOver<CR>', defo)
-map("n", "<leader>vs", ':DapStepInto<CR>', defo)
-map("n", "<leader>vo", ':DapStepOut<CR>', defo)
-map("n", "<leader>vc", ':DapContinue<CR>', defo)
+map("n", "<leader>vl", ':call vimspector#Launch()<CR>', defo)
+map("n", "<leader>vr", ':VimspectorReset<CR>', defo)
+map("n", "<leader>vb", ':call vimspector#ToggleBreakpoint()<CR>', defo)
+map("n", "<leader>vn", ':call vimspector#StepOver()<CR>', defo)
+map("n", "<leader>vs", ':call vimspector#StepInto()<CR>', defo)
+map("n", "<leader>vo", ':call vimspector#StepOut()<CR>', defo)
+map("n", "<leader>vh", ':call vimspector#RunToCursor()<CR>', defo)
+map("n", "<leader>vc", ':call vimspector#Continue()<CR>', defo)
 local g = vim.g
 g.vimspector_install_gadgets = [['CodeLLDB']]
 g.vimspector_variables_display_mode = 'full'

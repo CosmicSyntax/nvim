@@ -174,6 +174,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 		update_in_insert = true,
 	}
 )
-
--- Mason
-require("mason").setup()
