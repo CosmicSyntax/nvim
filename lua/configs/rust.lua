@@ -2,10 +2,18 @@
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- capabilities = cmp.update_capabilities(lsp_status.capabilities)
+local mason_registry = require("mason-registry")
+local codelldb = mason_registry.get_package("codelldb")
+local extension_path = codelldb:get_install_path() .. "/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
 -- Enable rust_analyzer
 local rt = require('rust-tools')
 local opts = {
+	dap = {
+		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+	},
 	tools = {
 		auto = false,
 		on_initialized = nil,

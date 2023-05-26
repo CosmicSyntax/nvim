@@ -70,6 +70,7 @@ require("lazy").setup({
 		'jose-elias-alvarez/null-ls.nvim',
 		ft = {'python'},
 	},
+	"williamboman/mason.nvim",
 	-- Tech Stack Specific Plugins
 	{
 		'sebdah/vim-delve',
@@ -84,6 +85,13 @@ require("lazy").setup({
 		'jose-elias-alvarez/typescript.nvim',
 		ft = {'typescript', 'javascript'},
 		config = function() require('configs/ts') end,
+	},
+	{
+		'rcarriga/nvim-dap-ui',
+		dependencies = {
+			'mfussenegger/nvim-dap',
+		},
+		config = function() require('configs/dap') end,
 	},
 	{
 		'simrat39/rust-tools.nvim',
@@ -112,5 +120,4 @@ require("lazy").setup({
 		ft = {'c', 'cpp'},
 		config = function() require('configs/c') end,
 	},
-	'puremourning/vimspector' -- Ensure you have python3 imported
 })
