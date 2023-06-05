@@ -19,7 +19,11 @@ require("lazy").setup({
 	'numToStr/Comment.nvim',
 	'lewis6991/gitsigns.nvim',
 	{ 'sindrets/diffview.nvim' },
-	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+	{
+		'nvim-treesitter/nvim-treesitter',
+		tag = "v0.9.0",
+		build = ':TSUpdate',
+	},
 	'lukas-reineke/indent-blankline.nvim',
 	'neovim/nvim-lspconfig',
 	'hrsh7th/nvim-cmp',
