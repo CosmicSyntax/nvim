@@ -21,11 +21,14 @@ require("lazy").setup({
 	{ 'sindrets/diffview.nvim' },
 	{
 		'nvim-treesitter/nvim-treesitter',
-		tag = "v0.9.0",
+		-- tag = "v0.9.0",
 		build = ':TSUpdate',
 	},
 	'lukas-reineke/indent-blankline.nvim',
-	'neovim/nvim-lspconfig',
+	{
+		'neovim/nvim-lspconfig',
+		tag = "v0.1.4",
+	},
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-path',
@@ -115,6 +118,11 @@ require("lazy").setup({
 		dir = '~/.config/nvim/lua/configs/c.lua',
 		ft = {'c', 'cpp'},
 		config = function() require('configs/c') end,
+	},
+	{
+		dir = '~/.config/nvim/lua/configs/sql.lua',
+		ft = {'sql'},
+		config = function() require('configs/sql') end,
 	},
 	'puremourning/vimspector' -- Ensure you have python3 imported
 })

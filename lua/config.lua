@@ -9,7 +9,8 @@ require'nvim-treesitter.configs'.setup {
 		"python",
 		"bash",
 		"typescript",
-		"cpp"
+		"cpp",
+		"sql",
 	},
 	highlight = {
 		enable = true,
