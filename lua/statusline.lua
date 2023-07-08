@@ -278,4 +278,7 @@ vim.api.nvim_exec([[
   augroup END
 ]], false)
 
+local cmd = vim.cmd
+cmd([[autocmd User LspProgressUpdate redraws]])
+cmd([[autocmd User LspRequest redraws]])
 vim.o.laststatus = 3
