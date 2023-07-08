@@ -27,7 +27,7 @@ require("lazy").setup({
 	'lukas-reineke/indent-blankline.nvim',
 	{
 		'neovim/nvim-lspconfig',
-		tag = "v0.1.4",
+		-- tag = "v0.1.4",
 	},
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
