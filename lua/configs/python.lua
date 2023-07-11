@@ -10,13 +10,13 @@ nvim_lsp.pyright.setup({
 	end,
 })
 
--- Null ls config for pylint
-local null_ls = require("null-ls")
-null_ls.setup({
-	sources = {
-		null_ls.builtins.diagnostics.pylint.with({
-			diagnostic_config = { underline = false, virtual_text = false, signs = false },
-			method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-		}),
-	},
+-- Pylint
+local lint = require('lint')
+lint.linters_by_ft = {
+	markdown = {'vale',}
+}
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	callback = function()
+		lint.try_lint()
+	end,
 })
