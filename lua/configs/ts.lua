@@ -5,7 +5,6 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 -- Typescript
 nvim_lsp.tsserver.setup({
 	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		require("lsp-inlayhints").on_attach(client, bufnr)
-	end,
 })
+vim.api.nvim_exec_autocmds("FileType", {})
+vim.lsp.inlay_hint(0, true)

@@ -1,7 +1,6 @@
 -- nvim_lsp object
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
--- capabilities = cmp.update_capabilities(lsp_status.capabilities)
 
 -- Enable rust_analyzer
 local rt = require('rust-tools')
@@ -39,12 +38,9 @@ local opts = {
 	},
 	server = {
 		capabilities = capabilities,
-		on_attach = function(client, bufnr)
-			require("lsp-inlayhints").on_attach(client, bufnr)
+		on_attach = function(_, bufnr)
 			-- Hover actions
 			vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-			-- Code action groups
-			-- vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 		end,
 		settings = {
 			["rust-analyzer"] = {
@@ -69,3 +65,4 @@ local opts = {
 	},
 }
 rt.setup(opts)
+vim.api.nvim_exec_autocmds("FileType", {})

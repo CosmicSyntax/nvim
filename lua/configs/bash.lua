@@ -5,9 +5,7 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 -- Enable Bash-LSP
 nvim_lsp.bashls.setup({
 	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		require("lsp-inlayhints").on_attach(client, bufnr)
-	end,
 	filetypes = { "sh" },
 	cmd = {'bash-language-server', 'start'},
 })
+vim.api.nvim_exec_autocmds("FileType", {})

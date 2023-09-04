@@ -5,9 +5,6 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 -- Enable Gopls
 nvim_lsp.gopls.setup({
 	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		require("lsp-inlayhints").on_attach(client, bufnr)
-	end,
 	filetypes = { "go", "gomod" },
 	cmd = {'gopls', '--remote=auto'},
 	settings = {
@@ -28,3 +25,4 @@ nvim_lsp.gopls.setup({
 		},
 	},
 })
+vim.api.nvim_exec_autocmds("FileType", {})

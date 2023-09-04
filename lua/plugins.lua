@@ -15,6 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	'windwp/nvim-autopairs',
 	'akinsho/bufferline.nvim',
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		event = "LspAttach",
+	},
 	{ 'mg979/vim-visual-multi', branch = 'master' },
 	'numToStr/Comment.nvim',
 	'lewis6991/gitsigns.nvim',
@@ -72,7 +77,7 @@ require("lazy").setup({
 		config = function() require('configs/leap') end,
 	},
 	'ray-x/lsp_signature.nvim',
-	'lvimuser/lsp-inlayhints.nvim',
+	-- 'lvimuser/lsp-inlayhints.nvim',
 	{
 		'mfussenegger/nvim-lint',
 		ft = {'python'},
@@ -81,7 +86,10 @@ require("lazy").setup({
 	{
 		'sebdah/vim-delve',
 		ft = {'go'},
-		config = function() require('configs/go') end,
+		config = function()
+			require('configs/go')
+			require('configs/inlay')
+		end,
 	},
 	{
 		'buoto/gotests-vim',
@@ -90,12 +98,18 @@ require("lazy").setup({
 	{
 		'jose-elias-alvarez/typescript.nvim',
 		ft = {'typescript', 'javascript'},
-		config = function() require('configs/ts') end,
+		config = function()
+			require('configs/ts')
+			require('configs/inlay')
+		end,
 	},
 	{
 		'simrat39/rust-tools.nvim',
 		ft = {'rust'},
-		config = function() require('configs/rust') end,
+		config = function()
+			require('configs/rust')
+			require('configs/inlay')
+		end,
 	},
 	{
 		'saecki/crates.nvim',
