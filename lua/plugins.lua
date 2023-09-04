@@ -126,17 +126,26 @@ require("lazy").setup({
 	{
 		dir = '~/.config/nvim/lua/lazyConfigs/bash.lua',
 		ft = {'sh'},
-		config = function() require('lazyConfigs/bash') end,
+		config = function()
+			require('lazyConfigs/bash')
+			require('lazyConfigs/inlay')
+		end,
 	},
 	{
 		dir = '~/.config/nvim/lua/lazyConfigs/c.lua',
 		ft = {'c', 'cpp'},
-		config = function() require('lazyConfigs/c') end,
+		config = function()
+			require('lazyConfigs/c')
+			require('lazyConfigs/inlay')
+		end,
 	},
 	{
 		dir = '~/.config/nvim/lua/lazyConfigs/sql.lua',
 		ft = {'sql'},
 		config = function() require('lazyConfigs/sql') end,
 	},
-	'puremourning/vimspector' -- Ensure you have python3 imported
+	{
+		'puremourning/vimspector',
+		ft = {'go', 'rust', 'c', 'cpp'},
+	} -- Ensure you have python3 imported
 })
