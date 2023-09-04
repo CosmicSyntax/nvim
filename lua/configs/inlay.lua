@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		if client.server_capabilities.inlayHintProvider then
 			vim.lsp.inlay_hint(0, true)
-			vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#bf616a' })
+			vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#616e88', italic = true })
 		end
 	end,
 })
