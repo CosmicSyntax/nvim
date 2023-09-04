@@ -1,3 +1,7 @@
+-- Python config for faster startup
+local g = vim.g
+g.python3_host_prog = "~/.pyenv/shims/python"
+
 local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())

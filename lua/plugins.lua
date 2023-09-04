@@ -40,7 +40,7 @@ require("lazy").setup({
 	{
 		'L3MON4D3/LuaSnip',
 		event = "BufRead",
-		config = function() require('configs/luasnip') end,
+		config = function() require('lazyConfigs/luasnip') end,
 	},
 	'rafamadriz/friendly-snippets',
 	'saadparwaiz1/cmp_luasnip',
@@ -50,7 +50,7 @@ require("lazy").setup({
 			'kyazdani42/nvim-web-devicons',
 		},
 		event = "VimEnter",
-		config = function() require('configs/nvimtree') end,
+		config = function() require('lazyConfigs/nvimtree') end,
 	},
 	'elihunter173/dirbuf.nvim',
 	'folke/trouble.nvim',
@@ -69,12 +69,12 @@ require("lazy").setup({
 	{
 		'ruifm/gitlinker.nvim',
 		event = "BufRead",
-		config = function() require('configs/tools') end,
+		config = function() require('lazyConfigs/tools') end,
 	},
 	{
 		'ggandor/leap.nvim',
 		event = "BufRead",
-		config = function() require('configs/leap') end,
+		config = function() require('lazyConfigs/leap') end,
 	},
 	'ray-x/lsp_signature.nvim',
 	-- 'lvimuser/lsp-inlayhints.nvim',
@@ -87,8 +87,8 @@ require("lazy").setup({
 		'sebdah/vim-delve',
 		ft = {'go'},
 		config = function()
-			require('configs/go')
-			require('configs/inlay')
+			require('lazyConfigs/go')
+			require('lazyConfigs/inlay')
 		end,
 	},
 	{
@@ -99,16 +99,16 @@ require("lazy").setup({
 		'jose-elias-alvarez/typescript.nvim',
 		ft = {'typescript', 'javascript'},
 		config = function()
-			require('configs/ts')
-			require('configs/inlay')
+			require('lazyConfigs/ts')
+			require('lazyConfigs/inlay')
 		end,
 	},
 	{
 		'simrat39/rust-tools.nvim',
 		ft = {'rust'},
 		config = function()
-			require('configs/rust')
-			require('configs/inlay')
+			require('lazyConfigs/rust')
+			require('lazyConfigs/inlay')
 		end,
 	},
 	{
@@ -119,24 +119,24 @@ require("lazy").setup({
 		end,
 	},
 	{
-		dir = '~/.config/nvim/lua/configs/python.lua',
+		dir = '~/.config/nvim/lua/lazyConfigs/python.lua',
 		ft = {'python'},
-		config = function() require('configs/python') end,
+		config = function() require('lazyConfigs/python') end,
 	},
 	{
-		dir = '~/.config/nvim/lua/configs/bash.lua',
+		dir = '~/.config/nvim/lua/lazyConfigs/bash.lua',
 		ft = {'sh'},
-		config = function() require('configs/bash') end,
+		config = function() require('lazyConfigs/bash') end,
 	},
 	{
-		dir = '~/.config/nvim/lua/configs/c.lua',
+		dir = '~/.config/nvim/lua/lazyConfigs/c.lua',
 		ft = {'c', 'cpp'},
-		config = function() require('configs/c') end,
+		config = function() require('lazyConfigs/c') end,
 	},
 	{
-		dir = '~/.config/nvim/lua/configs/sql.lua',
+		dir = '~/.config/nvim/lua/lazyConfigs/sql.lua',
 		ft = {'sql'},
-		config = function() require('configs/sql') end,
+		config = function() require('lazyConfigs/sql') end,
 	},
 	'puremourning/vimspector' -- Ensure you have python3 imported
 })

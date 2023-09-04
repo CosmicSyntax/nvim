@@ -1,3 +1,4 @@
+-- Built-in inlay hint... neovim 0.10 needed
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client_id = ev.data.client_id
