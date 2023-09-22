@@ -11,6 +11,7 @@ require'nvim-treesitter.configs'.setup {
 		"typescript",
 		"cpp",
 		"sql",
+		"markdown",
 	},
 	highlight = {
 		enable = true,
