@@ -123,6 +123,14 @@ require('Comment').setup()
 -- Nvim Git linker
 require("gitlinker").setup()
 
+-- Nvim indent-line
+require("ibl").setup {
+	indent = { char = "▏" },
+	scope = {
+		enabled = false,
+	},
+}
+
 -- Tabline config
 require('bufferline').setup {
 	highlights = {
