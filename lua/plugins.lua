@@ -145,6 +145,11 @@ require("lazy").setup({
 		config = function() require('lazyConfigs/sql') end,
 	},
 	{
+		dir = '~/.config/nvim/lua/lazyConfigs/lua.lua',
+		ft = {'lua'},
+		config = function() require('lazyConfigs/lua') end,
+	},
+	{
 		'puremourning/vimspector',
 		ft = {'go', 'rust', 'c', 'cpp'},
 	} -- Ensure you have python3 imported
