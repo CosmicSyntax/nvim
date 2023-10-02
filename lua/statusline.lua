@@ -137,7 +137,8 @@ local function lineinfo()
 	if vim.bo.filetype == "alpha" then
 		return ""
 	end
-	return "%P Ln:%l Col:%c "
+	-- return "%P Ln:%l Col:%c "
+	return "%P Column:%c "
 end
 
 local function vcs()
