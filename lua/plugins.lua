@@ -42,7 +42,7 @@ require("lazy").setup({
 		event = "BufRead",
 		config = function() require('lazyConfigs/luasnip') end,
 	},
-	'rafamadriz/friendly-snippets',
+	-- 'rafamadriz/friendly-snippets',
 	'saadparwaiz1/cmp_luasnip',
 	{
 		'kyazdani42/nvim-tree.lua', 
