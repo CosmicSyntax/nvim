@@ -5,6 +5,16 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 -- Typescript
 nvim_lsp.tsserver.setup({
 	capabilities = capabilities,
+	init_options = {
+		preferences = {
+			includeInlayParameterNameHints = 'all',
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayEnumMemberValueHints = true,
+			importModuleSpecifierPreference = 'non-relative',
+		},
+	},
 })
-vim.api.nvim_exec_autocmds("FileType", {})
-vim.lsp.inlay_hint(0, true)

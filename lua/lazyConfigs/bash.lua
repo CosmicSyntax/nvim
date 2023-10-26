@@ -8,4 +8,3 @@ nvim_lsp.bashls.setup({
 	filetypes = { "sh" },
 	cmd = {'bash-language-server', 'start'},
 })
-vim.api.nvim_exec_autocmds("FileType", {})

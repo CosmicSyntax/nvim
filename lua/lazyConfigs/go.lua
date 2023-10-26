@@ -25,4 +25,3 @@ nvim_lsp.gopls.setup({
 		},
 	},
 })
-vim.api.nvim_exec_autocmds("FileType", {})

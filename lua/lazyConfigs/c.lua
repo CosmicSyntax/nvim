@@ -13,4 +13,3 @@ nvim_lsp.clangd.setup({
 		},
 	filetypes = {"c", "cpp", "objc", "objcpp"},
 })
-vim.api.nvim_exec_autocmds("FileType", {})

@@ -14,4 +14,3 @@ nvim_lsp.lua_ls.setup({
         },
 	},
 })
-vim.api.nvim_exec_autocmds("FileType", {})

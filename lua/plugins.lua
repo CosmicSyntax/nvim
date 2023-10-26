@@ -96,7 +96,7 @@ require("lazy").setup({
 		ft = {'go'},
 	},
 	{
-		'jose-elias-alvarez/typescript.nvim',
+		dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
 		ft = {'typescript', 'javascript'},
 		config = function()
 			require('lazyConfigs/ts')

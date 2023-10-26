@@ -17,4 +17,3 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 		lint.try_lint()
 	end,
 })
-vim.api.nvim_exec_autocmds("FileType", {})
