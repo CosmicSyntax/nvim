@@ -65,4 +65,5 @@ local opts = {
 	},
 }
 rt.setup(opts)
+-- something with rust-tools that this is needed
 vim.api.nvim_exec_autocmds("FileType", {})
