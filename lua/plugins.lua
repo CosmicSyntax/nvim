@@ -104,7 +104,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		'simrat39/rust-tools.nvim',
+		dir = '~/.config/nvim/lua/lazyConfigs/rust.lua',
 		ft = {'rust'},
 		config = function()
 			require('lazyConfigs/rust')
