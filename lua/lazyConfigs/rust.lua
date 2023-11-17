@@ -1,16 +1,31 @@
 -- nvim_lsp object
+local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable rust_analyzer
-require'lspconfig'.rust_analyzer.setup{
+nvim_lsp.rust_analyzer.setup{
 	capabilities = capabilities,
 	filetypes = { "rust" },
 	cmd = {"rust-analyzer"},
 	settings = {
-		['rust-analyzer'] = {
-			diagnostics = {
-				enable = true;
+		["rust-analyzer"] = {
+			imports = {
+				granularity = {
+					group = "module",
+				},
+				prefix = "self",
+			},
+			cargo = {
+				buildScripts = {
+					enable = true,
+				},
+			},
+			procMacro = {
+				enable = true
+			},
+			checkOnSave = {
+				command = "clippy",
 			}
 		}
 	}
