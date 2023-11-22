@@ -30,3 +30,8 @@ nvim_lsp.rust_analyzer.setup{
 		}
 	}
 }
+
+-- Rust Proc Macro Expand
+vim.cmd(
+	"command! RustExpandMacro :lua require('lazyConfigs/rustUtils/utils').expand_macro()"
+)
