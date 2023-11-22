@@ -78,10 +78,10 @@ require("lazy").setup({
 	},
 	'ray-x/lsp_signature.nvim',
 	-- 'lvimuser/lsp-inlayhints.nvim',
-	{
-		'mfussenegger/nvim-lint',
-		ft = {'python'},
-	},
+	-- {
+	-- 	'mfussenegger/nvim-lint',
+	-- 	ft = {'python'},
+	-- },
 	-- Tech Stack Specific Plugins
 	{
 		'sebdah/vim-delve',

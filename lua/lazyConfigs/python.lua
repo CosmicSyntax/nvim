@@ -6,14 +6,7 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 nvim_lsp.pyright.setup({
 	capabilities = capabilities,
 })
-
--- Pylint
-local lint = require('lint')
-lint.linters_by_ft = {
-	markdown = {'vale',}
-}
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	callback = function()
-		lint.try_lint()
-	end,
+-- Enabled PyLsp
+nvim_lsp.pylsp.setup({
+	capabilities = capabilities,
 })
