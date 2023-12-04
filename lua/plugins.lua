@@ -77,6 +77,7 @@ require("lazy").setup({
 		config = function() require('lazyConfigs/leap') end,
 	},
 	'ray-x/lsp_signature.nvim',
+	'github/copilot.vim',
 	-- 'lvimuser/lsp-inlayhints.nvim',
 	-- {
 	-- 	'mfussenegger/nvim-lint',

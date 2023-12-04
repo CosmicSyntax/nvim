@@ -6,6 +6,10 @@ cmd([[set wildignore+=target/**]])
 local map = vim.api.nvim_set_keymap
 local defo = { noremap = true, silent = true }
 
+-- Copilot
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
 -- Show dianostic popup on cursor hold
 map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
 -- Move to dx
