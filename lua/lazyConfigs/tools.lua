@@ -124,12 +124,19 @@ require('Comment').setup()
 require("gitlinker").setup()
 
 -- Nvim indent-line
--- require("ibl").setup {
--- 	indent = { char = "▏" },
--- 	scope = {
--- 		enabled = false,
--- 	},
--- }
+vim.cmd("highlight CustomTabColor guifg=#292e39 guibg=#292e39")
+local highlight = {
+	"CustomTabColor",
+	"Whitespace",
+}
+require("ibl").setup {
+	indent = { highlight = highlight, char = "" },
+	whitespace = {
+		highlight = highlight,
+		remove_blankline_trail = false,
+	},
+	scope = { enabled = false },
+}
 
 -- Tabline config
 require('bufferline').setup {

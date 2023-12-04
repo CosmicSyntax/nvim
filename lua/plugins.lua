@@ -29,7 +29,7 @@ require("lazy").setup({
 		-- tag = "v0.9.0",
 		build = ':TSUpdate',
 	},
-	-- 'lukas-reineke/indent-blankline.nvim',
+	'lukas-reineke/indent-blankline.nvim',
 	{
 		'neovim/nvim-lspconfig',
 		-- tag = "v0.1.4",
