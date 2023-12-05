@@ -124,7 +124,7 @@ require('Comment').setup()
 require("gitlinker").setup()
 
 -- Nvim indent-line
-vim.cmd("highlight CustomTabColor guifg=#292e39 guibg=#292e39")
+vim.cmd("highlight CustomTabColor guifg=#363c4a guibg=#363c4a")
 local highlight = {
 	"CustomTabColor",
 	"Whitespace",
