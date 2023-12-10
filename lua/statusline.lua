@@ -47,7 +47,7 @@ local highlights = {
 	-- {'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
 	-- {'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
 	-- {'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
-	{'StatusLineExtra', { bg = '#232634' }},
+	{'StatusLineExtra', { bg = '#434c5e' }},
 }
 
 for _, highlight in ipairs(highlights) do

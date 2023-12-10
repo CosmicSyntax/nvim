@@ -20,6 +20,9 @@ cmd([[set noexpandtab]])
 cmd([[set nofoldenable]])
 -- End of UI Setting
 
+-- stuff
+vim.cmd([[autocmd ColorScheme * highlight! link NormalFloat Pmenu]])
+
 -- Python config for faster startup
 local g = vim.g
 g.python3_host_prog = "~/.pyenv/shims/python"
