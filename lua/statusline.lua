@@ -160,7 +160,7 @@ local function vcs()
 	end
 	return table.concat {
 		"%#GitSignsAdd#  ",
-		git_info.head,
+		git_info.head .. " ",
 		added,
 		changed,
 		removed,
