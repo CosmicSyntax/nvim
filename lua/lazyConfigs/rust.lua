@@ -24,11 +24,11 @@ nvim_lsp.rust_analyzer.setup{
 			procMacro = {
 				enable = true
 			},
-			inlayHints = {
-				implicitDrops = {
-					enable = true,
-				},
-			},
+			-- inlayHints = {
+			-- 	implicitDrops = {
+			-- 		enable = true,
+			-- 	},
+			-- },
 			checkOnSave = {
 				command = "clippy",
 			}
