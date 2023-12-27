@@ -75,6 +75,9 @@ require'bqf'.setup {
 vim.cmd("colorscheme nord")
 vim.cmd([[highlight Comment cterm=italic gui=italic]])
 vim.cmd([[highlight Function cterm=bold gui=bold]])
+vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b"})
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a"})
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a"})
 
 -- Line Setup
 -- require('lualine').setup {
