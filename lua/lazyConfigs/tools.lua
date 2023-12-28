@@ -102,7 +102,7 @@ require'diffview'.setup {
 
 -- Smooth scrolling
 require('neoscroll').setup {
-	easing_function = "quadratic",
+	easing_function = "sine",
 }
 
 -- Window management
