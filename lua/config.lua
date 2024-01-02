@@ -1,5 +1,5 @@
 -- Treesitter
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
 	ensure_installed = {
 		"c",
 		"lua",
@@ -40,7 +40,8 @@ require("telescope").setup {
 	pickers = {
 		find_files = {
 			-- theme = "dropdown",
-			hidden = true,
+			-- hidden = true,
+			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 		},
 		live_grep = {
 			-- theme = "dropdown",
@@ -56,28 +57,28 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension("ui-select")
 
 -- Better QF config
-require'bqf'.setup {
+require 'bqf'.setup {
 	auto_enable = true,
-    preview = {
-        win_height = 12,
-        win_vheight = 12,
-        delay_syntax = 80,
-        border_chars = {'┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█'}
-    },
-    func_map = {
-        vsplit = '',
-        ptogglemode = 'z,',
-        stoggleup = ''
-    },
+	preview = {
+		win_height = 12,
+		win_vheight = 12,
+		delay_syntax = 80,
+		border_chars = { '┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█' }
+	},
+	func_map = {
+		vsplit = '',
+		ptogglemode = 'z,',
+		stoggleup = ''
+	},
 }
 
 -- Nord... because there is nothing better
 vim.cmd("colorscheme nord")
 vim.cmd([[highlight Comment cterm=italic gui=italic]])
 vim.cmd([[highlight Function cterm=bold gui=bold]])
-vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b"})
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a"})
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a"})
+vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b" })
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
 
 -- Line Setup
 -- require('lualine').setup {
@@ -134,9 +135,9 @@ local jump_handle = function(_, result, ctx, _)
 			vim.fn.setqflist({}, ' ', {
 				title = 'LSP locations',
 				items = util.locations_to_items(result, client.offset_encoding)
-				})
+			})
 			vim.api.nvim_command("botright copen")
-		else 
+		else
 			util.jump_to_location(result[1], client.offset_encoding)
 		end
 	else
