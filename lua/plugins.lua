@@ -13,14 +13,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	'windwp/nvim-autopairs',
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+	},
 	'akinsho/bufferline.nvim',
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
 		event = "LspAttach",
 	},
-	{ 'mg979/vim-visual-multi', branch = 'master' },
 	'numToStr/Comment.nvim',
 	'lewis6991/gitsigns.nvim',
 	{ 'sindrets/diffview.nvim' },
@@ -42,7 +44,6 @@ require("lazy").setup({
 		event = "BufRead",
 		config = function() require('lazyConfigs/luasnip') end,
 	},
-	-- 'rafamadriz/friendly-snippets',
 	'saadparwaiz1/cmp_luasnip',
 	{
 		'kyazdani42/nvim-tree.lua',
@@ -54,12 +55,12 @@ require("lazy").setup({
 	},
 	'elihunter173/dirbuf.nvim',
 	'folke/trouble.nvim',
-	-- 'rmehri01/onenord.nvim',
 	'arcticicestudio/nord-vim',
 	'karb94/neoscroll.nvim',
 	'kevinhwang91/nvim-bqf',
 	'anuvyklack/windows.nvim',
 	'anuvyklack/middleclass',
+	-- pictograms
 	'onsails/lspkind-nvim',
 	'nvim-telescope/telescope.nvim',
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -76,14 +77,11 @@ require("lazy").setup({
 		event = "BufRead",
 		config = function() require('lazyConfigs/leap') end,
 	},
-	'ray-x/lsp_signature.nvim',
+	{
+		'ray-x/lsp_signature.nvim',
+		event = "VeryLazy",
+	},
 	'github/copilot.vim',
-	-- 'lvimuser/lsp-inlayhints.nvim',
-	-- {
-	-- 	'mfussenegger/nvim-lint',
-	-- 	ft = {'python'},
-	-- },
-	-- Tech Stack Specific Plugins
 	{
 		'sebdah/vim-delve',
 		ft = { 'go' },
