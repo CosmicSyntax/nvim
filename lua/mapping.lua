@@ -60,12 +60,6 @@ map("n", "gw", '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', defo)
 map("n", "ga", '<cmd>lua vim.lsp.buf.code_action()<CR>', defo)
 map("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<CR>', defo)
 
--- Mapping for moving around tabs
-map("n", "<C-l>", ':BufferLineCycleNext<CR>', defo)
-map("n", "<C-h>", ':BufferLineCyclePrev<CR>', defo)
-map("n", "<C-j>", ':BufferLineMoveNext<CR>', defo)
-map("n", "<C-k>", ':BufferLineMovePrev<CR>', defo)
-
 -- Mapping for Lazygit
 map("n", "<leader>gg", ':LazyGit<CR>', defo)
 

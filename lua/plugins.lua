@@ -17,7 +17,6 @@ require("lazy").setup({
 		'windwp/nvim-autopairs',
 		event = "InsertEnter",
 	},
-	'akinsho/bufferline.nvim',
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
