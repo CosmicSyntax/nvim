@@ -52,7 +52,6 @@ require("lazy").setup({
 		event = "VimEnter",
 		config = function() require('lazyConfigs/nvimtree') end,
 	},
-	'elihunter173/dirbuf.nvim',
 	'folke/trouble.nvim',
 	'arcticicestudio/nord-vim',
 	'karb94/neoscroll.nvim',
