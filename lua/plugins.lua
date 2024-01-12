@@ -18,6 +18,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 	},
 	{
+		-- LSP notification
 		"j-hui/fidget.nvim",
 		tag = "legacy",
 		event = "LspAttach",
@@ -92,6 +93,7 @@ require("lazy").setup({
 		'buoto/gotests-vim',
 		ft = { 'go' },
 	},
+	-- Internal
 	{
 		dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
 		ft = { 'typescript', 'javascript' },

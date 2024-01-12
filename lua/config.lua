@@ -34,7 +34,7 @@ require("telescope").setup {
 			'--line-number',
 			'--column',
 			'--smart-case',
-			'-.'
+			-- '-.'
 		},
 	},
 	pickers = {
@@ -43,9 +43,6 @@ require("telescope").setup {
 			-- hidden = true,
 			find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
 		},
-		live_grep = {
-			-- theme = "dropdown",
-		}
 	},
 	extensions = {
 		["ui-select"] = {

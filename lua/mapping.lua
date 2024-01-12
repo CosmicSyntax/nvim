@@ -24,6 +24,7 @@ map("n", "<F9>", ':Telescope find_files<CR>', defo)
 map("n", "<F8>", ':Telescope live_grep<CR>', defo)
 map("n", "<F10>", ':Telescope quickfix<CR>', defo)
 map("n", "<F11>", ':Telescope buffers<CR>', defo)
+map("n", "<F12>", ':Telescope treesitter<CR>', defo)
 
 -- Maaping for Lazy
 map("n", "<leader>pp", ':Lazy show<CR>', defo)
