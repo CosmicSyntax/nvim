@@ -56,7 +56,6 @@ require("lazy").setup({
 	'folke/trouble.nvim',
 	'arcticicestudio/nord-vim',
 	'karb94/neoscroll.nvim',
-	'kevinhwang91/nvim-bqf',
 	'anuvyklack/windows.nvim',
 	'anuvyklack/middleclass',
 	-- pictograms
