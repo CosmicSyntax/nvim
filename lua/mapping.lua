@@ -87,4 +87,4 @@ map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', 
 map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)
 
 -- Exit Terminal modes
-map("t", "<Esc>", '<C-\\><C-n>', defo)
+map("t", "<C-space>", '<C-\\><C-n>', defo)
