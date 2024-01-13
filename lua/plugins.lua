@@ -20,7 +20,7 @@ require("lazy").setup({
 	{
 		-- LSP notification
 		"j-hui/fidget.nvim",
-		tag = "legacy",
+		tag = "v1.2.0",
 		event = "LspAttach",
 	},
 	'numToStr/Comment.nvim',
