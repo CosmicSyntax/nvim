@@ -42,12 +42,20 @@ local highlights = {
 	{'StatusLineYellow', { fg = '#2e3440', bg = '#ebcb8b', gui= 'bold' }},
 	{'StatusLinePurple', { fg = '#2e3440', bg = '#b48ead', gui= 'bold' }},
 	{'StatusLineGreen', { fg = '#2e3440', bg = '#a3be8c', gui= 'bold' }},
+	{'StatusLineExtra', { bg = '#434c5e' }},
+	-- for symbols
+	{'StatusLineTrail', { fg = '#81a1c1', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLineRedTrail', { fg = '#bf616a', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLineBlueTrail', { fg = '#5e81ac', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLineYellowTrail', { fg = '#ebcb8b', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLinePurpleTrail', { fg = '#b48ead', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLineGreenTrail', { fg = '#a3be8c', bg = '#2e3440', gui= 'bold' }},
+	{'StatusLineExtraTrail', { bg = '#2e3440', fg = '#434c5e' }},
 	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
 	-- {'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
 	-- {'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
 	-- {'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
 	-- {'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
-	{'StatusLineExtra', { bg = '#434c5e' }},
 }
 
 for _, highlight in ipairs(highlights) do
@@ -69,6 +77,25 @@ local function update_mode_colors()
 		mode_color = "%#StatusLinePurple#"
 	elseif current_mode == "t" then
 		mode_color = "%#StatusLineGreen#"
+	end
+	return mode_color
+end
+
+local function update_mode_colors_trailing()
+	local current_mode = vim.api.nvim_get_mode().mode
+	local mode_color = "%#StatusLineTrail#"
+	if current_mode == "n" then
+		mode_color = "%#StatusLineTrail#"
+	elseif current_mode == "i" or current_mode == "ic" then
+		mode_color = "%#StatusLineYellowTrail#"
+	elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+		mode_color = "%#StatusLineBlueTrail#"
+	elseif current_mode == "R" then
+		mode_color = "%#StatusLineRedTrail#"
+	elseif current_mode == "c" then
+		mode_color = "%#StatusLinePurpleTrail#"
+	elseif current_mode == "t" then
+		mode_color = "%#StatusLineGreenTrail#"
 	end
 	return mode_color
 end
@@ -174,12 +201,16 @@ Statusline.active = function()
 	return table.concat {
 		update_mode_colors(),
 		mode(),
+		update_mode_colors_trailing(),
+		"",
 		"%#Normal#",
 		vcs(),
 		filepath(),
 		filename(),
 		lsp(),
-		"%=%#StatusLineExtra#",
+		"%=%#StatusLineExtraTrail#",
+		"",
+		"%#StatusLineExtra#",
 		filetype(),
 		lineinfo(),
 	}
