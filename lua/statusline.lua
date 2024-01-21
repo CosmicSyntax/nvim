@@ -36,26 +36,26 @@ local set_hl = function(group, options)
 end
 
 local highlights = {
-	{'StatusLine', { fg = '#2e3440', bg = '#81a1c1', gui= 'bold' }},
-	{'StatusLineRed', { fg = '#2e3440', bg = '#bf616a', gui= 'bold' }},
-	{'StatusLineBlue', { fg = '#2e3440', bg = '#5e81ac', gui= 'bold' }},
-	{'StatusLineYellow', { fg = '#2e3440', bg = '#ebcb8b', gui= 'bold' }},
-	{'StatusLinePurple', { fg = '#2e3440', bg = '#b48ead', gui= 'bold' }},
-	{'StatusLineGreen', { fg = '#2e3440', bg = '#a3be8c', gui= 'bold' }},
-	{'StatusLineExtra', { bg = '#434c5e' }},
+	{ 'StatusLine',            { fg = '#2e3440', bg = '#81a1c1', gui = 'bold' } },
+	{ 'StatusLineRed',         { fg = '#2e3440', bg = '#bf616a', gui = 'bold' } },
+	{ 'StatusLineBlue',        { fg = '#2e3440', bg = '#5e81ac', gui = 'bold' } },
+	{ 'StatusLineYellow',      { fg = '#2e3440', bg = '#ebcb8b', gui = 'bold' } },
+	{ 'StatusLinePurple',      { fg = '#2e3440', bg = '#b48ead', gui = 'bold' } },
+	{ 'StatusLineGreen',       { fg = '#2e3440', bg = '#a3be8c', gui = 'bold' } },
+	{ 'StatusLineExtra',       { bg = '#434c5e' } },
 	-- for symbols
-	{'StatusLineTrail', { fg = '#81a1c1', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLineRedTrail', { fg = '#bf616a', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLineBlueTrail', { fg = '#5e81ac', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLineYellowTrail', { fg = '#ebcb8b', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLinePurpleTrail', { fg = '#b48ead', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLineGreenTrail', { fg = '#a3be8c', bg = '#2e3440', gui= 'bold' }},
-	{'StatusLineExtraTrail', { bg = '#2e3440', fg = '#434c5e' }},
-	-- {'Normal', { fg = '#d8dee9', bg = '#2e3440' }},
-	-- {'LspDiagnosticsSignError', { fg = '#bf616a', gui = 'bold' }},
-	-- {'LspDiagnosticsSignWarning', { fg = '#d08770', gui = 'bold' }},
-	-- {'LspDiagnosticsSignHint', { fg = '#b988b0', gui = 'bold' }},
-	-- {'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' }},
+	{ 'StatusLineTrail',       { fg = '#81a1c1', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLineRedTrail',    { fg = '#bf616a', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLineBlueTrail',   { fg = '#5e81ac', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLineYellowTrail', { fg = '#ebcb8b', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLinePurpleTrail', { fg = '#b48ead', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLineGreenTrail',  { fg = '#a3be8c', bg = '#2e3440', gui = 'bold' } },
+	{ 'StatusLineExtraTrail',  { bg = '#2e3440', fg = '#434c5e' } },
+	-- { 'Normal',                        { fg = '#d8dee9', bg = '#2e3440' } },
+	-- { 'LspDiagnosticsSignError',       { fg = '#bf616a', gui = 'bold' } },
+	-- { 'LspDiagnosticsSignWarning',     { fg = '#d08770', gui = 'bold' } },
+	-- { 'LspDiagnosticsSignHint',        { fg = '#b988b0', gui = 'bold' } },
+	-- { 'LspDiagnosticsSignInformation', { fg = '#b48ead', gui = 'bold' } },
 }
 
 for _, highlight in ipairs(highlights) do
@@ -153,11 +153,18 @@ end
 
 local function filetype()
 	-- return string.format(" %s ", vim.bo.filetype):upper()
-	local icon = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype)
-	if icon == nil then
-		icon = ""
+	local icon, color = require("nvim-web-devicons").get_icon_colors_by_filetype(vim.bo.filetype)
+	local ft = vim.bo.filetype:upper()
+	if ft == "" then
+		ft = "¯\\_(ツ)_/¯"
 	end
-	return string.format(" %s %s ", icon, vim.bo.filetype):upper()
+	if icon == nil then
+		return " " .. ft .. " "
+	end
+
+	set_hl("IconColor", { fg = color, bg = "#434c5e", gui = "bold" })
+
+	return "%#IconColor#" .. string.format(" %s %s ", icon, ft) .. "%#StatusLineExtra#"
 end
 
 local function lineinfo()

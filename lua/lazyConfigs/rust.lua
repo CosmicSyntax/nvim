@@ -20,6 +20,9 @@ nvim_lsp.rust_analyzer.setup{
 				buildScripts = {
 					enable = true,
 				},
+				-- extraEnv = {
+				-- 	["RUSTFLAGS"] = "--cfg loom",
+				-- },
 			},
 			procMacro = {
 				enable = true

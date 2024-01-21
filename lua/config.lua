@@ -119,7 +119,8 @@ local jump_handle = function(_, result, ctx, _)
 				title = 'LSP locations',
 				items = util.locations_to_items(result, client.offset_encoding)
 			})
-			vim.api.nvim_command("botright copen")
+			-- vim.api.nvim_command("botright copen")
+			require("trouble").toggle("quickfix")
 		else
 			util.jump_to_location(result[1], client.offset_encoding)
 		end
@@ -130,6 +131,7 @@ end
 vim.lsp.handlers["textDocument/implementation"] = jump_handle
 vim.lsp.handlers["textDocument/definition"] = jump_handle
 vim.lsp.handlers["textDocument/typeDefinition"] = jump_handle
+vim.lsp.handlers["textDocument/references"] = jump_handle
 
 -- -- nvim_lsp object
 -- local nvim_lsp = require'lspconfig'
