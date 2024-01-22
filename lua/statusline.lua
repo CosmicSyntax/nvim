@@ -136,13 +136,13 @@ local function lsp()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#DiagnosticError#✗ " .. count["errors"]
+		errors = " %#DiagnosticError# " .. count["errors"]
 	end
 	if count["warnings"] ~= 0 then
 		warnings = " %#DiagnosticWarn# " .. count["warnings"]
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#DiagnosticHint#💡 " .. count["hints"]
+		hints = " %#DiagnosticHint# " .. count["hints"]
 	end
 	if count["info"] ~= 0 then
 		info = " %#DiagnosticInfo#🛈 " .. count["info"]
