@@ -1,8 +1,6 @@
 -- Custom Statusline... work in progress
 local modes = {
 	["n"] = "NORMAL",
-	["no"] = "NORMAL",
-	["v"] = "VISUAL",
 	["V"] = "VISUAL LINE",
 	[""] = "VISUAL BLOCK",
 	["s"] = "SELECT",
@@ -43,14 +41,27 @@ local highlights = {
 	{ 'StatusLinePurple',      { fg = '#2e3440', bg = '#b48ead', gui = 'bold' } },
 	{ 'StatusLineGreen',       { fg = '#2e3440', bg = '#a3be8c', gui = 'bold' } },
 	{ 'StatusLineExtra',       { bg = '#434c5e' } },
+	{ 'StatusLineMiddle',      { bg = '#3b4252' } },
+	-- for Git
+	{ 'GitAdd',                { fg = '#a3be8c', bg = '#4c566a' } },
+	{ 'GitChange',             { fg = '#ebcb8b', bg = '#4c566a' } },
+	{ 'GitDelete',             { fg = '#bf616a', bg = '#4c566a' } },
+	-- for FS
+	{ 'StatusLineFS',          { fg = '#d8dee9', bg = '#4c566a' } },
+	-- for Diagnostic
+	{ 'DxError',               { fg = '#bf616a', bg = '#4c566a' } },
+	{ 'DxWarn',                { fg = '#d08770', bg = '#4c566a' } },
+	{ 'DxHint',                { fg = '#b48ead', bg = '#4c566a' } },
+	{ 'DxInfo',                { fg = '#5e81ac', bg = '#4c566a' } },
+	{ 'StatusLineDivide',      { fg = '#4c566a', bg = '#3b4252' } },
 	-- for symbols
-	{ 'StatusLineTrail',       { fg = '#81a1c1', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLineRedTrail',    { fg = '#bf616a', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLineBlueTrail',   { fg = '#5e81ac', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLineYellowTrail', { fg = '#ebcb8b', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLinePurpleTrail', { fg = '#b48ead', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLineGreenTrail',  { fg = '#a3be8c', bg = '#2e3440', gui = 'bold' } },
-	{ 'StatusLineExtraTrail',  { bg = '#2e3440', fg = '#434c5e' } },
+	{ 'StatusLineTrail',       { fg = '#81a1c1', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLineRedTrail',    { fg = '#bf616a', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLineBlueTrail',   { fg = '#5e81ac', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLineYellowTrail', { fg = '#ebcb8b', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLinePurpleTrail', { fg = '#b48ead', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLineGreenTrail',  { fg = '#a3be8c', bg = '#4c566a', gui = 'bold' } },
+	{ 'StatusLineExtraTrail',  { bg = '#3b4252', fg = '#434c5e' } },
 	-- { 'Normal',                        { fg = '#d8dee9', bg = '#2e3440' } },
 	-- { 'LspDiagnosticsSignError',       { fg = '#bf616a', gui = 'bold' } },
 	-- { 'LspDiagnosticsSignWarning',     { fg = '#d08770', gui = 'bold' } },
@@ -100,21 +111,15 @@ local function update_mode_colors_trailing()
 	return mode_color
 end
 
-local function filepath()
+local function file()
 	local fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
-	if fpath == "" or fpath == "." then
-		return " "
-	end
-
-	return string.format(" %%<%s/", fpath)
-end
-
-local function filename()
 	local fname = vim.fn.expand "%:t"
-	if fname == "" then
+
+	if fname == "" or fpath == "" or fpath == "." then
 		return ""
 	end
-	return fname .. ""
+
+	return string.format(" %%<%s/", fpath) .. fname .. " "
 end
 
 local function lsp()
@@ -136,19 +141,19 @@ local function lsp()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#DiagnosticError# " .. count["errors"]
+		errors = " %#DxError# " .. count["errors"]
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#DiagnosticWarn# " .. count["warnings"]
+		warnings = " %#DxWarn# " .. count["warnings"]
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#DiagnosticHint# " .. count["hints"]
+		hints = " %#DxHint# " .. count["hints"]
 	end
 	if count["info"] ~= 0 then
-		info = " %#DiagnosticInfo#🛈 " .. count["info"]
+		info = " %#DxInfo#🛈 " .. count["info"]
 	end
 
-	return errors .. warnings .. hints .. info .. "%#Normal#"
+	return errors .. warnings .. hints .. info .. " "
 end
 
 local function filetype()
@@ -178,11 +183,11 @@ end
 local function vcs()
 	local git_info = vim.b.gitsigns_status_dict
 	if not git_info or git_info.head == "" then
-		return ""
+		return " ¯\\_(ツ)_/¯ "
 	end
-	local added = git_info.added and (" " .. "%#GitSignsAdd#+" .. git_info.added) or ""
-	local changed = git_info.changed and (" " .. "%#GitSignsChange#~" .. git_info.changed) or ""
-	local removed = git_info.removed and (" " .. "%#GitSignsDelete#-" .. git_info.removed) or ""
+	local added = git_info.added and (" " .. "%#GitAdd#+" .. git_info.added) or ""
+	local changed = git_info.changed and (" " .. "%#GitChange#~" .. git_info.changed) or ""
+	local removed = git_info.removed and (" " .. "%#GitDelete#-" .. git_info.removed) or ""
 	if git_info.added == 0 then
 		added = ""
 	end
@@ -193,12 +198,12 @@ local function vcs()
 		removed = ""
 	end
 	return table.concat {
-		"%#GitSignsAdd#  ",
+		"%#GitAdd#  ",
 		git_info.head .. " ",
 		added,
 		changed,
 		removed,
-		"%#Normal#",
+		-- "%#Normal#",
 	}
 end
 
@@ -210,11 +215,13 @@ Statusline.active = function()
 		mode(),
 		update_mode_colors_trailing(),
 		"",
-		"%#Normal#",
 		vcs(),
-		filepath(),
-		filename(),
+		"%#StatusLineFS#",
+		file(),
 		lsp(),
+		"%#StatusLineDivide#",
+		"",
+		"%#StatusLineMiddle#",
 		"%=%#StatusLineExtraTrail#",
 		"",
 		"%#StatusLineExtra#",
