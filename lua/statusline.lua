@@ -187,7 +187,7 @@ local function filetype()
 	local icon, color = require("nvim-web-devicons").get_icon_colors_by_filetype(vim.bo.filetype)
 	local ft = vim.bo.filetype:upper()
 	if ft == "" then
-		ft = ""
+		return " "
 	end
 	if icon == nil then
 		return " " .. ft .. " "
