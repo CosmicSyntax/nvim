@@ -137,7 +137,7 @@ local function file()
 	local fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
 	local fname = vim.fn.expand "%:t"
 
-	if fname == "" or fpath == "" or fpath == "." then
+	if fname == "" or fpath == "" then
 		return ""
 	end
 
