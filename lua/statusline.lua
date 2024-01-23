@@ -163,23 +163,23 @@ local function lsp()
 	local info = ""
 
 	if count["errors"] ~= 0 then
-		errors = " %#DxError# " .. count["errors"]
+		errors = "%#DxError# " .. count["errors"] .. " "
 	end
 	if count["warnings"] ~= 0 then
-		warnings = " %#DxWarn# " .. count["warnings"]
+		warnings = "%#DxWarn# " .. count["warnings"] .. " "
 	end
 	if count["hints"] ~= 0 then
-		hints = " %#DxHint# " .. count["hints"]
+		hints = "%#DxHint# " .. count["hints"] .. " "
 	end
 	if count["info"] ~= 0 then
-		info = " %#DxInfo#🛈 " .. count["info"]
+		info = "%#DxInfo#🛈 " .. count["info"] .. " "
 	end
 
 	if count["errors"] == 0 and count["warnings"] == 0 and count["hints"] == 0 and count["info"] == 0 then
 		return ""
 	end
 
-	return errors .. warnings .. hints .. info .. " "
+	return errors .. warnings .. hints .. info
 end
 
 local function filetype()
