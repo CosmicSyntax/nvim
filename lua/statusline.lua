@@ -42,8 +42,8 @@ local highlights = {
 	{ 'StatusLinePurple',      { fg = colors.darkBlue, bg = colors.purple, gui = 'bold' } },
 	{ 'StatusLineGreen',       { fg = colors.darkBlue, bg = colors.green, gui = 'bold' } },
 	{ 'StatusLineOrange',      { fg = colors.darkBlue, bg = colors.orange, gui = 'bold' } },
-	{ 'StatusLineExtra',       { bg = colors.mutelightBlue } },
-	{ 'StatusLineMiddle',      { bg = colors.muteBlue } },
+	{ 'StatusLineExtra',       { bg = colors.muteBlue } },
+	{ 'StatusLineMiddle',      { bg = colors.mutelightBlue } },
 	-- for Git
 	{ 'GitAdd',                { fg = colors.green, bg = colors.midBlue } },
 	{ 'GitChange',             { fg = colors.yellow, bg = colors.midBlue } },
@@ -55,7 +55,7 @@ local highlights = {
 	{ 'DxWarn',                { fg = colors.orange, bg = colors.midBlue } },
 	{ 'DxHint',                { fg = colors.purple, bg = colors.midBlue } },
 	{ 'DxInfo',                { fg = colors.blue, bg = colors.midBlue } },
-	{ 'StatusLineDivide',      { fg = colors.midBlue, bg = colors.muteBlue } },
+	{ 'StatusLineDivide',      { fg = colors.midBlue, bg = colors.mutelightBlue } },
 	-- for symbols
 	{ 'StatusLineTrail',       { fg = colors.lightBlue, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineRedTrail',    { fg = colors.red, bg = colors.midBlue, gui = 'bold' } },
@@ -64,7 +64,7 @@ local highlights = {
 	{ 'StatusLinePurpleTrail', { fg = colors.purple, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineGreenTrail',  { fg = colors.green, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineOrangeTrail', { fg = colors.orange, bg = colors.midBlue, gui = 'bold' } },
-	{ 'StatusLineExtraTrail',  { bg = colors.muteBlue, fg = colors.mutelightBlue } },
+	{ 'StatusLineExtraTrail',  { bg = colors.mutelightBlue, fg = colors.muteBlue } },
 	-- { 'Normal',                        { fg = '#d8dee9', bg = colors.darkBlue } },
 	-- { 'LspDiagnosticsSignError',       { fg = colors.red, gui = 'bold' } },
 	-- { 'LspDiagnosticsSignWarning',     { fg = '#d08770', gui = 'bold' } },
@@ -200,7 +200,7 @@ local function filetype()
 		return " " .. ft .. " "
 	end
 
-	set_hl("IconColor", { fg = color, bg = "#434c5e", gui = "bold" })
+	set_hl("IconColor", { fg = color, bg = colors.muteBlue, gui = "bold" })
 
 	return "%#IconColor#" .. string.format(" %s %s ", icon, ft) .. "%#StatusLineExtra#"
 end
