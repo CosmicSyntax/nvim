@@ -263,20 +263,20 @@ Statusline.active = function()
 	}
 end
 
-function Statusline.inactive()
-	return " %F"
-end
-
 function Statusline.short()
-	return "%#StatusLineNC#   NvimTree"
+	return table.concat {
+		"%#StatusLineFS#",
+		"%=",
+		"󱏒 Tree",
+		"%=%",
+	}
 end
 
 vim.api.nvim_exec([[
   augroup Statusline
   au!
   au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+  au WinEnter,BufEnter,FileType NvimTree_1 setlocal statusline=%!v:lua.Statusline.short()
   augroup END
 ]], false)
 vim.o.laststatus = 3
