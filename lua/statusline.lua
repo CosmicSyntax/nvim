@@ -21,6 +21,8 @@ local modes = {
 
 local colors = {
 	darkBlue = "#2e3440",
+	muteBlue = "#3b4252",
+	mutelightBlue = "#434c5e",
 	midBlue = "#4c566a",
 	lightBlue = "#81a1c1",
 	red = "#bf616a",
@@ -40,8 +42,8 @@ local highlights = {
 	{ 'StatusLinePurple',      { fg = colors.darkBlue, bg = colors.purple, gui = 'bold' } },
 	{ 'StatusLineGreen',       { fg = colors.darkBlue, bg = colors.green, gui = 'bold' } },
 	{ 'StatusLineOrange',      { fg = colors.darkBlue, bg = colors.orange, gui = 'bold' } },
-	{ 'StatusLineExtra',       { bg = '#434c5e' } },
-	{ 'StatusLineMiddle',      { bg = '#3b4252' } },
+	{ 'StatusLineExtra',       { bg = colors.mutelightBlue } },
+	{ 'StatusLineMiddle',      { bg = colors.muteBlue } },
 	-- for Git
 	{ 'GitAdd',                { fg = colors.green, bg = colors.midBlue } },
 	{ 'GitChange',             { fg = colors.yellow, bg = colors.midBlue } },
@@ -53,7 +55,7 @@ local highlights = {
 	{ 'DxWarn',                { fg = colors.orange, bg = colors.midBlue } },
 	{ 'DxHint',                { fg = colors.purple, bg = colors.midBlue } },
 	{ 'DxInfo',                { fg = colors.blue, bg = colors.midBlue } },
-	{ 'StatusLineDivide',      { fg = colors.midBlue, bg = '#3b4252' } },
+	{ 'StatusLineDivide',      { fg = colors.midBlue, bg = colors.muteBlue } },
 	-- for symbols
 	{ 'StatusLineTrail',       { fg = colors.lightBlue, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineRedTrail',    { fg = colors.red, bg = colors.midBlue, gui = 'bold' } },
@@ -62,7 +64,7 @@ local highlights = {
 	{ 'StatusLinePurpleTrail', { fg = colors.purple, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineGreenTrail',  { fg = colors.green, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineOrangeTrail', { fg = colors.orange, bg = colors.midBlue, gui = 'bold' } },
-	{ 'StatusLineExtraTrail',  { bg = '#3b4252', fg = '#434c5e' } },
+	{ 'StatusLineExtraTrail',  { bg = colors.muteBlue, fg = colors.mutelightBlue } },
 	-- { 'Normal',                        { fg = '#d8dee9', bg = colors.darkBlue } },
 	-- { 'LspDiagnosticsSignError',       { fg = colors.red, gui = 'bold' } },
 	-- { 'LspDiagnosticsSignWarning',     { fg = '#d08770', gui = 'bold' } },
