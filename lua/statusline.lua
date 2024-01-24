@@ -2,10 +2,9 @@
 local modes = {
 	["n"] = "NORMAL",
 	["V"] = "VISUAL LINE",
-	[""] = "VISUAL BLOCK",
+	["v"] = "VISUAL",
 	["s"] = "SELECT",
 	["S"] = "SELECT LINE",
-	[""] = "SELECT BLOCK",
 	["i"] = "INSERT",
 	["ic"] = "INSERT",
 	["R"] = "REPLACE",
@@ -40,6 +39,7 @@ local highlights = {
 	{ 'StatusLineYellow',      { fg = colors.darkBlue, bg = colors.yellow, gui = 'bold' } },
 	{ 'StatusLinePurple',      { fg = colors.darkBlue, bg = colors.purple, gui = 'bold' } },
 	{ 'StatusLineGreen',       { fg = colors.darkBlue, bg = colors.green, gui = 'bold' } },
+	{ 'StatusLineOrange',      { fg = colors.darkBlue, bg = colors.orange, gui = 'bold' } },
 	{ 'StatusLineExtra',       { bg = '#434c5e' } },
 	{ 'StatusLineMiddle',      { bg = '#3b4252' } },
 	-- for Git
@@ -61,6 +61,7 @@ local highlights = {
 	{ 'StatusLineYellowTrail', { fg = colors.yellow, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLinePurpleTrail', { fg = colors.purple, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineGreenTrail',  { fg = colors.green, bg = colors.midBlue, gui = 'bold' } },
+	{ 'StatusLineOrangeTrail', { fg = colors.orange, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineExtraTrail',  { bg = '#3b4252', fg = '#434c5e' } },
 	-- { 'Normal',                        { fg = '#d8dee9', bg = colors.darkBlue } },
 	-- { 'LspDiagnosticsSignError',       { fg = colors.red, gui = 'bold' } },
@@ -102,8 +103,10 @@ local function update_mode_colors()
 		mode_color = "%#StatusLine#"
 	elseif current_mode == "i" or current_mode == "ic" then
 		mode_color = "%#StatusLineYellow#"
-	elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
+	elseif current_mode == "v" or current_mode == "V" then
 		mode_color = "%#StatusLineBlue#"
+	elseif current_mode == "s" or current_mode == "S" then
+		mode_color = "%#StatusLineOrange#"
 	elseif current_mode == "R" then
 		mode_color = "%#StatusLineRed#"
 	elseif current_mode == "c" then
@@ -123,6 +126,8 @@ local function update_mode_colors_trailing()
 		mode_color = "%#StatusLineYellowTrail#"
 	elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
 		mode_color = "%#StatusLineBlueTrail#"
+	elseif current_mode == "s" or current_mode == "S" then
+		mode_color = "%#StatusLineOrangeTrail#"
 	elseif current_mode == "R" then
 		mode_color = "%#StatusLineRedTrail#"
 	elseif current_mode == "c" then
