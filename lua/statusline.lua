@@ -267,7 +267,7 @@ function Statusline.short()
 	return table.concat {
 		"%#StatusLineFS#",
 		"%=",
-		"󱏒 Tree",
+		"  ",
 		"%=%",
 	}
 end
