@@ -23,7 +23,6 @@ cmd([[set nofoldenable]])
 -- Python config for faster startup
 local g = vim.g
 g.python3_host_prog = "~/.pyenv/shims/python"
-g.lsp_display_progress_ttl = 300
 
 -- Plugin Manager
 require("plugins")

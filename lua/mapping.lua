@@ -13,6 +13,9 @@ vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true,
 -- Map jet-pack
 map("n", "<leader>l", ':ls<CR>:b<space>', { noremap = true, silent = false })
 
+-- Map jet-pack removal
+map("n", "<leader>d", ':ls<CR>:bd<space>', { noremap = true, silent = false })
+
 -- Show dianostic popup on cursor hold
 map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
 -- Move to dx
