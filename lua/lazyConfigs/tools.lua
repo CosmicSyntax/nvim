@@ -38,9 +38,9 @@
 require("trouble").setup {
 	icons = true,
 	action_keys = {
-        close_folds = "tc",
-        open_folds = "to",
-    },
+		close_folds = "tc",
+		open_folds = "to",
+	},
 }
 
 -- Gitsigns
@@ -55,7 +55,7 @@ require('gitsigns').setup({
 })
 
 -- Diffview Config
-require'diffview'.setup {
+require 'diffview'.setup {
 	diff_binaries = false,
 	enhanced_diff_hl = false,
 	use_icons = true,
@@ -113,9 +113,15 @@ require('windows').setup({
 })
 
 -- Nvim autopair
-require'nvim-autopairs'.setup {}
+require 'nvim-autopairs'.setup {}
 
-require("fidget").setup {}
+require("fidget").setup {
+	progress = {
+		lsp = {
+			progress_ringbuf_size = 1024,
+		},
+	},
+}
 
 -- Nvim Comment
 require('Comment').setup()
