@@ -45,5 +45,9 @@ nvim_lsp.rust_analyzer.setup {
 
 -- Rust Proc Macro Expand
 vim.cmd(
-	"command! RustExpandMacro :lua require('lazyConfigs/rustUtils/macro').expand_macro()"
+	[[
+		command! RustExpandMacro :lua require('lazyConfigs/rustUtils/macro')()
+		command! RustViewHIR :lua require('lazyConfigs/rustUtils/hir')()
+		command! RustViewMIR :lua require('lazyConfigs/rustUtils/mir')()
+	]]
 )

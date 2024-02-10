@@ -2,10 +2,8 @@ local view = require("lazyConfigs.rustUtils.view")
 local lsp = require("lazyConfigs.rustUtils.ra_lsp")
 local error = require("lazyConfigs.rustUtils.error")
 
-local M = {}
-
 ---Expands the macro under the current cursor position.
-function M.expand_macro()
+local function expand_macro()
     if not error.ensure_ra() then return end
 
     lsp.request("expandMacro", vim.lsp.util.make_position_params(0, lsp.offset_encoding()), function(response)
@@ -29,4 +27,4 @@ function M.expand_macro()
     end)
 end
 
-return M
+return expand_macro
