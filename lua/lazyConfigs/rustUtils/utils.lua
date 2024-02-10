@@ -1,115 +1,37 @@
 local M = {}
 
-local function get_params()
-  return vim.lsp.util.make_position_params()
+---Returns an iterator over the lines of a string.
+---@param s string # A string
+---@return fun(): string # An iterator over the lines of the string
+function M.iter_lines(s)
+    if s:sub(-1) ~= "\n" then s = s .. "\n" end
+    return s:gmatch("(.-)\n")
 end
 
-local latest_buf_id = nil
-
--- parse the lines from result to get a list of the desirable output
--- Example:
--- // Recursive expansion of the eprintln macro
--- // ============================================
-
--- {
---   $crate::io::_eprint(std::fmt::Arguments::new_v1(&[], &[std::fmt::ArgumentV1::new(&(err),std::fmt::Display::fmt),]));
--- }
-local function parse_lines(t)
-  local ret = {}
-
-  local name = t.name
-  local text = "// Recursive expansion of the " .. name .. " macro"
-  table.insert(ret, "// " .. string.rep("=", string.len(text) - 3))
-  table.insert(ret, text)
-  table.insert(ret, "// " .. string.rep("=", string.len(text) - 3))
-  table.insert(ret, "")
-
-  local expansion = t.expansion
-  for string in string.gmatch(expansion, "([^\n]+)") do
-    table.insert(ret, string)
-  end
-
-  return ret
-end
-
-local function delete_buf(bufnr)
-  if bufnr ~= nil and vim.api.nvim_buf_is_valid(bufnr) then
-    vim.api.nvim_buf_delete(bufnr, { force = true })
-  end
-end
-
-local function split(vertical, bufnr)
-  local cmd = vertical and "vsplit" or "split"
-
-  vim.cmd(cmd)
-  local win = vim.api.nvim_get_current_win()
-  vim.api.nvim_win_set_buf(win, bufnr)
-end
-
-local function resize(vertical, amount)
-  local cmd = vertical and "vertical resize " or "resize"
-  cmd = cmd .. amount
-
-  vim.cmd(cmd)
-end
-
-local function mk_handler(fn)
-  return function(...)
-    local config_or_client_id = select(4, ...)
-    local is_new = type(config_or_client_id) ~= "number"
-    if is_new then
-      fn(...)
-    else
-      local err = select(1, ...)
-      local method = select(2, ...)
-      local result = select(3, ...)
-      local client_id = select(4, ...)
-      local bufnr = select(5, ...)
-      local config = select(6, ...)
-      fn(
-        err,
-        result,
-        { method = method, client_id = client_id, bufnr = bufnr },
-        config
-      )
+---Turns some string into an array of lines.
+---@param s string # The string
+---@return string[] # An array of lines
+function M.string_to_line_array(s)
+    local lines = {}
+    for line in M.iter_lines(s) do
+        table.insert(lines, line)
     end
-  end
+
+    return lines
 end
 
-local function request(bufnr, method, params, handler)
-  return vim.lsp.buf_request(bufnr, method, params, mk_handler(handler))
-end
+---Returns the maximum key in a table with numeric keys.
+---@param tbl table<number, any>
+---@return number
+function M.max_key(tbl)
+    local max = 0
+    for i, _ in pairs(tbl) do
+        if i > max then
+            max = i
+        end
+    end
 
-local function handler(_, result)
-  -- echo a message when result is nil (meaning no macro under cursor) and
-  -- exit
-  if result == nil then
-    vim.api.nvim_out_write("No macro under cursor!\n")
-    return
-  end
-
-  -- check if a buffer with the latest id is already open, if it is then
-  -- delete it and continue
-  delete_buf(latest_buf_id)
-
-  -- create a new buffer
-  latest_buf_id = vim.api.nvim_create_buf(false, true) -- not listed and scratch
-
-  -- split the window to create a new buffer and set it to our window
-  split(true, latest_buf_id)
-
-  -- set filetpe to rust for syntax highlighting
-  vim.api.nvim_buf_set_option(latest_buf_id, "filetype", "rust")
-  -- write the expansion content to the buffer
-  vim.api.nvim_buf_set_lines(latest_buf_id, 0, 0, false, parse_lines(result))
-
-  -- make the new buffer smaller
-  resize(true, "-25")
-end
-
--- Sends the request to rust-analyzer to get cargo.tomls location and open it
-function M.expand_macro()
-  request(0, "rust-analyzer/expandMacro", get_params(), handler)
+    return max
 end
 
 return M

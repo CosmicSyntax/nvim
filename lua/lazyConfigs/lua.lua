@@ -11,6 +11,9 @@ nvim_lsp.lua_ls.setup({
             diagnostics = {
                 globals = { 'vim' }
             },
+			hint = {
+				enable = true,
+			},
         },
 	},
 })

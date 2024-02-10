@@ -118,7 +118,7 @@ require 'nvim-autopairs'.setup {}
 require("fidget").setup {
 	progress = {
 		lsp = {
-			progress_ringbuf_size = 1024,
+			progress_ringbuf_size = 2048,
 		},
 	},
 }

@@ -1,13 +1,13 @@
 -- nvim_lsp object
-local nvim_lsp = require'lspconfig'
+local nvim_lsp = require 'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup{
+nvim_lsp.rust_analyzer.setup {
 	capabilities = capabilities,
 	filetypes = { "rust" },
-	cmd = {"rust-analyzer"},
+	cmd = { "rust-analyzer" },
 	settings = {
 		["rust-analyzer"] = {
 			imports = {
@@ -27,11 +27,15 @@ nvim_lsp.rust_analyzer.setup{
 			procMacro = {
 				enable = true
 			},
-			-- inlayHints = {
-			-- 	implicitDrops = {
-			-- 		enable = true,
-			-- 	},
-			-- },
+			inlayHints = {
+				-- implicitDrops = {
+				-- 	enable = true,
+				-- },
+				enable = true,
+				showParameterNames = true,
+				-- parameterHintsPrefix = "<- ",
+				-- otherHintsPrefix = "=> ",
+			},
 			checkOnSave = {
 				command = "clippy",
 			}
@@ -41,5 +45,5 @@ nvim_lsp.rust_analyzer.setup{
 
 -- Rust Proc Macro Expand
 vim.cmd(
-	"command! RustExpandMacro :lua require('lazyConfigs/rustUtils/utils').expand_macro()"
+	"command! RustExpandMacro :lua require('lazyConfigs/rustUtils/macro').expand_macro()"
 )

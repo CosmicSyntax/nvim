@@ -1,0 +1,32 @@
+local view = require("lazyConfigs.rustUtils.view")
+local lsp = require("lazyConfigs.rustUtils.ra_lsp")
+local error = require("lazyConfigs.rustUtils.error")
+
+local M = {}
+
+---Expands the macro under the current cursor position.
+function M.expand_macro()
+    if not error.ensure_ra() then return end
+
+    lsp.request("expandMacro", vim.lsp.util.make_position_params(0, lsp.offset_encoding()), function(response)
+        if response.result == nil then
+            if response.error == nil then
+                error.raise(
+                    "no answer from rust-analyzer for macro expansion in given cursor position")
+                return
+            end
+
+            error.raise_lsp_error("error expanding macro", response.error)
+            return
+        end
+
+        ---@type string
+        local name = response.result.name
+        ---@type string
+        local expansion = response.result.expansion
+
+        view.open("macro", expansion, "Recursive expansion of the " .. name .. " macro")
+    end)
+end
+
+return M

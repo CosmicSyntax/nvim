@@ -145,7 +145,17 @@ require("lazy").setup({
 	{
 		dir = '~/.config/nvim/lua/lazyConfigs/lua.lua',
 		ft = { 'lua' },
-		config = function() require('lazyConfigs/lua') end,
+		config = function()
+			require('lazyConfigs/lua')
+			require('lazyConfigs/inlay')
+		end,
+	},
+	{
+		dir = '~/.config/nvim/lua/lazyConfigs/vue.lua',
+		ft = { 'vue' },
+		config = function()
+			require('lazyConfigs/vue')
+		end,
 	},
 	{
 		'puremourning/vimspector',
