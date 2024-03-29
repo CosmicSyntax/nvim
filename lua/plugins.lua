@@ -161,4 +161,9 @@ require("lazy").setup({
 		'puremourning/vimspector',
 		ft = { 'rust', 'c', 'cpp', 'python' },
 	} -- Ensure you have python3 imported
+},
+{
+	ui = {
+		backdrop = 100,
+	}
 })
