@@ -158,6 +158,13 @@ require("lazy").setup({
 		end,
 	},
 	{
+		dir = '~/.config/nvim/lua/lazyConfigs/tf.lua',
+		ft = { 'terraform', 'terraform-vars' },
+		config = function()
+			require('lazyConfigs/tf')
+		end,
+	},
+	{
 		'puremourning/vimspector',
 		ft = { 'rust', 'c', 'cpp', 'python' },
 	} -- Ensure you have python3 imported
