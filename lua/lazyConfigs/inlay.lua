@@ -13,11 +13,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if client.server_capabilities.inlayHintProvider then
 			-- Rust specific since LSP is not immediatelt available when on_attach is called
 			if vim.bo.filetype == 'rust' then
-				vim.lsp.handlers['experimental/serverStatus'] = function(_, result)
+				vim.lsp.handlers['experimental/serverStatus'] = function(_, result, ctx, _)
 					if result.quiescent and not M.ran_once then
-						vim.lsp.inlay_hint.enable()
-						enable_inlay_hints()
-						M.ran_once = true
+						for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+							vim.lsp.inlay_hint.enable(false);
+							enable_inlay_hints()
+						end
 					end
 				end
 			end
