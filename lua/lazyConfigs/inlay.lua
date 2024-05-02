@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			if vim.bo.filetype == 'rust' then
 				vim.lsp.handlers['experimental/serverStatus'] = function(_, result)
 					if result.quiescent and not M.ran_once then
-						vim.lsp.inlay_hint.enable(0, false)
+						vim.lsp.inlay_hint.enable()
 						enable_inlay_hints()
 						M.ran_once = true
 					end
