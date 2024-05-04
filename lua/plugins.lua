@@ -13,164 +13,186 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{
-		'windwp/nvim-autopairs',
-		event = "InsertEnter",
-	},
-	{
-		-- LSP notification
-		"j-hui/fidget.nvim",
-		-- tag = "legacy",
-		event = "LspAttach",
-	},
-	'numToStr/Comment.nvim',
-	'lewis6991/gitsigns.nvim',
-	{ 'sindrets/diffview.nvim' },
-	{
-		'nvim-treesitter/nvim-treesitter',
-		-- tag = "v0.9.0",
-		build = ':TSUpdate',
-	},
-	'lukas-reineke/indent-blankline.nvim',
-	{
-		'neovim/nvim-lspconfig',
-		-- tag = "v0.1.4",
-	},
-	'hrsh7th/nvim-cmp',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-path',
-	{
-		'L3MON4D3/LuaSnip',
-		event = "BufRead",
-		config = function() require('lazyConfigs/luasnip') end,
-	},
-	'saadparwaiz1/cmp_luasnip',
-	{
-		'kyazdani42/nvim-tree.lua',
-		dependencies = {
-			'kyazdani42/nvim-web-devicons',
+		{
+			'windwp/nvim-autopairs',
+			event = "InsertEnter",
 		},
-		event = "VimEnter",
-		config = function() require('lazyConfigs/nvimtree') end,
+		{
+			-- LSP notification
+			"j-hui/fidget.nvim",
+			-- tag = "legacy",
+			event = "LspAttach",
+		},
+		{
+			'numToStr/Comment.nvim',
+			event = "BufRead",
+		},
+		'lewis6991/gitsigns.nvim',
+		{ 'sindrets/diffview.nvim' },
+		{
+			'nvim-treesitter/nvim-treesitter',
+			-- tag = "v0.9.0",
+			build = ':TSUpdate',
+		},
+		'lukas-reineke/indent-blankline.nvim',
+		{
+			'neovim/nvim-lspconfig',
+			event = "BufRead",
+		},
+		{
+			'hrsh7th/nvim-cmp',
+			event = "BufRead",
+		},
+		{
+			'hrsh7th/cmp-nvim-lsp',
+			event = "BufRead",
+		},
+		{
+			'hrsh7th/cmp-path',
+			event = "BufRead",
+		},
+		{
+			'L3MON4D3/LuaSnip',
+			event = "BufRead",
+			config = function() require('lazyConfigs/luasnip') end,
+		},
+		{
+			'saadparwaiz1/cmp_luasnip',
+			event = "BufRead",
+		},
+		{
+			'kyazdani42/nvim-tree.lua',
+			dependencies = {
+				'kyazdani42/nvim-web-devicons',
+			},
+			event = "VimEnter",
+			config = function() require('lazyConfigs/nvimtree') end,
+		},
+
+		{
+			'folke/trouble.nvim',
+			event = "BufRead",
+		},
+		'arcticicestudio/nord-vim',
+		'karb94/neoscroll.nvim',
+		'anuvyklack/windows.nvim',
+		'anuvyklack/middleclass',
+		-- pictograms
+		{
+			'onsails/lspkind-nvim',
+			event = "BufRead",
+		},
+		'nvim-telescope/telescope.nvim',
+		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+		'nvim-telescope/telescope-ui-select.nvim',
+		'nvim-lua/plenary.nvim',
+		'kdheepak/lazygit.nvim',
+		{
+			'ruifm/gitlinker.nvim',
+			event = "BufRead",
+			config = function() require('lazyConfigs/tools') end,
+		},
+		{
+			'ggandor/leap.nvim',
+			event = "BufRead",
+			config = function() require('lazyConfigs/leap') end,
+		},
+		{
+			'ray-x/lsp_signature.nvim',
+			event = "VeryLazy",
+		},
+		'github/copilot.vim',
+		{
+			'sebdah/vim-delve',
+			ft = { 'go' },
+			config = function()
+				require('lazyConfigs/go')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			'buoto/gotests-vim',
+			ft = { 'go' },
+		},
+		-- Internal
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
+			ft = { 'typescript', 'javascript' },
+			config = function()
+				require('lazyConfigs/ts')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/rust.lua',
+			ft = { 'rust' },
+			config = function()
+				require('lazyConfigs/rust')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			'saecki/crates.nvim',
+			event = { "BufRead Cargo.toml" },
+			config = function()
+				require('crates').setup()
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/python.lua',
+			ft = { 'python' },
+			config = function() require('lazyConfigs/python') end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/bash.lua',
+			ft = { 'sh' },
+			config = function()
+				require('lazyConfigs/bash')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/c.lua',
+			ft = { 'c', 'cpp' },
+			config = function()
+				require('lazyConfigs/c')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/sql.lua',
+			ft = { 'sql' },
+			config = function() require('lazyConfigs/sql') end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/lua.lua',
+			ft = { 'lua' },
+			config = function()
+				require('lazyConfigs/lua')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/vue.lua',
+			ft = { 'vue' },
+			config = function()
+				require('lazyConfigs/vue')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/tf.lua',
+			ft = { 'terraform', 'terraform-vars' },
+			config = function()
+				require('lazyConfigs/tf')
+			end,
+		},
+		{
+			'puremourning/vimspector',
+			ft = { 'rust', 'c', 'cpp', 'python' },
+		} -- Ensure you have python3 imported
 	},
-	'folke/trouble.nvim',
-	'arcticicestudio/nord-vim',
-	'karb94/neoscroll.nvim',
-	'anuvyklack/windows.nvim',
-	'anuvyklack/middleclass',
-	-- pictograms
-	'onsails/lspkind-nvim',
-	'nvim-telescope/telescope.nvim',
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-	'nvim-telescope/telescope-ui-select.nvim',
-	'nvim-lua/plenary.nvim',
-	'kdheepak/lazygit.nvim',
 	{
-		'ruifm/gitlinker.nvim',
-		event = "BufRead",
-		config = function() require('lazyConfigs/tools') end,
-	},
-	{
-		'ggandor/leap.nvim',
-		event = "BufRead",
-		config = function() require('lazyConfigs/leap') end,
-	},
-	{
-		'ray-x/lsp_signature.nvim',
-		event = "VeryLazy",
-	},
-	'github/copilot.vim',
-	{
-		'sebdah/vim-delve',
-		ft = { 'go' },
-		config = function()
-			require('lazyConfigs/go')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		'buoto/gotests-vim',
-		ft = { 'go' },
-	},
-	-- Internal
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
-		ft = { 'typescript', 'javascript' },
-		config = function()
-			require('lazyConfigs/ts')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/rust.lua',
-		ft = { 'rust' },
-		config = function()
-			require('lazyConfigs/rust')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		'saecki/crates.nvim',
-		event = { "BufRead Cargo.toml" },
-		config = function()
-			require('crates').setup()
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/python.lua',
-		ft = { 'python' },
-		config = function() require('lazyConfigs/python') end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/bash.lua',
-		ft = { 'sh' },
-		config = function()
-			require('lazyConfigs/bash')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/c.lua',
-		ft = { 'c', 'cpp' },
-		config = function()
-			require('lazyConfigs/c')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/sql.lua',
-		ft = { 'sql' },
-		config = function() require('lazyConfigs/sql') end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/lua.lua',
-		ft = { 'lua' },
-		config = function()
-			require('lazyConfigs/lua')
-			require('lazyConfigs/inlay')
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/vue.lua',
-		ft = { 'vue' },
-		config = function()
-			require('lazyConfigs/vue')
-		end,
-	},
-	{
-		dir = '~/.config/nvim/lua/lazyConfigs/tf.lua',
-		ft = { 'terraform', 'terraform-vars' },
-		config = function()
-			require('lazyConfigs/tf')
-		end,
-	},
-	{
-		'puremourning/vimspector',
-		ft = { 'rust', 'c', 'cpp', 'python' },
-	} -- Ensure you have python3 imported
-},
-{
-	ui = {
-		backdrop = 100,
-	}
-})
+		ui = {
+			backdrop = 100,
+		}
+	})
