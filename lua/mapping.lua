@@ -52,7 +52,7 @@ map("n", "]c", ':Gitsigns next_hunk<CR>', defo)
 map("n", "[c", ':Gitsigns prev_hunk<CR>', defo)
 map("n", "<leader>gs", ':Gitsigns stage_hunk<CR>', defo)
 map("n", "<leader>gr", ':Gitsigns reset_hunk<CR>', defo)
-map("n", "<leader>gp", ':Gitsigns preview_hunk<CR>', defo)
+map("n", "<leader>gp", ':Gitsigns preview_hunk_inline<CR>', defo)
 map("n", "<leader>gb", ':Git blame_line<CR>', defo)
 
 -- Mapping for LSP configuration
