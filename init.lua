@@ -21,11 +21,6 @@ cmd([[set nofoldenable]])
 
 -- Highlight for nightly
 vim.cmd([[autocmd ColorScheme * highlight! link NormalFloat Pmenu]])
-vim.cmd([[autocmd ColorScheme * highlight! link DiagnosticFloatingError DiagnosticError]])
-vim.cmd([[autocmd ColorScheme * highlight! link DiagnosticFloatingWarn DiagnosticWarn]])
-vim.cmd([[autocmd ColorScheme * highlight! link DiagnosticFloatingInfo DiagnosticInfo]])
-vim.cmd([[autocmd ColorScheme * highlight! link DiagnosticFloatingHint DiagnosticHint]])
-vim.cmd([[autocmd ColorScheme * highlight! link DiagnosticFloatingOk DiagnosticOk]])
 vim.cmd([[autocmd ColorScheme * highlight! link WinSeparator FoldColumn]])
 -- End of UI Setting
 
