@@ -115,7 +115,7 @@ local jump_handle = function(_, result, ctx, _)
 	end
 	local client = vim.lsp.get_client_by_id(ctx.client_id)
 
-	if vim.tbl_islist(result) then
+	if vim.islist(result) then
 		if #result > 1 then
 			vim.fn.setqflist({}, ' ', {
 				title = 'LSP locations',
