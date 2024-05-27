@@ -73,7 +73,8 @@ require("lazy").setup({
 			'folke/trouble.nvim',
 			event = "BufRead",
 		},
-		'arcticicestudio/nord-vim',
+		-- 'arcticicestudio/nord-vim',
+		'gbprod/nord.nvim',
 		'karb94/neoscroll.nvim',
 		'anuvyklack/windows.nvim',
 		'anuvyklack/middleclass',
@@ -184,6 +185,13 @@ require("lazy").setup({
 			ft = { 'terraform', 'terraform-vars' },
 			config = function()
 				require('lazyConfigs/tf')
+			end,
+		},
+		{
+			dir = '~/.config/nvim/lua/lazyConfigs/docker.lua',
+			ft = { 'dockerfile' },
+			config = function()
+				require('lazyConfigs/docker')
 			end,
 		},
 		{

@@ -19,9 +19,6 @@ cmd([[set shortmess+=c]])
 cmd([[set noexpandtab]])
 cmd([[set nofoldenable]])
 
--- Highlight for nightly
-vim.cmd([[autocmd ColorScheme * highlight! link NormalFloat Pmenu]])
-vim.cmd([[autocmd ColorScheme * highlight! link WinSeparator FoldColumn]])
 -- End of UI Setting
 
 -- Python config for faster startup
