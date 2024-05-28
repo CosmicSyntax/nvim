@@ -153,11 +153,6 @@ vim.lsp.handlers["textDocument/references"] = jump_handle
 -- local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- capabilities = cmp.update_capabilities(lsp_status.capabilities)
 
--- Enable LSP Signature
-require "lsp_signature".setup({
-	floating_window = false
-})
-
 -- Enable Solargraph
 -- nvim_lsp.solargraph.setup({
 -- 	capabilities = capabilities,

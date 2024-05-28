@@ -52,6 +52,10 @@ require("lazy").setup({
 			event = "BufRead",
 		},
 		{
+			'hrsh7th/cmp-nvim-lsp-signature-help',
+			event = "BufRead",
+		},
+		{
 			'L3MON4D3/LuaSnip',
 			event = "BufRead",
 			config = function() require('lazyConfigs/luasnip') end,
@@ -97,10 +101,6 @@ require("lazy").setup({
 			'ggandor/leap.nvim',
 			event = "BufRead",
 			config = function() require('lazyConfigs/leap') end,
-		},
-		{
-			'ray-x/lsp_signature.nvim',
-			event = "VeryLazy",
 		},
 		'github/copilot.vim',
 		{

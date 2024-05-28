@@ -1,5 +1,5 @@
 -- Setup nvim-cmp.
-local cmp = require'cmp'
+local cmp = require 'cmp'
 local lspkind = require('lspkind')
 require("luasnip.loaders.from_vscode").lazy_load()
 local snip = require('luasnip')
@@ -8,8 +8,8 @@ cmp.setup({
 		expand = function(args)
 			snip.lsp_expand(args.body)
 		end,
-    },
-    mapping = {
+	},
+	mapping = {
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -23,8 +23,9 @@ cmp.setup({
 		{ name = 'luasnip' },
 		{ name = 'path' },
 		{ name = 'crates' },
+		{ name = 'nvim_lsp_signature_help' },
 	},
 	formatting = {
-		format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
+		format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),
 	},
 })
