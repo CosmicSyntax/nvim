@@ -13,6 +13,7 @@ require 'nvim-treesitter.configs'.setup {
 		"sql",
 		"html",
 		"markdown",
+		"markdown_inline",
 		"vimdoc",
 	},
 	highlight = {
