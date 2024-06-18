@@ -181,6 +181,13 @@ require("lazy").setup({
 			end,
 		},
 		{
+			dir = '~/.config/nvim/lua/lazyConfigs/zig.lua',
+			ft = { 'zig' },
+			config = function()
+				require('lazyConfigs/zig')
+			end,
+		},
+		{
 			dir = '~/.config/nvim/lua/lazyConfigs/tf.lua',
 			ft = { 'terraform', 'terraform-vars' },
 			config = function()
