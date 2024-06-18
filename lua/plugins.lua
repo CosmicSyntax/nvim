@@ -78,7 +78,11 @@ require("lazy").setup({
 			event = "BufRead",
 		},
 		-- 'arcticicestudio/nord-vim',
-		'gbprod/nord.nvim',
+		{
+			'CosmicSyntax/nord',
+			branch = 'nvim10',
+		},
+		-- 'gbprod/nord.nvim',
 		'karb94/neoscroll.nvim',
 		'anuvyklack/windows.nvim',
 		'anuvyklack/middleclass',
