@@ -189,6 +189,7 @@ require("lazy").setup({
 			ft = { 'zig' },
 			config = function()
 				require('lazyConfigs/zig')
+				require('lazyConfigs/inlay')
 			end,
 		},
 		{
