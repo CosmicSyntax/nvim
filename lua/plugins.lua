@@ -122,7 +122,7 @@ require("lazy").setup({
 		-- Internal
 		{
 			dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
-			ft = { 'typescript', 'javascript' },
+			ft = { 'typescript', 'javascript', 'html' },
 			config = function()
 				require('lazyConfigs/ts')
 				require('lazyConfigs/inlay')
