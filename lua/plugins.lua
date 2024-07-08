@@ -102,10 +102,11 @@ require("lazy").setup({
 			config = function() require('lazyConfigs/tools') end,
 		},
 		{
-			'ggandor/leap.nvim',
+			"folke/flash.nvim",
 			event = "BufRead",
-			commit = "eca8108dcd5f41fbde2a674dceb58b81ed887dc8",
-			config = function() require('lazyConfigs/leap') end,
+			config = function()
+				require('lazyConfigs/flash')
+			end,
 		},
 		'github/copilot.vim',
 		{
