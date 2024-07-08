@@ -104,6 +104,7 @@ require("lazy").setup({
 		{
 			'ggandor/leap.nvim',
 			event = "BufRead",
+			commit = "eca8108dcd5f41fbde2a674dceb58b81ed887dc8",
 			config = function() require('lazyConfigs/leap') end,
 		},
 		'github/copilot.vim',
