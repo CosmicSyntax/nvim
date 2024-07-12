@@ -14,6 +14,7 @@ require 'nvim-treesitter.configs'.setup {
 		"html",
 		"markdown",
 		"markdown_inline",
+		"terraform",
 		"vimdoc",
 	},
 	highlight = {
