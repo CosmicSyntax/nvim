@@ -16,6 +16,10 @@ map("n", "<leader>l", ':ls<CR>:b<space>', { noremap = true, silent = false })
 -- Map jet-pack removal
 map("n", "<leader>d", ':ls<CR>:bd<space>', { noremap = true, silent = false })
 
+-- Map terminal launch shortcut
+map("n", "<leader>tv", ':vsplit term://bash<CR>', defo)
+map("n", "<leader>ts", ':split term://bash<CR>', defo)
+
 -- Show dianostic popup on cursor hold
 map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
 -- Move to dx
@@ -85,7 +89,7 @@ g.vimspector_install_gadgets = [['CodeLLDB']]
 g.vimspector_variables_display_mode = 'full'
 
 -- Mapping for TS spacing
-map("n", "<leader>ts", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
+map("n", "<leader>st", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
 
 -- Mapping for formatting
 map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)
