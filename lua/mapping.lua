@@ -72,8 +72,8 @@ map("n", "gw", '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', defo)
 map("n", "ga", '<cmd>lua vim.lsp.buf.code_action()<CR>', defo)
 map("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<CR>', defo)
 
--- Mapping for Lazygit
-map("n", "<leader>gg", ':LazyGit<CR>', defo)
+-- Mapping for Neogit
+map("n", "<leader>gg", ':Neogit<CR>', defo)
 
 -- Mapping for vimspector debugging
 map("n", "<leader>vl", ':call vimspector#Launch()<CR>', defo)
