@@ -127,7 +127,16 @@ require("lazy").setup({
 				views = {
 					cmdline_popup = {
 						border = {
-							style = "none",
+							style = {
+								top_left = "",
+								top = "",
+								top_right = "",
+								left = "",
+								right = "",
+								bottom_left = "",
+								bottom_right = "",
+								bottom = "─",
+							},
 						},
 						position = {
 							row = "50%",
