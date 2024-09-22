@@ -126,6 +126,9 @@ require("lazy").setup({
 			opts = {
 				views = {
 					cmdline_popup = {
+						border = {
+							style = "none",
+						},
 						position = {
 							row = "50%",
 							col = "50%",
