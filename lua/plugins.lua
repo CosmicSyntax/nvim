@@ -95,7 +95,18 @@ require("lazy").setup({
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		'nvim-telescope/telescope-ui-select.nvim',
 		'nvim-lua/plenary.nvim',
-		'kdheepak/lazygit.nvim',
+		-- 'kdheepak/lazygit.nvim',
+		{
+			"NeogitOrg/neogit",
+			dependencies = {
+				"nvim-lua/plenary.nvim", -- required
+				"sindrets/diffview.nvim", -- optional - Diff integration
+
+				-- Only one of these is needed.
+				"nvim-telescope/telescope.nvim", -- optional
+			},
+			config = true
+		},
 		{
 			'ruifm/gitlinker.nvim',
 			event = "BufRead",
