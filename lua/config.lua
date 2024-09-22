@@ -80,6 +80,10 @@ vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b" })
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = "#4c566a" })
+vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight', { link = 'DiffAdd' })
+vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { link = 'DiffDelete' })
+vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { link = 'DiffAdd' })
+vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
 
 -- Line Setup
 -- require('lualine').setup {
