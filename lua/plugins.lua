@@ -27,8 +27,11 @@ require("lazy").setup({
 			'numToStr/Comment.nvim',
 			event = "BufRead",
 		},
-		'lewis6991/gitsigns.nvim',
-		{ 'sindrets/diffview.nvim' },
+		{
+			'lewis6991/gitsigns.nvim',
+			event = "VeryLazy",
+		},
+		'sindrets/diffview.nvim',
 		{
 			'nvim-treesitter/nvim-treesitter',
 			-- tag = "v0.9.0",
@@ -82,7 +85,6 @@ require("lazy").setup({
 			'CosmicSyntax/nord',
 			branch = 'nvim10',
 		},
-		-- 'gbprod/nord.nvim',
 		'karb94/neoscroll.nvim',
 		'anuvyklack/windows.nvim',
 		'anuvyklack/middleclass',
@@ -95,16 +97,14 @@ require("lazy").setup({
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		'nvim-telescope/telescope-ui-select.nvim',
 		'nvim-lua/plenary.nvim',
-		-- 'kdheepak/lazygit.nvim',
 		{
 			"NeogitOrg/neogit",
 			dependencies = {
-				"nvim-lua/plenary.nvim", -- required
-				"sindrets/diffview.nvim", -- optional - Diff integration
-
-				-- Only one of these is needed.
+				"nvim-lua/plenary.nvim",
+				"sindrets/diffview.nvim",
 				"nvim-telescope/telescope.nvim", -- optional
 			},
+			event = "VeryLazy",
 			config = true
 		},
 		{
