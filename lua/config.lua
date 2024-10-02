@@ -17,6 +17,8 @@ require 'nvim-treesitter.configs'.setup {
 		"terraform",
 		"vimdoc",
 		"regex",
+		"toml",
+		"yaml",
 	},
 	highlight = {
 		enable = true,
