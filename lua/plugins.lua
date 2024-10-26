@@ -120,49 +120,49 @@ require("lazy").setup({
 			end,
 		},
 		-- lazy.nvim
-		{
-			"folke/noice.nvim",
-			event = "VeryLazy",
-			opts = {
-				views = {
-					cmdline_popup = {
-						border = {
-							style = {
-								top_left = "",
-								top = "",
-								top_right = "",
-								left = "",
-								right = "",
-								bottom_left = "",
-								bottom_right = "",
-								bottom = "─",
-							},
-						},
-						position = {
-							row = "50%",
-							col = "50%",
-						},
-						size = {
-							width = 75,
-							height = "auto",
-						},
-					},
-				},
-				lsp = {
-					progress = {
-						enabled = false,
-					},
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-					},
-				},
-			},
-			dependencies = {
-				"MunifTanjim/nui.nvim",
-			}
-		},
+		-- {
+		-- 	"folke/noice.nvim",
+		-- 	event = "VeryLazy",
+		-- 	opts = {
+		-- 		views = {
+		-- 			cmdline_popup = {
+		-- 				border = {
+		-- 					style = {
+		-- 						top_left = "",
+		-- 						top = "",
+		-- 						top_right = "",
+		-- 						left = "",
+		-- 						right = "",
+		-- 						bottom_left = "",
+		-- 						bottom_right = "",
+		-- 						bottom = "─",
+		-- 					},
+		-- 				},
+		-- 				position = {
+		-- 					row = "50%",
+		-- 					col = "50%",
+		-- 				},
+		-- 				size = {
+		-- 					width = 75,
+		-- 					height = "auto",
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 		lsp = {
+		-- 			progress = {
+		-- 				enabled = false,
+		-- 			},
+		-- 			override = {
+		-- 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+		-- 				["vim.lsp.util.stylize_markdown"] = true,
+		-- 				["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+		-- 			},
+		-- 		},
+		-- 	},
+		-- 	dependencies = {
+		-- 		"MunifTanjim/nui.nvim",
+		-- 	}
+		-- },
 		'github/copilot.vim',
 		{
 			'sebdah/vim-delve',
