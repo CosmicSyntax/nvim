@@ -128,34 +128,71 @@ vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
 -- vim.o.laststatus = 3
 
 -- stop nvim_lsp auto jump for GI
-local log = require 'vim.lsp.log'
-local util = require 'vim.lsp.util'
-local jump_handle = function(_, result, ctx, _)
-	if result == nil or vim.tbl_isempty(result) then
-		local _ = log.info() and log.info(ctx.method, 'No location found')
-		return nil
+local validate = vim.validate
+local api = vim.api
+local lsp = vim.lsp
+local util = require('vim.lsp.util')
+local ms = require('vim.lsp.protocol').Methods
+---@param context (table|nil) Context for the request
+---@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_references
+---@param opts? vim.lsp.ListOpts
+local function references(context, opts)
+	validate('context', context, 'table', true)
+	local bufnr = api.nvim_get_current_buf()
+	local clients = lsp.get_clients({ method = ms.textDocument_references, bufnr = bufnr })
+	if not next(clients) then
+		return
 	end
-	local client = vim.lsp.get_client_by_id(ctx.client_id)
+	local win = api.nvim_get_current_win()
+	opts = opts or {}
 
-	if vim.islist(result) then
-		if #result > 1 then
-			vim.fn.setqflist({}, ' ', {
-				title = 'LSP locations',
-				items = util.locations_to_items(result, client.offset_encoding)
-			})
-			-- vim.api.nvim_command("botright copen")
-			require("trouble").toggle("quickfix")
+	local all_items = {}
+	local title = 'References'
+
+	local function on_done()
+		if not next(all_items) then
+			vim.notify('No references found')
 		else
-			util.jump_to_location(result[1], client.offset_encoding)
+			local list = {
+				title = title,
+				items = all_items,
+				context = {
+					method = ms.textDocument_references,
+					bufnr = bufnr,
+				},
+			}
+			if opts.loclist then
+				vim.fn.setloclist(0, {}, ' ', list)
+				require("trouble").toggle("quickfix")
+			elseif opts.on_list then
+				assert(vim.is_callable(opts.on_list), 'on_list is not a function')
+				opts.on_list(list)
+			else
+				vim.fn.setqflist({}, ' ', list)
+				require("trouble").toggle("quickfix")
+			end
 		end
-	else
-		util.jump_to_location(result, client.offset_encoding)
+	end
+
+	local remaining = #clients
+	for _, client in ipairs(clients) do
+		local params = util.make_position_params(win, client.offset_encoding)
+
+		---@diagnostic disable-next-line: inject-field
+		params.context = context or {
+			includeDeclaration = true,
+		}
+		client.request(ms.textDocument_references, params, function(_, result)
+			local items = util.locations_to_items(result or {}, client.offset_encoding)
+			vim.list_extend(all_items, items)
+			remaining = remaining - 1
+			if remaining == 0 then
+				on_done()
+			end
+		end)
 	end
 end
-vim.lsp.handlers["textDocument/implementation"] = jump_handle
-vim.lsp.handlers["textDocument/definition"] = jump_handle
-vim.lsp.handlers["textDocument/typeDefinition"] = jump_handle
-vim.lsp.handlers["textDocument/references"] = jump_handle
+vim.lsp.buf.references = references
 
 -- -- nvim_lsp object
 -- local nvim_lsp = require'lspconfig'
