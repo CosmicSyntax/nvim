@@ -141,6 +141,11 @@ require("lazy").setup({
 			'buoto/gotests-vim',
 			ft = { 'go' },
 		},
+		{
+			"lewis6991/satellite.nvim",
+			event = "BufRead",
+			opts = {},
+		},
 
 		-- Internal
 		{
