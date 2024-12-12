@@ -2,7 +2,7 @@ local nvim_lsp = require'lspconfig'
 local cmp = require('cmp_nvim_lsp')
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Enable Gopls
+-- Enable Lua language server
 nvim_lsp.lua_ls.setup({
 	capabilities = capabilities,
 	filetypes = { "lua" },

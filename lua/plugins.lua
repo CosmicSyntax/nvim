@@ -1,14 +1,17 @@
--- Bootstrap Lazy
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out,                            "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -73,9 +76,15 @@ require("lazy").setup({
 				'kyazdani42/nvim-web-devicons',
 			},
 			event = "VimEnter",
-			config = function() require('lazyConfigs/nvimtree') end,
+			opts = {
+				view = {
+					width = 40,
+				},
+				filters = {
+					dotfiles = false,
+				},
+			},
 		},
-
 		{
 			'folke/trouble.nvim',
 			event = "BufRead",
@@ -119,50 +128,6 @@ require("lazy").setup({
 				require('lazyConfigs/flash')
 			end,
 		},
-		-- lazy.nvim
-		-- {
-		-- 	"folke/noice.nvim",
-		-- 	event = "VeryLazy",
-		-- 	opts = {
-		-- 		views = {
-		-- 			cmdline_popup = {
-		-- 				border = {
-		-- 					style = {
-		-- 						top_left = "",
-		-- 						top = "",
-		-- 						top_right = "",
-		-- 						left = "",
-		-- 						right = "",
-		-- 						bottom_left = "",
-		-- 						bottom_right = "",
-		-- 						bottom = "─",
-		-- 					},
-		-- 				},
-		-- 				position = {
-		-- 					row = "50%",
-		-- 					col = "50%",
-		-- 				},
-		-- 				size = {
-		-- 					width = 75,
-		-- 					height = "auto",
-		-- 				},
-		-- 			},
-		-- 		},
-		-- 		lsp = {
-		-- 			progress = {
-		-- 				enabled = false,
-		-- 			},
-		-- 			override = {
-		-- 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-		-- 				["vim.lsp.util.stylize_markdown"] = true,
-		-- 				["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-		-- 			},
-		-- 		},
-		-- 	},
-		-- 	dependencies = {
-		-- 		"MunifTanjim/nui.nvim",
-		-- 	}
-		-- },
 		'github/copilot.vim',
 		{
 			'sebdah/vim-delve',
@@ -176,21 +141,96 @@ require("lazy").setup({
 			'buoto/gotests-vim',
 			ft = { 'go' },
 		},
+
 		-- Internal
 		{
-			dir = '~/.config/nvim/lua/lazyConfigs/ts.lua',
+			name = "typescript",
+			dir = '~/.config/nvim/lua/lazyConfigs/ts',
 			ft = { 'typescript', 'javascript', 'html' },
 			config = function()
-				require('lazyConfigs/ts')
+				require('lazyConfigs/ts/ts')
 				require('lazyConfigs/inlay')
 			end,
 		},
 		{
-			dir = '~/.config/nvim/lua/lazyConfigs/rust.lua',
+			name = "rust",
+			dir = '~/.config/nvim/lua/lazyConfigs/rust/',
 			ft = { 'rust' },
 			config = function()
-				require('lazyConfigs/rust')
+				require('lazyConfigs/rust/rust')
 				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "python",
+			dir = '~/.config/nvim/lua/lazyConfigs/python',
+			ft = { 'python' },
+			config = function() require('lazyConfigs/python/python') end,
+		},
+		{
+			name = "bash",
+			dir = '~/.config/nvim/lua/lazyConfigs/bash',
+			ft = { 'sh' },
+			config = function()
+				require('lazyConfigs/bash/bash')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "c",
+			dir = '~/.config/nvim/lua/lazyConfigs/c',
+			ft = { 'c', 'cpp' },
+			config = function()
+				require('lazyConfigs/c/c')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "sql",
+			dir = '~/.config/nvim/lua/lazyConfigs/sql',
+			ft = { 'sql' },
+			config = function() require('lazyConfigs/sql/sql') end,
+		},
+		{
+			name = "lua",
+			dir = '~/.config/nvim/lua/lazyConfigs/lua',
+			ft = { 'lua' },
+			config = function()
+				require('lazyConfigs/lua/lua')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "vue",
+			dir = '~/.config/nvim/lua/lazyConfigs/vue',
+			ft = { 'vue' },
+			config = function()
+				require('lazyConfigs/vue/vue')
+			end,
+		},
+		{
+			name = "zig",
+			dir = '~/.config/nvim/lua/lazyConfigs/zig',
+			ft = { 'zig' },
+			config = function()
+				require('lazyConfigs/zig/zig')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "terraform",
+			dir = '~/.config/nvim/lua/lazyConfigs/tf/',
+			ft = { 'terraform', 'terraform-vars' },
+			config = function()
+				require('lazyConfigs/tf/tf')
+			end,
+		},
+		{
+			name = "docker",
+			dir = '~/.config/nvim/lua/lazyConfigs/docker/',
+			ft = { 'dockerfile' },
+			config = function()
+				require('lazyConfigs/docker/docker')
 			end,
 		},
 		{
@@ -198,69 +238,6 @@ require("lazy").setup({
 			event = { "BufRead Cargo.toml" },
 			config = function()
 				require('crates').setup()
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/python.lua',
-			ft = { 'python' },
-			config = function() require('lazyConfigs/python') end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/bash.lua',
-			ft = { 'sh' },
-			config = function()
-				require('lazyConfigs/bash')
-				require('lazyConfigs/inlay')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/c.lua',
-			ft = { 'c', 'cpp' },
-			config = function()
-				require('lazyConfigs/c')
-				require('lazyConfigs/inlay')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/sql.lua',
-			ft = { 'sql' },
-			config = function() require('lazyConfigs/sql') end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/lua.lua',
-			ft = { 'lua' },
-			config = function()
-				require('lazyConfigs/lua')
-				require('lazyConfigs/inlay')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/vue.lua',
-			ft = { 'vue' },
-			config = function()
-				require('lazyConfigs/vue')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/zig.lua',
-			ft = { 'zig' },
-			config = function()
-				require('lazyConfigs/zig')
-				require('lazyConfigs/inlay')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/tf.lua',
-			ft = { 'terraform', 'terraform-vars' },
-			config = function()
-				require('lazyConfigs/tf')
-			end,
-		},
-		{
-			dir = '~/.config/nvim/lua/lazyConfigs/docker.lua',
-			ft = { 'dockerfile' },
-			config = function()
-				require('lazyConfigs/docker')
 			end,
 		},
 		{
