@@ -63,18 +63,6 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension("ui-select")
 
 -- Nord... because there is nothing better
--- require('nord').setup({
--- 	styles = {
--- 		comments = { italic = true },
--- 		keywords = {},
--- 		functions = { bold = true },
--- 		variables = {},
--- 		bufferline = {
--- 			current = {},
--- 			modified = { italic = true },
--- 		},
--- 	}
--- })
 vim.cmd("colorscheme nord")
 vim.cmd([[highlight Comment cterm=italic gui=italic]])
 vim.cmd([[highlight Function cterm=bold gui=bold]])

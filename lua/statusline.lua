@@ -31,6 +31,7 @@ local colors = {
 	purple = "#b48ead",
 	green = "#a3be8c",
 	orange = "#d08770",
+	white = "#d8dee9",
 }
 
 -- TODO: replace hardcoded colors to local variables
@@ -42,14 +43,14 @@ local highlights = {
 	{ 'StatusLinePurple',      { fg = colors.darkBlue, bg = colors.purple, gui = 'bold' } },
 	{ 'StatusLineGreen',       { fg = colors.darkBlue, bg = colors.green, gui = 'bold' } },
 	{ 'StatusLineOrange',      { fg = colors.darkBlue, bg = colors.orange, gui = 'bold' } },
-	{ 'StatusLineExtra',       { bg = colors.muteBlue } },
+	{ 'StatusLineExtra',       { fg = colors.white, bg = colors.muteBlue } },
 	{ 'StatusLineMiddle',      { bg = colors.mutelightBlue } },
 	-- for Git
 	{ 'GitAdd',                { fg = colors.green, bg = colors.midBlue } },
 	{ 'GitChange',             { fg = colors.yellow, bg = colors.midBlue } },
 	{ 'GitDelete',             { fg = colors.red, bg = colors.midBlue } },
 	-- for FS
-	{ 'StatusLineFS',          { fg = '#d8dee9', bg = colors.midBlue } },
+	{ 'StatusLineFS',          { fg = colors.white, bg = colors.midBlue } },
 	-- for Diagnostic
 	{ 'DxError',               { fg = colors.red, bg = colors.midBlue } },
 	{ 'DxWarn',                { fg = colors.orange, bg = colors.midBlue } },
