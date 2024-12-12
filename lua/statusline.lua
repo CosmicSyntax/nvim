@@ -82,6 +82,8 @@ local statuline_symbols = {
 	},
 }
 
+local black_placeholder = "    "
+
 local function mode()
 	local current_mode = vim.api.nvim_get_mode().mode
 	return string.format(" %s ", modes[current_mode]):upper()
@@ -195,7 +197,7 @@ local function filetype()
 	local icon, color = require("nvim-web-devicons").get_icon_colors_by_filetype(vim.bo.filetype)
 	local ft = vim.bo.filetype:upper()
 	if ft == "" then
-		return " "
+		return "     " .. black_placeholder .. "     "
 	end
 	if icon == nil then
 		return " " .. ft .. " "
@@ -207,7 +209,7 @@ local function filetype()
 end
 
 local function lineinfo()
-	if vim.bo.filetype == "alpha" then
+	if vim.fn.expand "%P" == "" then
 		return ""
 	end
 	-- return "%P Ln:%l Col:%c "
@@ -268,7 +270,7 @@ function Statusline.short()
 	return table.concat {
 		"%#StatusLineFS#",
 		"%=",
-		"  ",
+		black_placeholder,
 		"%=%",
 	}
 end
