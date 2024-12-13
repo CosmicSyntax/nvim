@@ -133,7 +133,7 @@ require("lazy").setup({
 			'sebdah/vim-delve',
 			ft = { 'go' },
 			config = function()
-				require('lazyConfigs/go')
+				require('lazyConfigs/go/go')
 				require('lazyConfigs/inlay')
 			end,
 		},
