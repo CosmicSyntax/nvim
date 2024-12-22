@@ -269,6 +269,18 @@ vim.lsp.buf.definition = function(opts)
 	get_locations(ms.textDocument_definition, opts)
 end
 
+vim.lsp.buf.implementation = function(opts)
+	get_locations(ms.textDocument_implementation, opts)
+end
+
+vim.lsp.buf.type_definition = function(opts)
+	get_locations(ms.textDocument_typeDefinition, opts)
+end
+
+vim.lsp.buf.declaration = function(opts)
+	get_locations(ms.textDocument_documentSymbol, opts)
+end
+
 -- -- nvim_lsp object
 -- local nvim_lsp = require'lspconfig'
 -- local cmp = require('cmp_nvim_lsp')
