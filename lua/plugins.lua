@@ -151,7 +151,7 @@ require("lazy").setup({
 		{
 			name = "typescript",
 			dir = '~/.config/nvim/lua/lazyConfigs/ts',
-			ft = { 'typescript', 'javascript', 'html' },
+			ft = { 'typescript', 'javascript', 'html', 'htmldjango' },
 			config = function()
 				require('lazyConfigs/ts/ts')
 				require('lazyConfigs/inlay')
@@ -236,6 +236,15 @@ require("lazy").setup({
 			ft = { 'dockerfile' },
 			config = function()
 				require('lazyConfigs/docker/docker')
+			end,
+		},
+		{
+			name = "tailwindcss",
+			dir = '~/.config/nvim/lua/lazyConfigs/tailwind/',
+			ft = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "clojure", "django-html", "htmldjango", "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte", "templ" },
+			config = function()
+				require('lazyConfigs/tailwind/tailwind')
+				require('lazyConfigs/inlay')
 			end,
 		},
 		{
