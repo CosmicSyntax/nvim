@@ -18,8 +18,20 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 -- 		},
 -- 	},
 -- })
-nvim_lsp.denols.setup({
+nvim_lsp.ts_ls.setup({
 	capabilities = capabilities,
+	init_options = {
+		preferences = {
+			includeInlayParameterNameHints = "all",
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayEnumMemberValueHints = true,
+		},
+	},
 })
 
 nvim_lsp.html.setup({
