@@ -115,190 +115,81 @@ vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
 -- }
 -- vim.o.laststatus = 3
 
--- Update references to default to Trouble
-local validate = vim.validate
-local api = vim.api
-local lsp = vim.lsp
+-- Update references to default to Trouble for v0.10.n
+local log = require('vim.lsp.log')
+local protocol = require('vim.lsp.protocol')
+local ms = protocol.Methods
 local util = require('vim.lsp.util')
-local ms = require('vim.lsp.protocol').Methods
----@param context (table|nil) Context for the request
----@see https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_references
----@param opts? vim.lsp.ListOpts
-local function references(context, opts)
-	validate('context', context, 'table', true)
-	local bufnr = api.nvim_get_current_buf()
-	local clients = lsp.get_clients({ method = ms.textDocument_references, bufnr = bufnr })
-	if not next(clients) then
+local api = vim.api
+--- Jumps to a location. Used as a handler for multiple LSP methods.
+---@param _ nil not used
+---@param result (table) result of LSP method; a location or a list of locations.
+---@param ctx (lsp.HandlerContext) table containing the context of the request, including the method
+---@param config? vim.lsp.LocationOpts
+---(`textDocument/definition` can return `Location` or `Location[]`
+local function location_handler(_, result, ctx, config)
+	if result == nil or vim.tbl_isempty(result) then
+		log.info(ctx.method, 'No location found')
+		return nil
+	end
+	local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+
+	config = config or {}
+
+	-- textDocument/definition can return Location or Location[]
+	-- https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_definition
+	if not vim.islist(result) then
+		result = { result }
+	end
+
+	local title = 'LSP locations'
+	local items = util.locations_to_items(result, client.offset_encoding)
+
+	if config.on_list then
+		assert(vim.is_callable(config.on_list), 'on_list is not a function')
+		config.on_list({ title = title, items = items })
 		return
 	end
-	local win = api.nvim_get_current_win()
-	opts = opts or {}
+	if #result == 1 then
+		util.jump_to_location(result[1], client.offset_encoding, config.reuse_win)
+		return
+	end
+	if config.loclist then
+		vim.fn.setloclist(0, {}, ' ', { title = title, items = items })
+		require("trouble").toggle("quickfix")
+	else
+		vim.fn.setqflist({}, ' ', { title = title, items = items })
+		require("trouble").toggle("quickfix")
+	end
+end
 
-	local all_items = {}
+vim.lsp.handlers[ms.textDocument_declaration] = location_handler
+vim.lsp.handlers[ms.textDocument_definition] = location_handler
+vim.lsp.handlers[ms.textDocument_typeDefinition] = location_handler
+vim.lsp.handlers[ms.textDocument_implementation] = location_handler
+vim.lsp.handlers[ms.textDocument_references] = function(_, result, ctx, config)
+	if not result or vim.tbl_isempty(result) then
+		vim.notify('No references found')
+		return
+	end
+
+	local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+	config = config or {}
 	local title = 'References'
+	local items = util.locations_to_items(result, client.offset_encoding)
 
-	local function on_done()
-		if not next(all_items) then
-			vim.notify('No references found')
-		else
-			local list = {
-				title = title,
-				items = all_items,
-				context = {
-					method = ms.textDocument_references,
-					bufnr = bufnr,
-				},
-			}
-			if opts.loclist then
-				vim.fn.setloclist(0, {}, ' ', list)
-				require("trouble").toggle("quickfix")
-			elseif opts.on_list then
-				assert(vim.is_callable(opts.on_list), 'on_list is not a function')
-				opts.on_list(list)
-			else
-				vim.fn.setqflist({}, ' ', list)
-				require("trouble").toggle("quickfix")
-			end
-		end
-	end
-
-	local remaining = #clients
-	for _, client in ipairs(clients) do
-		local params = util.make_position_params(win, client.offset_encoding)
-
-		---@diagnostic disable-next-line: inject-field
-		params.context = context or {
-			includeDeclaration = true,
-		}
-		client.request(ms.textDocument_references, params, function(_, result)
-			local items = util.locations_to_items(result or {}, client.offset_encoding)
-			vim.list_extend(all_items, items)
-			remaining = remaining - 1
-			if remaining == 0 then
-				on_done()
-			end
-		end)
+	local list = { title = title, items = items, context = ctx }
+	if config.loclist then
+		vim.fn.setloclist(0, {}, ' ', list)
+		require("trouble").toggle("quickfix")
+	elseif config.on_list then
+		assert(vim.is_callable(config.on_list), 'on_list is not a function')
+		config.on_list(list)
+	else
+		vim.fn.setqflist({}, ' ', list)
+		require("trouble").toggle("quickfix")
 	end
 end
-vim.lsp.buf.references = references
-
----@param method string
----@param opts? vim.lsp.LocationOpts
-local function get_locations(method, opts)
-	opts = opts or {}
-	local bufnr = api.nvim_get_current_buf()
-	local clients = lsp.get_clients({ method = method, bufnr = bufnr })
-	if not next(clients) then
-		vim.notify(lsp._unsupported_method(method), vim.log.levels.WARN)
-		return
-	end
-	local win = api.nvim_get_current_win()
-	local from = vim.fn.getpos('.')
-	from[1] = bufnr
-	local tagname = vim.fn.expand('<cword>')
-	local remaining = #clients
-
-	---@type vim.quickfix.entry[]
-	local all_items = {}
-
-	---@param result nil|lsp.Location|lsp.Location[]
-	---@param client vim.lsp.Client
-	local function on_response(_, result, client)
-		local locations = {}
-		if result then
-			locations = vim.islist(result) and result or { result }
-		end
-		local items = util.locations_to_items(locations, client.offset_encoding)
-		vim.list_extend(all_items, items)
-		remaining = remaining - 1
-		if remaining == 0 then
-			if vim.tbl_isempty(all_items) then
-				vim.notify('No locations found', vim.log.levels.INFO)
-				return
-			end
-
-			local title = 'LSP locations'
-			if opts.on_list then
-				assert(vim.is_callable(opts.on_list), 'on_list is not a function')
-				opts.on_list({
-					title = title,
-					items = all_items,
-					context = { bufnr = bufnr, method = method },
-				})
-				return
-			end
-
-			if #all_items == 1 then
-				local item = all_items[1]
-				local b = item.bufnr or vim.fn.bufadd(item.filename)
-
-				-- Save position in jumplist
-				vim.cmd("normal! m'")
-				-- Push a new item into tagstack
-				local tagstack = { { tagname = tagname, from = from } }
-				vim.fn.settagstack(vim.fn.win_getid(win), { items = tagstack }, 't')
-
-				vim.bo[b].buflisted = true
-				local w = opts.reuse_win and vim.fn.win_findbuf(b)[1] or win
-				api.nvim_win_set_buf(w, b)
-				api.nvim_win_set_cursor(w, { item.lnum, item.col - 1 })
-				vim._with({ win = w }, function()
-					-- Open folds under the cursor
-					vim.cmd('normal! zv')
-				end)
-				return
-			end
-			if opts.loclist then
-				vim.fn.setloclist(0, {}, ' ', { title = title, items = all_items })
-				require("trouble").toggle("quickfix")
-			else
-				vim.fn.setqflist({}, ' ', { title = title, items = all_items })
-				require("trouble").toggle("quickfix")
-			end
-		end
-	end
-	for _, client in ipairs(clients) do
-		local params = util.make_position_params(win, client.offset_encoding)
-		client:request(method, params, function(_, result)
-			on_response(_, result, client)
-		end)
-	end
-end
-
-vim.lsp.buf.definition = function(opts)
-	get_locations(ms.textDocument_definition, opts)
-end
-
-vim.lsp.buf.implementation = function(opts)
-	get_locations(ms.textDocument_implementation, opts)
-end
-
-vim.lsp.buf.type_definition = function(opts)
-	get_locations(ms.textDocument_typeDefinition, opts)
-end
-
-vim.lsp.buf.declaration = function(opts)
-	get_locations(ms.textDocument_documentSymbol, opts)
-end
-
--- -- nvim_lsp object
--- local nvim_lsp = require'lspconfig'
--- local cmp = require('cmp_nvim_lsp')
--- local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
--- capabilities = cmp.update_capabilities(lsp_status.capabilities)
-
--- Enable Solargraph
--- nvim_lsp.solargraph.setup({
--- 	capabilities = capabilities,
--- 	flags = {
--- 		debounce_text_changes = 150,
--- 	},
--- })
-
--- Enable R LSP
--- nvim_lsp.r_language_server.setup{
--- 	capabilities = capabilities,
--- }
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
