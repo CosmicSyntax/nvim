@@ -63,9 +63,28 @@ require('telescope').load_extension('fzf')
 require("telescope").load_extension("ui-select")
 
 -- Nord... because there is nothing better
+require("nord").setup({
+	transparent = false,     -- Enable this to disable setting the background color
+	terminal_colors = true,  -- Configure the colors used when opening a `:terminal` in Neovim
+	diff = { mode = "bg" },  -- enables/disables colorful backgrounds when used in diff mode. values : [bg|fg]
+	borders = true,          -- Enable the border between verticaly split windows visible
+	errors = { mode = "bg" }, -- Display mode for errors and diagnostics
+	-- values : [bg|fg|none]
+	search = { theme = "vim" }, -- theme for highlighting search results
+	-- values : [vim|vscode]
+	styles = {
+		-- Style to be applied to different syntax groups
+		-- Value is any valid attr-list value for `:help nvim_set_hl`
+		comments = { italic = true },
+		keywords = {},
+		functions = { bold = true },
+		variables = {},
+	},
+})
+
 vim.cmd("colorscheme nord")
-vim.cmd([[highlight Comment cterm=italic gui=italic]])
-vim.cmd([[highlight Function cterm=bold gui=bold]])
+-- vim.cmd([[highlight Comment cterm=italic gui=italic]])
+-- vim.cmd([[highlight Function cterm=bold gui=bold]])
 vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b" })
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })

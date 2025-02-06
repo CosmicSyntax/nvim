@@ -90,9 +90,14 @@ require("lazy").setup({
 			event = "BufRead",
 		},
 		-- 'arcticicestudio/nord-vim',
+		-- {
+		-- 	'CosmicSyntax/nord',
+		-- 	branch = 'nvim10',
+		-- },
 		{
-			'CosmicSyntax/nord',
-			branch = 'nvim10',
+			'gbprod/nord.nvim',
+			lazy = false,
+			priority = 1000,
 		},
 		'karb94/neoscroll.nvim',
 		'anuvyklack/windows.nvim',
@@ -151,7 +156,7 @@ require("lazy").setup({
 		{
 			name = "typescript",
 			dir = '~/.config/nvim/lua/lazyConfigs/ts',
-			ft = { 'typescript', 'javascript', 'html', 'htmldjango' },
+			ft = { 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' },
 			config = function()
 				require('lazyConfigs/ts/ts')
 				require('lazyConfigs/inlay')
