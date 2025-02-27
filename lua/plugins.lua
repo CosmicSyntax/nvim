@@ -54,7 +54,7 @@ require("lazy").setup({
 				keymap = {
 					preset = 'none',
 					['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation' },
-					['<CR>'] = { 'select_and_accept' },
+					['<CR>'] = { 'select_and_accept', 'fallback' },
 
 					['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
 					['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
