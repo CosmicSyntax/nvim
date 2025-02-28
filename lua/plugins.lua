@@ -53,7 +53,7 @@ require("lazy").setup({
 				-- TODO: clean this up
 				keymap = {
 					preset = 'none',
-					['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation' },
+					['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
 					['<CR>'] = { 'select_and_accept', 'fallback' },
 
 					['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
@@ -72,9 +72,11 @@ require("lazy").setup({
 				sources = {
 					default = { 'lsp', 'path', 'snippets', 'buffer' },
 				},
-				fuzzy = { implementation = "prefer_rust_with_warning" }
+				fuzzy = { implementation = "prefer_rust_with_warning" },
+				signature = { enabled = true },
 			},
-			opts_extend = { "sources.default" }
+			opts_extend = { "sources.default" },
+			event = "VeryLazy",
 		},
 		{
 			'kyazdani42/nvim-tree.lua',
