@@ -1,19 +1,19 @@
 -- Trouble - dx
 require("trouble").setup {
 	auto_close = false, -- auto close when there are no items
-	auto_open = false,  -- auto open when there are items
+	auto_open = false, -- auto open when there are items
 	auto_preview = true, -- automatically open preview when on an item
 	auto_refresh = true, -- auto refresh when open
-	auto_jump = false,  -- auto jump to the item when there's only one
-	focus = false,      -- Focus the window when opened
-	restore = true,     -- restores the last location in the list when opening
-	follow = true,      -- Follow the current item
+	auto_jump = false, -- auto jump to the item when there's only one
+	focus = false,     -- Focus the window when opened
+	restore = true,    -- restores the last location in the list when opening
+	follow = true,     -- Follow the current item
 	indent_guides = true, -- show indent guides
-	max_items = 200,    -- limit number of items that can be displayed per section
-	multiline = true,   -- render multi-line messages
-	pinned = false,     -- When pinned, the opened trouble window will be bound to the current buffer
+	max_items = 200,   -- limit number of items that can be displayed per section
+	multiline = true,  -- render multi-line messages
+	pinned = false,    -- When pinned, the opened trouble window will be bound to the current buffer
 	---@type trouble.Window.opts
-	win = {},           -- window options for the results window. Can be a split or a floating window.
+	win = {},          -- window options for the results window. Can be a split or a floating window.
 	-- Window options for the preview window. Can be a split, floating window,
 	-- or `main` to show the preview in the main editor window.
 	---@type trouble.Window.opts
@@ -27,10 +27,10 @@ require("trouble").setup {
 	-- Throttle/Debounce settings. Should usually not be changed.
 	---@type table<string, number|{ms:number, debounce?:boolean}>
 	throttle = {
-		refresh = 20,                        -- fetches new data when needed
-		update = 10,                         -- updates the window
-		render = 10,                         -- renders the window
-		follow = 100,                        -- follows the current item
+		refresh = 20,                      -- fetches new data when needed
+		update = 10,                       -- updates the window
+		render = 10,                       -- renders the window
+		follow = 100,                      -- follows the current item
 		preview = { ms = 100, debounce = true }, -- shows the preview for the current item
 	},
 	-- Key mappings can be set to the name of a builtin action,
@@ -221,6 +221,38 @@ require 'diffview'.setup {
 require('neoscroll').setup {
 	easing_function = "sine",
 }
+
+-- Blink Config
+require('blink.cmp').setup({
+	keymap = {
+		preset = 'none',
+		-- ['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
+		['<CR>'] = { 'select_and_accept', 'fallback' },
+
+		['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+		['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+
+		['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
+		['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
+
+		['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
+		['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' },
+	},
+	appearance = {
+		use_nvim_cmp_as_default = true,
+		nerd_font_variant = 'mono'
+	},
+	sources = {
+		default = { 'lsp', 'path', 'snippets', 'buffer' },
+	},
+	fuzzy = { implementation = "prefer_rust_with_warning" },
+	signature = {
+		enabled = true,
+		window = {
+			winblend = 30,
+		},
+	},
+})
 
 -- Window management
 require('windows').setup({

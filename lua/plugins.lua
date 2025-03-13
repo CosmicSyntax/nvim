@@ -49,37 +49,6 @@ require("lazy").setup({
 			'saghen/blink.cmp',
 			dependencies = 'rafamadriz/friendly-snippets',
 			version = '*',
-			opts = {
-				-- TODO: clean this up
-				keymap = {
-					preset = 'none',
-					['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
-					['<CR>'] = { 'select_and_accept', 'fallback' },
-
-					['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-					['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
-
-					['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
-					['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
-
-					['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
-					['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' },
-				},
-				appearance = {
-					use_nvim_cmp_as_default = true,
-					nerd_font_variant = 'mono'
-				},
-				sources = {
-					default = { 'lsp', 'path', 'snippets', 'buffer' },
-				},
-				fuzzy = { implementation = "prefer_rust_with_warning" },
-				signature = {
-					enabled = true,
-					window = {
-						winblend = 30,
-					},
-				},
-			},
 			opts_extend = { "sources.default" },
 			event = "VeryLazy",
 		},

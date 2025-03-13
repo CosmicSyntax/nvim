@@ -13,6 +13,10 @@ vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true,
 -- Map jet-pack
 map("n", "<leader>l", ':ls<CR>:b<space>', { noremap = true, silent = false })
 
+-- Horizontal scrolling
+map("n", "<C-h>", '20zh', defo)
+map("n", "<C-l>", '20zl', defo)
+
 -- Map jet-pack removal
 map("n", "<leader>d", ':ls<CR>:bd<space>', { noremap = true, silent = false })
 
