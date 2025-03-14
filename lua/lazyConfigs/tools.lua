@@ -226,7 +226,7 @@ require('neoscroll').setup {
 require('blink.cmp').setup({
 	keymap = {
 		preset = 'none',
-		-- ['<S-K>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
+		['<C-Tab>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
 		['<CR>'] = { 'select_and_accept', 'fallback' },
 
 		['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
