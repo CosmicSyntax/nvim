@@ -11,7 +11,7 @@ opt.completeopt = [[menuone,noinsert,noselect]]
 opt.guicursor = [[n:block-blinkon250,v:hor100-blinkon250,i:ver100-blinkon250]]
 opt.updatetime = 1000
 opt.foldmethod = "indent"
-opt.winblend = 20
+opt.winblend = 30
 opt.termguicolors = true
 
 local cmd = vim.cmd

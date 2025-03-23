@@ -46,29 +46,11 @@ require("lazy").setup({
 			event = "BufRead",
 		},
 		{
-			'hrsh7th/nvim-cmp',
-			event = "BufRead",
-		},
-		{
-			'hrsh7th/cmp-nvim-lsp',
-			event = "BufRead",
-		},
-		{
-			'hrsh7th/cmp-path',
-			event = "BufRead",
-		},
-		{
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			event = "BufRead",
-		},
-		{
-			'L3MON4D3/LuaSnip',
-			event = "BufRead",
-			config = function() require('lazyConfigs/luasnip') end,
-		},
-		{
-			'saadparwaiz1/cmp_luasnip',
-			event = "BufRead",
+			'saghen/blink.cmp',
+			dependencies = 'rafamadriz/friendly-snippets',
+			version = '*',
+			opts_extend = { "sources.default" },
+			event = "VeryLazy",
 		},
 		{
 			'kyazdani42/nvim-tree.lua',
@@ -90,9 +72,14 @@ require("lazy").setup({
 			event = "BufRead",
 		},
 		-- 'arcticicestudio/nord-vim',
+		-- {
+		-- 	'CosmicSyntax/nord',
+		-- 	branch = 'nvim10',
+		-- },
 		{
-			'CosmicSyntax/nord',
-			branch = 'nvim10',
+			'gbprod/nord.nvim',
+			lazy = false,
+			priority = 1000,
 		},
 		'karb94/neoscroll.nvim',
 		'anuvyklack/windows.nvim',
@@ -151,7 +138,7 @@ require("lazy").setup({
 		{
 			name = "typescript",
 			dir = '~/.config/nvim/lua/lazyConfigs/ts',
-			ft = { 'typescript', 'javascript', 'html', 'htmldjango' },
+			ft = { 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' },
 			config = function()
 				require('lazyConfigs/ts/ts')
 				require('lazyConfigs/inlay')

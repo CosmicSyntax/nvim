@@ -1,7 +1,7 @@
 -- nvim_lsp object
 local nvim_lsp = require 'lspconfig'
-local cmp = require('cmp_nvim_lsp')
-local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local cmp = require('blink.cmp')
+local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup {
@@ -22,6 +22,10 @@ nvim_lsp.rust_analyzer.setup {
 				},
 				-- extraEnv = {
 				-- 	["RUSTFLAGS"] = "--cfg loom",
+				-- },
+				-- features = {
+				-- 	"notebook",
+				-- 	"lifecycle",
 				-- },
 			},
 			procMacro = {
