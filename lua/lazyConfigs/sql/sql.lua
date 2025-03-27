@@ -1,10 +1,9 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable SQL-LSP
-nvim_lsp.sqlls.setup({
+vim.lsp.config["sqlls"] = {
 	capabilities = capabilities,
-	filetypes = { "sql", "mysql" },
 	cmd = { "sql-language-server", "up", "--method", "stdio" },
-})
+	filetypes = { "sql", "mysql" },
+}
+vim.lsp.enable("sqlls")

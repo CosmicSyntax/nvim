@@ -1,12 +1,10 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable Gopls
-nvim_lsp.gopls.setup({
+vim.lsp.config["gopls"] = {
 	capabilities = capabilities,
-	filetypes = { "go", "gomod" },
 	cmd = {'gopls', '--remote=auto'},
+	filetypes = { "go", "gomod" },
 	settings = {
 		analyses = {
 			unusedparams = true,
@@ -24,4 +22,5 @@ nvim_lsp.gopls.setup({
 			},
 		},
 	},
-})
+}
+vim.lsp.enable("gopls")

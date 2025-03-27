@@ -3,7 +3,7 @@ local function enable_inlay_hints()
 	vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#616e88', italic = true })
 end
 
--- Built-in inlay hint... neovim 0.10 needed
+-- Built-in inlay hint... at least eovim 0.10 needed
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client_id = ev.data.client_id
@@ -15,15 +15,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			if vim.bo.filetype == 'rust' then
 				vim.lsp.handlers['experimental/serverStatus'] = function(_, result, ctx, _)
 					if result.quiescent and not M.ran_once then
-						for _, bufnr in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
+						for _, _ in ipairs(vim.lsp.get_buffers_by_client_id(ctx.client_id)) do
 							vim.lsp.inlay_hint.enable(false);
 							enable_inlay_hints()
 						end
+						M.ran_once = true
 					end
 				end
+			else
+				enable_inlay_hints()
 			end
-
-			enable_inlay_hints()
 		end
 	end,
 })

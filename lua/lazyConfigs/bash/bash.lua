@@ -1,10 +1,9 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable Bash-LSP
-nvim_lsp.bashls.setup({
+vim.lsp.config["bashls"] = {
 	capabilities = capabilities,
 	filetypes = { "sh" },
-	cmd = {'bash-language-server', 'start'},
-})
+	cmd = { 'bash-language-server', 'start' },
+}
+vim.lsp.enable("bashls")

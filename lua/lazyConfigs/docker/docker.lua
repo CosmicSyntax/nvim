@@ -1,7 +1,8 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-nvim_lsp.dockerls.setup({
+vim.lsp.config["dockerls"] = {
 	capabilities = capabilities,
-})
+	cmd = { "docker-langserver", "--stdio" },
+	filetypes = { "Dockerfile", "dockerfile" },
+}
+vim.lsp.enable("dockerls")

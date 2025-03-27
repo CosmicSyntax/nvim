@@ -1,7 +1,9 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-nvim_lsp.terraformls.setup({
+-- Enable Terraform-LSP
+vim.lsp.config.terraformls = {
 	capabilities = capabilities,
-})
+	cmd = { "terraform-ls", "serve" },
+	filetypes = { "hcl", "tf", "terraform" },
+}
+vim.lsp.enable("terraformls")
