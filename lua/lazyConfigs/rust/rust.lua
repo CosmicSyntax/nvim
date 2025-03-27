@@ -1,5 +1,7 @@
---
 local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.experimental = {
+	serverStatusNotification = true,
+}
 
 -- Enable rust_analyzer
 vim.lsp.config['rust-analyzer'] = {
@@ -45,17 +47,6 @@ vim.lsp.config['rust-analyzer'] = {
 	capabilities = capabilities,
 }
 vim.lsp.enable('rust-analyzer')
-
--- TEMP FIX for server cancellation error pop-up in neovim
-for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-	local default_diagnostic_handler = vim.lsp.handlers[method]
-	vim.lsp.handlers[method] = function(err, result, context, config)
-		if err ~= nil and err.code == -32802 then
-			return
-		end
-		return default_diagnostic_handler(err, result, context, config)
-	end
-end
 
 -- Rust Proc Macro Expand
 vim.cmd(
