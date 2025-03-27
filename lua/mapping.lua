@@ -7,8 +7,12 @@ local map = vim.api.nvim_set_keymap
 local defo = { noremap = true, silent = true }
 
 -- Copilot
-vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("i", "<C-a>", function()
+	require("copilot.suggestion").accept()
+end)
+vim.keymap.set("i", "<C-s>", function()
+	require("copilot.suggestion").next()
+end)
 
 -- Map jet-pack
 map("n", "<leader>l", ':ls<CR>:b<space>', { noremap = true, silent = false })
