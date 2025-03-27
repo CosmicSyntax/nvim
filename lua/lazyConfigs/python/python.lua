@@ -1,12 +1,17 @@
-local nvim_lsp = require'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable MS Pyright
-nvim_lsp.pyright.setup({
+vim.lsp.config["pyright"] = {
 	capabilities = capabilities,
-})
+	cmd = { "pyright-langserver", "--stdio" },
+	filetypes = { "python" },
+}
+vim.lsp.enable("pyright")
+
 -- Enabled PyLsp
-nvim_lsp.pylsp.setup({
+vim.lsp.config["pylsp"] = {
 	capabilities = capabilities,
-})
+	cmd = { "pylsp" },
+	filetypes = { "python" },
+}
+vim.lsp.enable("pylsp")

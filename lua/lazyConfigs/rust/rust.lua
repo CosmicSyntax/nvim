@@ -1,3 +1,6 @@
+--
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 -- Enable rust_analyzer
 vim.lsp.config['rust-analyzer'] = {
 	filetypes = { "rust" },
@@ -38,7 +41,8 @@ vim.lsp.config['rust-analyzer'] = {
 				command = "clippy",
 			}
 		}
-	}
+	},
+	capabilities = capabilities,
 }
 vim.lsp.enable('rust-analyzer')
 

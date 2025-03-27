@@ -1,25 +1,10 @@
-local nvim_lsp = require 'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Typescript
--- nvim_lsp.tsserver.setup({
--- 	capabilities = capabilities,
--- 	init_options = {
--- 		preferences = {
--- 			includeInlayParameterNameHints = 'all',
--- 			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
--- 			includeInlayFunctionParameterTypeHints = true,
--- 			includeInlayVariableTypeHints = true,
--- 			includeInlayPropertyDeclarationTypeHints = true,
--- 			includeInlayFunctionLikeReturnTypeHints = true,
--- 			includeInlayEnumMemberValueHints = true,
--- 			importModuleSpecifierPreference = 'non-relative',
--- 		},
--- 	},
--- })
-nvim_lsp.ts_ls.setup({
+-- Enable TypeScript-LSP
+vim.lsp.config["tsserver"] = {
 	capabilities = capabilities,
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
 	init_options = {
 		preferences = {
 			includeInlayParameterNameHints = "all",
@@ -32,8 +17,11 @@ nvim_lsp.ts_ls.setup({
 			includeInlayEnumMemberValueHints = true,
 		},
 	},
-})
+}
 
-nvim_lsp.html.setup({
+-- Enable HTML-LSP
+vim.lsp.config["html"] = {
 	capabilities = capabilities,
-})
+	cmd = { "vscode-html-language-server", "--stdio" },
+	filetypes = { "html" },
+}

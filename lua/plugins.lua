@@ -42,10 +42,6 @@ require("lazy").setup({
 		},
 		'lukas-reineke/indent-blankline.nvim',
 		{
-			'neovim/nvim-lspconfig',
-			event = "BufRead",
-		},
-		{
 			'saghen/blink.cmp',
 			dependencies = 'rafamadriz/friendly-snippets',
 			version = '*',
