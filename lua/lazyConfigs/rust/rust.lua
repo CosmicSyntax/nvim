@@ -1,11 +1,5 @@
--- nvim_lsp object
-local nvim_lsp = require 'lspconfig'
-local cmp = require('blink.cmp')
-local capabilities = cmp.get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 -- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup {
-	capabilities = capabilities,
+vim.lsp.config['rust-analyzer'] = {
 	filetypes = { "rust" },
 	cmd = { "rust-analyzer" },
 	settings = {
@@ -46,6 +40,7 @@ nvim_lsp.rust_analyzer.setup {
 		}
 	}
 }
+vim.lsp.enable('rust-analyzer')
 
 -- TEMP FIX for server cancellation error pop-up in neovim
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
