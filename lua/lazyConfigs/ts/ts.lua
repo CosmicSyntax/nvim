@@ -18,10 +18,20 @@ vim.lsp.config["tsserver"] = {
 		},
 	},
 }
+vim.lsp.enable('tsserver')
 
 -- Enable HTML-LSP
 vim.lsp.config["html"] = {
 	capabilities = capabilities,
 	cmd = { "vscode-html-language-server", "--stdio" },
-	filetypes = { "html" },
+	filetypes = { "html", "htmldjango" },
+	init_options = {
+		configurationSection = { "html", "css", "javascript" },
+		embeddedLanguages = {
+			css = true,
+			javascript = true
+		},
+		provideFormatter = true
+	}
 }
+vim.lsp.enable('html')
