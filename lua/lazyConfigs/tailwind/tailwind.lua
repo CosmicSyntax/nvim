@@ -1,7 +1,7 @@
 local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable TailwindCSS-LSP
-vim.lsp.config["tw"] = {
+vim.lsp.config["tailwindcss"] = {
 	capabilities = capabilities,
 	cmd = { 'tailwindcss-language-server', '--stdio' },
 	-- filetypes copied and adjusted from tailwindcss-intellisense
@@ -59,4 +59,4 @@ vim.lsp.config["tw"] = {
 		'tailwind.config.ts',
 	},
 }
-vim.lsp.enable('tw')
+vim.lsp.enable('tailwindcss')
