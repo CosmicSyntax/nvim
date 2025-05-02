@@ -19,6 +19,8 @@ require 'nvim-treesitter.configs'.setup {
 		"regex",
 		"toml",
 		"yaml",
+		"helm",
+		"dockerfile",
 	},
 	highlight = {
 		enable = true,
