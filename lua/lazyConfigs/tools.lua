@@ -248,9 +248,9 @@ require('blink.cmp').setup({
 	fuzzy = { implementation = "prefer_rust_with_warning" },
 	signature = {
 		enabled = true,
-		window = {
-			winblend = 30,
-		},
+		-- window = {
+		-- 	winblend = 30,
+		-- },
 	},
 })
 -- Copilot with Blink

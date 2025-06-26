@@ -120,14 +120,6 @@ require("lazy").setup({
 			end,
 		},
 		{
-			'sebdah/vim-delve',
-			ft = { 'go' },
-			config = function()
-				require('lazyConfigs/go/go')
-				require('lazyConfigs/inlay')
-			end,
-		},
-		{
 			'buoto/gotests-vim',
 			ft = { 'go' },
 		},
@@ -153,6 +145,15 @@ require("lazy").setup({
 			ft = { 'rust' },
 			config = function()
 				require('lazyConfigs/rust/rust')
+				require('lazyConfigs/inlay')
+			end,
+		},
+		{
+			name = "go",
+			dir = '~/.config/nvim/lua/lazyConfigs/go',
+			ft = { 'go' },
+			config = function()
+				require('lazyConfigs/go/go')
 				require('lazyConfigs/inlay')
 			end,
 		},
@@ -246,7 +247,7 @@ require("lazy").setup({
 		},
 		{
 			'puremourning/vimspector',
-			ft = { 'rust', 'c', 'cpp', 'python' },
+			ft = { 'rust', 'c', 'cpp', 'python', 'go' },
 		} -- Ensure you have python3 imported
 	},
 	{
