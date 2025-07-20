@@ -5,6 +5,7 @@ require 'nvim-treesitter.configs'.setup {
 		"lua",
 		"vim",
 		"rust",
+		"zig",
 		"go",
 		"python",
 		"bash",
