@@ -31,8 +31,8 @@ map("n", "<leader>ts", ':split term://bash<CR>', defo)
 -- Show dianostic popup on cursor hold
 map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
 -- Move to dx
-map("n", "]d", ':lua vim.diagnostic.goto_next()<CR>', defo)
-map("n", "[d", ':lua vim.diagnostic.goto_prev()<CR>', defo)
+map("n", "]d", ':lua vim.diagnostic.jump({count=1, float=true})<CR>', defo)
+map("n", "[d", ':lua vim.diagnostic.jump({count=-1, float=true})<CR>', defo)
 
 -- Mapping for Telescope
 map("n", "<F9>", ':Telescope find_files<CR>', defo)

@@ -247,7 +247,7 @@ require("lazy").setup({
 		},
 		{
 			'puremourning/vimspector',
-			ft = { 'rust', 'c', 'cpp', 'python', 'go' },
+			ft = { 'rust', 'c', 'cpp', 'python', 'go', 'zig' },
 		} -- Ensure you have python3 imported
 	},
 	{
