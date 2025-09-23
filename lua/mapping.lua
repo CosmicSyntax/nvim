@@ -96,6 +96,10 @@ local g = vim.g
 g.vimspector_install_gadgets = [['CodeLLDB']]
 g.vimspector_variables_display_mode = 'full'
 
+-- Mapping for Kulaja
+map("n", "<leader>kr", '<cmd>lua require("kulala").run()<CR>', defo)
+map("n", "<leader>ka", '<cmd>lua require("kulala").run_all()<CR>', defo)
+
 -- Mapping for TS spacing
 map("n", "<leader>st", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
 

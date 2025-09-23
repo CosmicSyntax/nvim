@@ -248,7 +248,16 @@ require("lazy").setup({
 		{
 			'puremourning/vimspector',
 			ft = { 'rust', 'c', 'cpp', 'python', 'go', 'zig' },
-		} -- Ensure you have python3 imported
+		}, -- Ensure you have python3 imported
+		{
+			"mistweaverco/kulala.nvim",
+			ft = { "http", "rest" },
+			config = function()
+				require('lazyConfigs/kulala/kulala')
+				require('lazyConfigs/inlay')
+			end,
+
+		}
 	},
 	{
 		ui = {
