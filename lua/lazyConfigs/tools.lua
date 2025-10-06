@@ -229,8 +229,8 @@ require('blink.cmp').setup({
 		['<C-Tab>'] = { 'show', 'show_documentation', 'hide_documentation', "fallback" },
 		['<CR>'] = { 'select_and_accept', 'fallback' },
 
-		['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-		['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+		-- ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+		-- ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
 
 		['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
 		['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
