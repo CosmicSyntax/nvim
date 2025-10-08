@@ -25,8 +25,8 @@ map("n", "<C-l>", '20zl', defo)
 map("n", "<leader>d", ':ls<CR>:bd<space>', { noremap = true, silent = false })
 
 -- Map terminal launch shortcut
-map("n", "<leader>tv", ':vsplit term://bash<CR>', defo)
-map("n", "<leader>ts", ':split term://bash<CR>', defo)
+map("n", "<leader>tv", ':vsplit | terminal<CR>', defo)
+map("n", "<leader>ts", ':split | terminal<CR>', defo)
 
 -- Show dianostic popup on cursor hold
 map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
