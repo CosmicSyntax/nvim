@@ -1,6 +1,16 @@
 -- Treesitter
-require 'nvim-treesitter.configs'.setup {
-	ensure_installed = {
+require 'nvim-treesitter'.setup {
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
+	autopairs = {
+		enable = true,
+	},
+}
+require 'nvim-treesitter'.install {
 		"c",
 		"lua",
 		"vim",
@@ -22,16 +32,6 @@ require 'nvim-treesitter.configs'.setup {
 		"yaml",
 		"helm",
 		"dockerfile",
-	},
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	autopairs = {
-		enable = true,
-	},
 }
 
 -- Nvim Telescope
