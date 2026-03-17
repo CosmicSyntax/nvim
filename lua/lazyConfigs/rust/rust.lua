@@ -41,7 +41,12 @@ vim.lsp.config['rust-analyzer'] = {
 			},
 			checkOnSave = {
 				command = "clippy",
-			}
+			},
+			hover = {
+				memoryLayout = {
+					niches = true,
+				},
+			},
 		}
 	},
 	capabilities = capabilities,
