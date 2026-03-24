@@ -13,11 +13,9 @@ opt.updatetime = 1000
 opt.foldmethod = "indent"
 opt.winblend = 20
 opt.termguicolors = true
-
-local cmd = vim.cmd
-cmd([[set shortmess+=c]])
-cmd([[set noexpandtab]])
-cmd([[set nofoldenable]])
+opt.foldenable = false
+opt.expandtab = false
+opt.shortmess:append("c")
 
 -- End of UI Setting
 

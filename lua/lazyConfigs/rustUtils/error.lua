@@ -4,7 +4,7 @@ local lsp = require("lazyConfigs.rustUtils.ra_lsp")
 ---Raises an error with the given message
 ---@param message string # The error message
 function M.raise(message)
-    vim.notify("ferris.nvim - " .. message, vim.log.levels.ERROR)
+    vim.notify("Rust - " .. message, vim.log.levels.ERROR)
 end
 
 ---@param condition boolean # The condition expected to be false

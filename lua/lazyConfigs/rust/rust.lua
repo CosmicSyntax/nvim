@@ -22,10 +22,9 @@ vim.lsp.config['rust-analyzer'] = {
 				-- extraEnv = {
 				-- 	["RUSTFLAGS"] = "--cfg loom",
 				-- },
-				-- features = {
-				-- 	"notebook",
-				-- 	"lifecycle",
-				-- },
+				features = {
+					"full",
+				},
 			},
 			procMacro = {
 				enable = true
