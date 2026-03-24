@@ -1,62 +1,51 @@
-local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- 1. Fetch Capabilities
+local capabilities = require('lazyConfigs.shared')
 capabilities.experimental = {
 	serverStatusNotification = true,
 }
 
--- Enable rust_analyzer
+-- 2. Configure the Server
 vim.lsp.config['rust-analyzer'] = {
-	filetypes = { "rust" },
 	cmd = { "rust-analyzer" },
+	filetypes = { "rust" },
+	capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
 			imports = {
-				granularity = {
-					group = "module",
-				},
+				granularity = { group = "module" },
 				prefix = "self",
 			},
 			cargo = {
-				buildScripts = {
-					enable = true,
-				},
-				-- extraEnv = {
-				-- 	["RUSTFLAGS"] = "--cfg loom",
-				-- },
-				features = {
-					"full",
-				},
+				buildScripts = { enable = true },
+				features = { "full" },
 			},
-			procMacro = {
-				enable = true
-			},
+			procMacro = { enable = true },
 			inlayHints = {
-				-- implicitDrops = {
-				-- 	enable = true,
-				-- },
 				enable = true,
 				showParameterNames = true,
-				-- parameterHintsPrefix = "<- ",
-				-- otherHintsPrefix = "=> ",
 			},
-			checkOnSave = {
-				command = "clippy",
-			},
+			checkOnSave = { command = "clippy" },
 			hover = {
-				memoryLayout = {
-					niches = true,
-				},
+				memoryLayout = { niches = true },
 			},
 		}
 	},
-	capabilities = capabilities,
 }
+
+-- 3. Enable the Server
 vim.lsp.enable('rust-analyzer')
 
--- Rust Proc Macro Expand
-vim.cmd(
-	[[
-		command! RustExpandMacro :lua require('lazyConfigs/rustUtils/macro')()
-		command! RustViewHIR :lua require('lazyConfigs/rustUtils/hir')()
-		command! RustViewMIR :lua require('lazyConfigs/rustUtils/mir')()
-	]]
-)
+-- 4. Native Lua Custom Commands (Replacing vim.cmd)
+local create_cmd = vim.api.nvim_create_user_command
+
+create_cmd('RustExpandMacro', function()
+	require('lazyConfigs.rustUtils.macro')()
+end, { desc = "Expand Rust Macro under cursor" })
+
+create_cmd('RustViewHIR', function()
+	require('lazyConfigs.rustUtils.hir')()
+end, { desc = "View Rust HIR" })
+
+create_cmd('RustViewMIR', function()
+	require('lazyConfigs.rustUtils.mir')()
+end, { desc = "View Rust MIR" })

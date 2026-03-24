@@ -1,5 +1,4 @@
-
-local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('lazyConfigs.shared')
 
 -- Enable Gopls
 vim.lsp.config['copilot'] = {

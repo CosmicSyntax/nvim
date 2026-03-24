@@ -74,7 +74,6 @@ vim.pack.add({
 })
 
 -- 3. Setup Configurations
--- vim.pack does not execute plugin setups automatically, so we do it here:
 vim.cmd.colorscheme('nord')
 
 require('nvim-tree').setup({
@@ -90,78 +89,55 @@ require('satellite').setup()
 require('lazyConfigs.flash')
 require('lazyConfigs.tools')
 
--- 4. Filetype Specific Configurations (Replacing 'ft' lazy-loading)
--- We use native autocommands to load your local internal configs only when needed.
+-- ==========================================
+-- 4. Filetype Specific Configurations
+-- ==========================================
+-- A data-driven approach to lazy loading. This replaces 45+ lines of
+-- repetitive function calls with a single, clean routing table.
+local lazy_loads = {
+	[{ 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' }]                                                    = { 'lazyConfigs.ts.ts', 'lazyConfigs.inlay' },
+	[{ 'rust' }]                                                                                                                 = { 'lazyConfigs.rust.rust', 'lazyConfigs.inlay' },
+	[{ 'go' }]                                                                                                                   = { 'lazyConfigs.go.go', 'lazyConfigs.inlay' },
+	[{ 'python' }]                                                                                                               = { 'lazyConfigs.python.python' },
+	[{ 'sh' }]                                                                                                                   = { 'lazyConfigs.bash.bash', 'lazyConfigs.inlay' },
+	[{ 'c', 'cpp' }]                                                                                                             = { 'lazyConfigs.c.c', 'lazyConfigs.inlay' },
+	[{ 'sql' }]                                                                                                                  = { 'lazyConfigs.sql.sql' },
+	[{ 'vue' }]                                                                                                                  = { 'lazyConfigs.vue.vue' },
+	[{ 'terraform', 'terraform-vars' }]                                                                                          = { 'lazyConfigs.tf.tf' },
+	[{ 'dockerfile' }]                                                                                                           = { 'lazyConfigs.docker.docker' },
+	[{ 'lua' }]                                                                                                                  = { 'lazyConfigs.lua.lua', 'lazyConfigs.inlay' },
+	[{ 'zig' }]                                                                                                                  = { 'lazyConfigs.zig.zig', 'lazyConfigs.inlay' },
+	[{ 'http', 'rest' }]                                                                                                         = { 'lazyConfigs.kulala.kulala', 'lazyConfigs.inlay' },
+	-- Tailwind covers multiple overlapping types
+	[{ 'html', 'htmldjango', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'vue' }] = { 'lazyConfigs.tailwind.tailwind', 'lazyConfigs.inlay' },
+}
 
 local lazy_group = vim.api.nvim_create_augroup('LazyConfigs', { clear = true })
 
-local function on_filetype(patterns, callback)
+for patterns, modules in pairs(lazy_loads) do
 	vim.api.nvim_create_autocmd('FileType', {
 		group = lazy_group,
 		pattern = patterns,
-		callback = callback
+		callback = function()
+			for _, mod in ipairs(modules) do
+				-- Using pcall (protected call) prevents one failing config
+				-- (like a typo in a lua file) from breaking the whole chain
+				local ok, err = pcall(require, mod)
+				if not ok then
+					vim.notify("Failed to load: " .. mod .. "\n" .. err, vim.log.levels.ERROR)
+				end
+			end
+		end
 	})
 end
 
-on_filetype({ 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' }, function()
-	require('lazyConfigs.ts.ts')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'rust' }, function()
-	require('lazyConfigs.rust.rust')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'go' }, function()
-	require('lazyConfigs.go.go')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'python' }, function()
-	require('lazyConfigs.python.python')
-end)
-
-on_filetype({ 'sh' }, function()
-	require('lazyConfigs.bash.bash')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'c', 'cpp' }, function()
-	require('lazyConfigs.c.c')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'sql' }, function() require('lazyConfigs.sql.sql') end)
-on_filetype({ 'vue' }, function() require('lazyConfigs.vue.vue') end)
-on_filetype({ 'terraform', 'terraform-vars' }, function() require('lazyConfigs.tf.tf') end)
-on_filetype({ 'dockerfile' }, function() require('lazyConfigs.docker.docker') end)
-
-on_filetype({ 'lua' }, function()
-	require('lazyConfigs.lua.lua')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype({ 'zig' }, function()
-	require('lazyConfigs.zig.zig')
-	require('lazyConfigs.inlay')
-end)
-
-on_filetype(
-{ 'html', 'htmldjango', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'vue' },
-	function()
-		require('lazyConfigs.tailwind.tailwind')
-		require('lazyConfigs.inlay')
-	end)
-
--- Tool specific lazy loads
-on_filetype({ 'toml' }, function()
-	if vim.fn.expand('%:t') == 'Cargo.toml' then
-		require('crates').setup()
+-- Tool specific lazy loads that require extra conditional logic
+vim.api.nvim_create_autocmd('FileType', {
+	group = lazy_group,
+	pattern = 'toml',
+	callback = function()
+		if vim.fn.expand('%:t') == 'Cargo.toml' then
+			require('crates').setup()
+		end
 	end
-end)
-
-on_filetype({ 'http', 'rest' }, function()
-	require('lazyConfigs.kulala.kulala')
-	require('lazyConfigs.inlay')
-end)
+})

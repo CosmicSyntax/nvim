@@ -1,4 +1,4 @@
-local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('lazyConfigs.shared')
 
 -- Enable ClangD
 vim.lsp.config["clangd"] = {
@@ -8,7 +8,7 @@ vim.lsp.config["clangd"] = {
 		"--background-index",
 		"--suggest-missing-includes",
 		'--query-driver="/usr/local/opt/gcc-arm-none-eabi-8-2019-q3-update/bin/arm-none-eabi-gcc"'
-		},
-	filetypes = {"c", "cpp", "objc", "objcpp"},
+	},
+	filetypes = { "c", "cpp", "objc", "objcpp" },
 }
 vim.lsp.enable("clangd")
