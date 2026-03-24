@@ -292,11 +292,22 @@ require('Comment').setup()
 require("gitlinker").setup()
 
 -- Nvim indent-line
-vim.cmd("highlight CustomTabColor guibg=#363c4a")
+-- 1. Set the highlight safely
+vim.api.nvim_set_hl(0, "CustomTabColor", { bg = "#363c4a" })
+
+-- 2. Create an autocommand to ensure it survives colorscheme reloads
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_set_hl(0, "CustomTabColor", { bg = "#363c4a" })
+	end,
+})
+
 local highlight = {
 	"CustomTabColor",
 	"Whitespace",
 }
+
 require("ibl").setup {
 	indent = { highlight = highlight, char = "" },
 	whitespace = {
