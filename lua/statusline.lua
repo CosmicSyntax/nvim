@@ -1,4 +1,4 @@
--- Custom Statusline... work in progress
+-- Custom Statusline
 local modes = {
 	["n"] = "NORMAL",
 	["V"] = "VISUAL LINE",
@@ -34,7 +34,6 @@ local colors = {
 	white = "#d8dee9",
 }
 
--- TODO: replace hardcoded colors to local variables
 local highlights = {
 	{ 'StatusLine',            { fg = colors.darkBlue, bg = colors.lightBlue, gui = 'bold' } },
 	{ 'StatusLineRed',         { fg = colors.darkBlue, bg = colors.red, gui = 'bold' } },
@@ -45,19 +44,15 @@ local highlights = {
 	{ 'StatusLineOrange',      { fg = colors.darkBlue, bg = colors.orange, gui = 'bold' } },
 	{ 'StatusLineExtra',       { fg = colors.white, bg = colors.muteBlue } },
 	{ 'StatusLineMiddle',      { bg = colors.mutelightBlue } },
-	-- for Git
 	{ 'GitAdd',                { fg = colors.green, bg = colors.midBlue } },
 	{ 'GitChange',             { fg = colors.yellow, bg = colors.midBlue } },
 	{ 'GitDelete',             { fg = colors.red, bg = colors.midBlue } },
-	-- for FS
 	{ 'StatusLineFS',          { fg = colors.white, bg = colors.midBlue } },
-	-- for Diagnostic
 	{ 'DxError',               { fg = colors.red, bg = colors.midBlue } },
 	{ 'DxWarn',                { fg = colors.orange, bg = colors.midBlue } },
 	{ 'DxHint',                { fg = colors.purple, bg = colors.midBlue } },
 	{ 'DxInfo',                { fg = colors.blue, bg = colors.midBlue } },
 	{ 'StatusLineDivide',      { fg = colors.midBlue, bg = colors.mutelightBlue } },
-	-- for symbols
 	{ 'StatusLineTrail',       { fg = colors.lightBlue, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineRedTrail',    { fg = colors.red, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineBlueTrail',   { fg = colors.blue, bg = colors.midBlue, gui = 'bold' } },
@@ -66,81 +61,70 @@ local highlights = {
 	{ 'StatusLineGreenTrail',  { fg = colors.green, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineOrangeTrail', { fg = colors.orange, bg = colors.midBlue, gui = 'bold' } },
 	{ 'StatusLineExtraTrail',  { bg = colors.mutelightBlue, fg = colors.muteBlue } },
-	-- { 'Normal',                        { fg = '#d8dee9', bg = colors.darkBlue } },
-	-- { 'LspDiagnosticsSignError',       { fg = colors.red, gui = 'bold' } },
-	-- { 'LspDiagnosticsSignWarning',     { fg = '#d08770', gui = 'bold' } },
-	-- { 'LspDiagnosticsSignHint',        { fg = '#b988b0', gui = 'bold' } },
-	-- { 'LspDiagnosticsSignInformation', { fg = colors.purple, gui = 'bold' } },
 }
 
 local statuline_symbols = {
-	right = {
-		arrow = "",
-	},
-	left = {
-		arrow = "",
-	},
+	right = { arrow = "" },
+	left = { arrow = "" },
 }
 
-local black_placeholder = "    "
+local black_placeholder = "    "
 
-local function mode()
-	local current_mode = vim.api.nvim_get_mode().mode
-	return string.format(" %s ", modes[current_mode]):upper()
-end
-
+-- Modern Highlight Setter
 local set_hl = function(group, options)
-	local bg = options.bg == nil and '' or 'guibg=' .. options.bg
-	local fg = options.fg == nil and '' or 'guifg=' .. options.fg
-	local gui = options.gui == nil and '' or 'gui=' .. options.gui
-
-	vim.cmd(string.format('hi %s %s %s %s', group, bg, fg, gui))
+	vim.api.nvim_set_hl(0, group, {
+		fg = options.fg,
+		bg = options.bg,
+		bold = options.gui == 'bold'
+	})
 end
 
 for _, highlight in ipairs(highlights) do
 	set_hl(highlight[1], highlight[2])
 end
 
-local function update_mode_colors()
+local function mode()
 	local current_mode = vim.api.nvim_get_mode().mode
-	local mode_color = "%#StatusLine#"
-	if current_mode == "n" then
-		mode_color = "%#StatusLine#"
-	elseif current_mode == "i" or current_mode == "ic" then
-		mode_color = "%#StatusLineYellow#"
-	elseif current_mode == "v" or current_mode == "V" then
-		mode_color = "%#StatusLineBlue#"
-	elseif current_mode == "s" or current_mode == "S" then
-		mode_color = "%#StatusLineOrange#"
-	elseif current_mode == "R" then
-		mode_color = "%#StatusLineRed#"
-	elseif current_mode == "c" then
-		mode_color = "%#StatusLinePurple#"
-	elseif current_mode == "t" then
-		mode_color = "%#StatusLineGreen#"
-	end
-	return mode_color
+	return string.format(" %s ", modes[current_mode] or "UNKNOWN"):upper()
+end
+
+-- Fast Table Lookups for Mode Colors
+local mode_colors = {
+	n = "%#StatusLine#",
+	i = "%#StatusLineYellow#",
+	ic = "%#StatusLineYellow#",
+	v = "%#StatusLineBlue#",
+	V = "%#StatusLineBlue#",
+	["\22"] = "%#StatusLineBlue#",
+	s = "%#StatusLineOrange#",
+	S = "%#StatusLineOrange#",
+	R = "%#StatusLineRed#",
+	c = "%#StatusLinePurple#",
+	t = "%#StatusLineGreen#"
+}
+
+local mode_colors_trailing = {
+	n = "%#StatusLineTrail#",
+	i = "%#StatusLineYellowTrail#",
+	ic = "%#StatusLineYellowTrail#",
+	v = "%#StatusLineBlueTrail#",
+	V = "%#StatusLineBlueTrail#",
+	["\22"] = "%#StatusLineBlueTrail#",
+	s = "%#StatusLineOrangeTrail#",
+	S = "%#StatusLineOrangeTrail#",
+	R = "%#StatusLineRedTrail#",
+	c = "%#StatusLinePurpleTrail#",
+	t = "%#StatusLineGreenTrail#"
+}
+
+local function update_mode_colors()
+	local m = vim.api.nvim_get_mode().mode
+	return mode_colors[m] or "%#StatusLine#"
 end
 
 local function update_mode_colors_trailing()
-	local current_mode = vim.api.nvim_get_mode().mode
-	local mode_color = "%#StatusLineTrail#"
-	if current_mode == "n" then
-		mode_color = "%#StatusLineTrail#"
-	elseif current_mode == "i" or current_mode == "ic" then
-		mode_color = "%#StatusLineYellowTrail#"
-	elseif current_mode == "v" or current_mode == "V" or current_mode == "" then
-		mode_color = "%#StatusLineBlueTrail#"
-	elseif current_mode == "s" or current_mode == "S" then
-		mode_color = "%#StatusLineOrangeTrail#"
-	elseif current_mode == "R" then
-		mode_color = "%#StatusLineRedTrail#"
-	elseif current_mode == "c" then
-		mode_color = "%#StatusLinePurpleTrail#"
-	elseif current_mode == "t" then
-		mode_color = "%#StatusLineGreenTrail#"
-	end
-	return mode_color
+	local m = vim.api.nvim_get_mode().mode
+	return mode_colors_trailing[m] or "%#StatusLineBlueTrail#"
 end
 
 local function file()
@@ -154,46 +138,34 @@ local function file()
 	return string.format(" %%<%s/", fpath) .. fname .. " "
 end
 
+-- Optimized Diagnostic Fetching
 local function lsp()
-	local count = {}
-	local levels = {
-		errors = "Error",
-		warnings = "Warn",
-		info = "Info",
-		hints = "Hint",
-	}
+	local count = { errors = 0, warnings = 0, info = 0, hints = 0 }
 
-	for k, level in pairs(levels) do
-		count[k] = vim.tbl_count(vim.diagnostic.get(0, { severity = level }))
-	end
-
-	local errors = ""
-	local warnings = ""
-	local hints = ""
-	local info = ""
-
-	if count["errors"] ~= 0 then
-		errors = "%#DxError# " .. count["errors"] .. " "
-	end
-	if count["warnings"] ~= 0 then
-		warnings = "%#DxWarn# " .. count["warnings"] .. " "
-	end
-	if count["hints"] ~= 0 then
-		hints = "%#DxHint# " .. count["hints"] .. " "
-	end
-	if count["info"] ~= 0 then
-		info = "%#DxInfo#🛈 " .. count["info"] .. " "
+	if vim.fn.has("nvim-0.10") == 1 then
+		local diags = vim.diagnostic.count(0)
+		count.errors = diags[vim.diagnostic.severity.ERROR] or 0
+		count.warnings = diags[vim.diagnostic.severity.WARN] or 0
+		count.info = diags[vim.diagnostic.severity.INFO] or 0
+		count.hints = diags[vim.diagnostic.severity.HINT] or 0
+	else
+		count.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+		count.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+		count.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+		count.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
 	end
 
-	if count["errors"] == 0 and count["warnings"] == 0 and count["hints"] == 0 and count["info"] == 0 then
-		return ""
-	end
+	local out = {}
+	if count.errors > 0 then table.insert(out, "%#DxError# " .. count.errors .. " ") end
+	if count.warnings > 0 then table.insert(out, "%#DxWarn# " .. count.warnings .. " ") end
+	if count.hints > 0 then table.insert(out, "%#DxHint# " .. count.hints .. " ") end
+	if count.info > 0 then table.insert(out, "%#DxInfo#🛈 " .. count.info .. " ") end
 
-	return errors .. warnings .. hints .. info
+	if #out == 0 then return "" end
+	return table.concat(out)
 end
 
 local function filetype()
-	-- return string.format(" %s ", vim.bo.filetype):upper()
 	local icon, color = require("nvim-web-devicons").get_icon_colors_by_filetype(vim.bo.filetype)
 	local ft = vim.bo.filetype:upper()
 	if ft == "" then
@@ -212,7 +184,6 @@ local function lineinfo()
 	if vim.fn.expand "%P" == "" then
 		return ""
 	end
-	-- return "%P Ln:%l Col:%c "
 	return "%P Column:%c "
 end
 
@@ -221,25 +192,16 @@ local function vcs()
 	if not git_info or git_info.head == "" then
 		return ""
 	end
-	local added = git_info.added and (" " .. "%#GitAdd#+" .. git_info.added) or ""
-	local changed = git_info.changed and (" " .. "%#GitChange#~" .. git_info.changed) or ""
-	local removed = git_info.removed and (" " .. "%#GitDelete#-" .. git_info.removed) or ""
-	if git_info.added == 0 then
-		added = ""
-	end
-	if git_info.changed == 0 then
-		changed = ""
-	end
-	if git_info.removed == 0 then
-		removed = ""
-	end
+	local added = git_info.added and git_info.added > 0 and (" " .. "%#GitAdd#+" .. git_info.added) or ""
+	local changed = git_info.changed and git_info.changed > 0 and (" " .. "%#GitChange#~" .. git_info.changed) or ""
+	local removed = git_info.removed and git_info.removed > 0 and (" " .. "%#GitDelete#-" .. git_info.removed) or ""
+
 	return table.concat {
 		"%#GitAdd#  ",
 		git_info.head,
 		added,
 		changed,
 		removed,
-		-- "%#Normal#",
 	}
 end
 
@@ -275,11 +237,19 @@ function Statusline.short()
 	}
 end
 
-vim.api.nvim_exec([[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinEnter,BufEnter,FileType NvimTree_1 setlocal statusline=%!v:lua.Statusline.short()
-  augroup END
-]], false)
+-- Modern Autocommands
 vim.o.laststatus = 3
+
+local stl_group = vim.api.nvim_create_augroup("StatuslineGroup", { clear = true })
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+	group = stl_group,
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "NvimTree" then
+			vim.wo.statusline = "%!v:lua.Statusline.short()"
+		else
+			vim.wo.statusline = "%!v:lua.Statusline.active()"
+		end
+	end
+})

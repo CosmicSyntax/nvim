@@ -1,4 +1,4 @@
-local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('lazyConfigs.shared')
 
 -- Enable Lua language server
 vim.lsp.config["lua_ls"] = {

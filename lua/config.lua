@@ -1,59 +1,30 @@
--- Treesitter
-require 'nvim-treesitter'.setup {
-	highlight = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	autopairs = {
-		enable = true,
-	},
+-- ==========================================
+-- 1. Treesitter
+-- ==========================================
+require('nvim-treesitter').setup {
+	highlight = { enable = true },
+	indent = { enable = true },
+	autopairs = { enable = true },
 }
-require 'nvim-treesitter'.install {
-	"c",
-	"lua",
-	"vim",
-	"rust",
-	"zig",
-	"go",
-	"python",
-	"bash",
-	"typescript",
-	"cpp",
-	"sql",
-	"html",
-	"markdown",
-	"markdown_inline",
-	"terraform",
-	"vimdoc",
-	"regex",
-	"toml",
-	"yaml",
-	"helm",
-	"dockerfile",
-	"http",
+require('nvim-treesitter').install {
+	"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript",
+	"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc",
+	"regex", "toml", "yaml", "helm", "dockerfile", "http",
 }
 
--- Nvim Telescope
-require("telescope").setup {
+-- ==========================================
+-- 2. Telescope
+-- ==========================================
+local telescope = require("telescope")
+telescope.setup {
 	defaults = {
 		vimgrep_arguments = {
-			'rg',
-			'--no-heading',
-			'--with-filename',
-			'--line-number',
-			'--column',
-			'--smart-case',
-			'--glob',
-			'!**/Cargo.lock',
-			-- '-.'
+			'rg', '--no-heading', '--with-filename', '--line-number',
+			'--column', '--smart-case', '--glob', '!**/Cargo.lock',
 		},
 	},
 	pickers = {
 		find_files = {
-			-- theme = "dropdown",
-			-- hidden = true,
 			find_command = { "fd", "--type", "f", "--no-ignore", "--hidden", "--exclude", ".git", "--exclude", "target" },
 		},
 	},
@@ -63,22 +34,20 @@ require("telescope").setup {
 		}
 	}
 }
-require('telescope').load_extension('fzf')
-require("telescope").load_extension("ui-select")
+telescope.load_extension('fzf')
+telescope.load_extension("ui-select")
 
--- Nord... because there is nothing better
+-- ==========================================
+-- 3. Colorscheme (Nord)
+-- ==========================================
 require("nord").setup({
-	transparent = false,     -- Enable this to disable setting the background color
-	terminal_colors = true,  -- Configure the colors used when opening a `:terminal` in Neovim
-	diff = { mode = "bg" },  -- enables/disables colorful backgrounds when used in diff mode. values : [bg|fg]
-	borders = true,          -- Enable the border between verticaly split windows visible
-	errors = { mode = "bg" }, -- Display mode for errors and diagnostics
-	-- values : [bg|fg|none]
-	search = { theme = "vim" }, -- theme for highlighting search results
-	-- values : [vim|vscode]
+	transparent = false,
+	terminal_colors = true,
+	diff = { mode = "bg" },
+	borders = true,
+	errors = { mode = "bg" },
+	search = { theme = "vim" },
 	styles = {
-		-- Style to be applied to different syntax groups
-		-- Value is any valid attr-list value for `:help nvim_set_hl`
 		comments = { italic = true },
 		keywords = {},
 		functions = { bold = true },
@@ -87,18 +56,27 @@ require("nord").setup({
 })
 
 vim.cmd("colorscheme nord")
--- vim.cmd([[highlight Comment cterm=italic gui=italic]])
--- vim.cmd([[highlight Function cterm=bold gui=bold]])
-vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b" })
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
-vim.api.nvim_set_hl(0, 'WinSeparator', { fg = "#4c566a" })
-vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { link = 'DiffDelete' })
-vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
 
--- Enable diagnostics
+-- Wrap overrides in an augroup so they persist if the colorscheme is ever reloaded
+local hl_group = vim.api.nvim_create_augroup("CustomHighlights", { clear = true })
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = hl_group,
+	pattern = "*",
+	callback = function()
+		vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b" })
+		vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
+		vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
+		vim.api.nvim_set_hl(0, 'WinSeparator', { fg = "#4c566a" })
+		vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight', { link = 'DiffAdd' })
+		vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { link = 'DiffDelete' })
+		vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { link = 'DiffAdd' })
+		vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
+	end,
+})
+
+-- ==========================================
+-- 4. Diagnostics
+-- ==========================================
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,

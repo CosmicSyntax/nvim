@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 						-- FETCH CLIENT AND ITERATE OVER ATTACHED_BUFFERS
 						local ctx_client = vim.lsp.get_client_by_id(ctx.client_id)
 						if ctx_client then
-							for bufnr, _ in pairs(ctx_client.attached_buffers) do
+							for _, _ in pairs(ctx_client.attached_buffers) do
 								vim.lsp.inlay_hint.enable(false)
 								enable_inlay_hints()
 							end

@@ -1,110 +1,125 @@
-local cmd = vim.cmd
+-- ==========================================
+-- 1. General Settings & Autocommands
+-- ==========================================
+vim.opt.wildignore:append("target/**")
 
-cmd([[autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>]])
-cmd([[set wildignore+=target/**]])
+-- Modern autocommand to close quickfix list on Enter
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.keymap.set("n", "<CR>", "<CR><cmd>cclose<CR>",
+			{ buffer = true, silent = true, desc = "Jump to error and close Quickfix" })
+	end,
+})
 
-local map = vim.api.nvim_set_keymap
-local defo = { noremap = true, silent = true }
+-- ==========================================
+-- 2. Keymaps Setup
+-- ==========================================
+local map = vim.keymap.set
+-- We no longer need `noremap = true` because it is the default for vim.keymap.set
+local opts = { silent = true }
 
 -- Copilot
-vim.keymap.set("i", "<C-a>", function()
-	require("copilot.suggestion").accept()
-end)
-vim.keymap.set("i", "<C-s>", function()
-	require("copilot.suggestion").next()
-end)
+map("i", "<C-a>", function() require("copilot.suggestion").accept() end, { desc = "Copilot Accept" })
+map("i", "<C-s>", function() require("copilot.suggestion").next() end, { desc = "Copilot Next" })
 
--- Map jet-pack
-map("n", "<leader>l", ':ls<CR>:b<space>', { noremap = true, silent = false })
+-- Buffer Management (Leaving command line open for input)
+map("n", "<leader>l", ":ls<CR>:b ", { silent = false, desc = "List and switch buffers" })
+map("n", "<leader>d", ":ls<CR>:bd ", { silent = false, desc = "List and delete buffers" })
 
 -- Horizontal scrolling
-map("n", "<C-h>", '20zh', defo)
-map("n", "<C-l>", '20zl', defo)
+map("n", "<C-h>", "20zh", { silent = true, desc = "Scroll Left" })
+map("n", "<C-l>", "20zl", { silent = true, desc = "Scroll Right" })
 
--- Map jet-pack removal
-map("n", "<leader>d", ':ls<CR>:bd<space>', { noremap = true, silent = false })
+-- Terminal launch
+map("n", "<leader>tv", "<cmd>vsplit | terminal<CR>", { silent = true, desc = "Terminal (Vertical)" })
+map("n", "<leader>ts", "<cmd>split | terminal<CR>", { silent = true, desc = "Terminal (Horizontal)" })
+map("t", "<C-space>", "<C-\\><C-n>", { silent = true, desc = "Exit Terminal Mode" })
 
--- Map terminal launch shortcut
-map("n", "<leader>tv", ':vsplit | terminal<CR>', defo)
-map("n", "<leader>ts", ':split | terminal<CR>', defo)
+-- Copy to system clipboard
+map("v", "<C-c>", '"+y', { silent = true, desc = "Yank to System Clipboard" })
 
--- Show dianostic popup on cursor hold
-map("n", "<space>d", ':lua vim.diagnostic.open_float()<CR>', defo)
--- Move to dx
-map("n", "]d", ':lua vim.diagnostic.jump({count=1, float=true})<CR>', defo)
-map("n", "[d", ':lua vim.diagnostic.jump({count=-1, float=true})<CR>', defo)
+-- Formatting & Spacing tweaks
+map("n", "<leader>st", "<cmd>set shiftwidth=2 | set tabstop=2 | set expandtab<CR>",
+	{ silent = true, desc = "Set 2-space tabs" })
+map("n", "<leader>f", vim.lsp.buf.format, { silent = true, desc = "Format Buffer" })
 
--- Mapping for Telescope
-map("n", "<F9>", ':Telescope find_files<CR>', defo)
-map("n", "<F8>", ':Telescope live_grep<CR>', defo)
-map("n", "<F10>", ':Telescope quickfix<CR>', defo)
-map("n", "<F11>", ':Telescope buffers<CR>', defo)
-map("n", "<F12>", ':Telescope treesitter<CR>', defo)
+-- Plugin Manager
+map("n", "<leader>pp", function() vim.pack.update() end, { silent = true, desc = "Update Plugins" })
 
--- Maaping for Lazy
-map("n", "<leader>pp", ':Lazy show<CR>', defo)
+-- ==========================================
+-- 3. UI & Navigation Plugins
+-- ==========================================
+-- Nvim Tree
+map("n", "<F7>", "<cmd>NvimTreeToggle<CR>", opts)
+map("n", "<leader>r", "<cmd>NvimTreeRefresh<CR>", opts)
+map("n", "<leader>n", "<cmd>NvimTreeFindFile<CR>", opts)
 
--- Mapping for copy into clipboard
-map("v", "<C-c>", '"+y', defo)
+-- Windows Maximize
+map("n", "<leader>mm", "<cmd>WindowsMaximize<CR>", opts)
 
--- Mapping for Nvim Tree Explorer
-map("n", "<F7>", ':NvimTreeToggle<CR>', defo)
-map("n", "<leader>r", ':NvimTreeRefresh<CR>', defo)
-map("n", "<leader>n", ':NvimTreeFindFile<CR>', defo)
+-- Telescope
+map("n", "<F8>", "<cmd>Telescope live_grep<CR>", opts)
+map("n", "<F9>", "<cmd>Telescope find_files<CR>", opts)
+map("n", "<F10>", "<cmd>Telescope quickfix<CR>", opts)
+map("n", "<F11>", "<cmd>Telescope buffers<CR>", opts)
+map("n", "<F12>", "<cmd>Telescope treesitter<CR>", opts)
 
--- Mapping for maximizing buffer
-map("n", "<leader>mm", ':WindowsMaximize<CR>', defo)
+-- ==========================================
+-- 4. LSP & Diagnostics
+-- ==========================================
+-- Native Diagnostics
+map("n", "<space>d", vim.diagnostic.open_float, { silent = true, desc = "Line Diagnostics" })
+map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end,
+	{ silent = true, desc = "Next Diagnostic" })
+map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end,
+	{ silent = true, desc = "Prev Diagnostic" })
 
--- Mapping Trouble diagnostics
-map("n", "<space>a", ':Trouble diagnostics toggle<CR>', defo)
-map("n", "<space>z", ':Trouble diagnostics toggle filter.buf=0<CR>', defo)
-map("n", "<space>q", ':Trouble quickfix toggle<CR>', defo)
+-- Trouble
+map("n", "<space>a", "<cmd>Trouble diagnostics toggle<CR>", opts)
+map("n", "<space>z", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", opts)
+map("n", "<space>q", "<cmd>Trouble quickfix toggle<CR>", opts)
 
--- Mapping for Gitsigns
-map("n", "]c", ':Gitsigns next_hunk<CR>', defo)
-map("n", "[c", ':Gitsigns prev_hunk<CR>', defo)
-map("n", "<leader>gs", ':Gitsigns stage_hunk<CR>', defo)
-map("n", "<leader>gr", ':Gitsigns reset_hunk<CR>', defo)
-map("n", "<leader>gp", ':Gitsigns preview_hunk_inline<CR>', defo)
-map("n", "<leader>gb", ':Git blame_line<CR>', defo)
+-- LSP Actions (Pure Lua)
+map("n", "K", vim.lsp.buf.hover, { silent = true, desc = "LSP Hover" })
+map("n", "<c-k>", vim.lsp.buf.signature_help, { silent = true, desc = "LSP Signature Help" })
+map("n", "g0", vim.lsp.buf.document_symbol, { silent = true, desc = "LSP Document Symbols" })
+map("n", "gw", vim.lsp.buf.workspace_symbol, { silent = true, desc = "LSP Workspace Symbols" })
+map("n", "ga", vim.lsp.buf.code_action, { silent = true, desc = "LSP Code Action" })
 
--- Mapping for LSP configuration
-map("n", "K", '<cmd>lua vim.lsp.buf.hover()<CR>', defo)
-map("n", "<c-k>", '<cmd>lua vim.lsp.buf.signature_help()<CR>', defo)
-map("n", "gi", '<cmd>Trouble lsp_implementations toggle focus=true auto_jump=true<cr>', defo)
-map("n", "gr", '<cmd>Trouble lsp_references toggle focus=true auto_jump=true<cr>', defo)
-map("n", "gd", '<cmd>Trouble lsp_definitions toggle focus=true auto_jump=true<cr>', defo)
-map("n", "gD", '<cmd>Trouble lsp_declarations toggle focus=true auto_jump=true<cr>', defo)
-map("n", "g0", '<cmd>lua vim.lsp.buf.document_symbol()<CR>', defo)
-map("n", "gw", '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', defo)
-map("n", "ga", '<cmd>lua vim.lsp.buf.code_action()<CR>', defo)
-map("n", "gt", '<cmd>Trouble lsp_type_definitions toggle focus=true auto_jump=true<cr>', defo)
+-- LSP Jumping (via Trouble)
+map("n", "gi", "<cmd>Trouble lsp_implementations toggle focus=true auto_jump=true<cr>", opts)
+map("n", "gr", "<cmd>Trouble lsp_references toggle focus=true auto_jump=true<cr>", opts)
+map("n", "gd", "<cmd>Trouble lsp_definitions toggle focus=true auto_jump=true<cr>", opts)
+map("n", "gD", "<cmd>Trouble lsp_declarations toggle focus=true auto_jump=true<cr>", opts)
+map("n", "gt", "<cmd>Trouble lsp_type_definitions toggle focus=true auto_jump=true<cr>", opts)
 
--- Mapping for Neogit
-map("n", "<leader>gg", ':Neogit<CR>', defo)
+-- ==========================================
+-- 5. Git & Debugging Tools
+-- ==========================================
+-- Gitsigns & Neogit
+map("n", "]c", "<cmd>Gitsigns next_hunk<CR>", opts)
+map("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", opts)
+map("n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
+map("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
+map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>", opts)
+map("n", "<leader>gb", "<cmd>Git blame_line<CR>", opts)
+map("n", "<leader>gg", "<cmd>Neogit<CR>", opts)
 
--- Mapping for vimspector debugging
-map("n", "<leader>vl", ':call vimspector#Launch()<CR>', defo)
-map("n", "<leader>vr", ':VimspectorReset<CR>', defo)
-map("n", "<leader>vb", ':call vimspector#ToggleBreakpoint()<CR>', defo)
-map("n", "<leader>vn", ':call vimspector#StepOver()<CR>', defo)
-map("n", "<leader>vs", ':call vimspector#StepInto()<CR>', defo)
-map("n", "<leader>vo", ':call vimspector#StepOut()<CR>', defo)
-map("n", "<leader>vh", ':call vimspector#RunToCursor()<CR>', defo)
-map("n", "<leader>vc", ':call vimspector#Continue()<CR>', defo)
-local g = vim.g
-g.vimspector_install_gadgets = [['CodeLLDB']]
-g.vimspector_variables_display_mode = 'full'
+-- Kulala (API testing)
+map("n", "<leader>kr", function() require("kulala").run() end, { silent = true, desc = "Kulala Run" })
+map("n", "<leader>ka", function() require("kulala").run_all() end, { silent = true, desc = "Kulala Run All" })
 
--- Mapping for Kulaja
-map("n", "<leader>kr", '<cmd>lua require("kulala").run()<CR>', defo)
-map("n", "<leader>ka", '<cmd>lua require("kulala").run_all()<CR>', defo)
+-- Vimspector
+-- Note: Vimspector uses Vimscript functions extensively, so `<cmd>call...` is still the best approach here.
+map("n", "<leader>vl", "<cmd>call vimspector#Launch()<CR>", opts)
+map("n", "<leader>vr", "<cmd>VimspectorReset<CR>", opts)
+map("n", "<leader>vb", "<cmd>call vimspector#ToggleBreakpoint()<CR>", opts)
+map("n", "<leader>vn", "<cmd>call vimspector#StepOver()<CR>", opts)
+map("n", "<leader>vs", "<cmd>call vimspector#StepInto()<CR>", opts)
+map("n", "<leader>vo", "<cmd>call vimspector#StepOut()<CR>", opts)
+map("n", "<leader>vh", "<cmd>call vimspector#RunToCursor()<CR>", opts)
+map("n", "<leader>vc", "<cmd>call vimspector#Continue()<CR>", opts)
 
--- Mapping for TS spacing
-map("n", "<leader>st", ':set shiftwidth=2 | set tabstop=2 | set expandtab<CR>', defo)
-
--- Mapping for formatting
-map("n", "<leader>f", ':lua vim.lsp.buf.format()<CR>', defo)
-
--- Exit Terminal modes
-map("t", "<C-space>", '<C-\\><C-n>', defo)
+vim.g.vimspector_install_gadgets = { 'CodeLLDB' }
+vim.g.vimspector_variables_display_mode = 'full'
