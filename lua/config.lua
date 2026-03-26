@@ -1,16 +1,18 @@
 -- ==========================================
 -- 1. Treesitter
 -- ==========================================
-require('nvim-treesitter').setup {
+local ntree = require('nvim-treesitter')
+
+ntree.setup {
 	-- Moved your parser list here using the correct 'ensure_installed' API
-	ensure_installed = {
-		"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript",
-		"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc",
-		"regex", "toml", "yaml", "helm", "dockerfile", "http",
-	},
 	highlight = { enable = true },
 	indent = { enable = true },
 	autopairs = { enable = true },
+}
+ntree.install {
+	"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript",
+	"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc",
+	"regex", "toml", "yaml", "helm", "dockerfile", "http",
 }
 
 -- ==========================================
@@ -20,7 +22,7 @@ local telescope = require("telescope")
 telescope.setup {
 	defaults = {
 		vimgrep_arguments = {
-			'rg', '--no-heading', '--with-filename', '--line-number', 
+			'rg', '--no-heading', '--with-filename', '--line-number',
 			'--column', '--smart-case', '--glob', '!**/Cargo.lock',
 		},
 	},
