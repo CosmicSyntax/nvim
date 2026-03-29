@@ -88,11 +88,11 @@ map("n", "gw", vim.lsp.buf.workspace_symbol, { silent = true, desc = "LSP Worksp
 map("n", "ga", vim.lsp.buf.code_action, { silent = true, desc = "LSP Code Action" })
 
 -- LSP Jumping (via Trouble)
-map("n", "gi", "<cmd>Trouble lsp_implementations toggle focus=true auto_jump=true<cr>", opts)
-map("n", "gr", "<cmd>Trouble lsp_references toggle focus=true auto_jump=true<cr>", opts)
-map("n", "gd", "<cmd>Trouble lsp_definitions toggle focus=true auto_jump=true<cr>", opts)
-map("n", "gD", "<cmd>Trouble lsp_declarations toggle focus=true auto_jump=true<cr>", opts)
-map("n", "gt", "<cmd>Trouble lsp_type_definitions toggle focus=true auto_jump=true<cr>", opts)
+map("n", "gi", "<cmd>Trouble lsp_implementations toggle focus=true auto_jump=true auto_close=true<cr>", opts)
+map("n", "gr", "<cmd>Trouble lsp_references toggle focus=true auto_jump=true auto_close=true<cr>", opts)
+map("n", "gd", "<cmd>Trouble lsp_definitions toggle focus=true auto_jump=true auto_close=true<cr>", opts)
+map("n", "gD", "<cmd>Trouble lsp_declarations toggle focus=true auto_jump=true auto_close=true<cr>", opts)
+map("n", "gt", "<cmd>Trouble lsp_type_definitions toggle focus=true auto_jump=true auto_close=true<cr>", opts)
 
 -- ==========================================
 -- 5. Git & Debugging Tools

@@ -17,7 +17,7 @@ vim.lsp.config['rust-analyzer'] = {
 			},
 			cargo = {
 				buildScripts = { enable = true },
-				features = { "full" },
+				-- features = { "full" },
 			},
 			procMacro = { enable = true },
 			inlayHints = {
