@@ -44,7 +44,10 @@ vim.pack.add({
 	'https://github.com/zbirenbaum/copilot.lua',
 
 	-- Syntax & Treesitter
-	'https://github.com/nvim-treesitter/nvim-treesitter',
+	{
+		src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+		branch = 'main',
+	},
 
 	-- UI & Navigation
 	'https://github.com/kyazdani42/nvim-web-devicons', -- dependency for nvim-tree
