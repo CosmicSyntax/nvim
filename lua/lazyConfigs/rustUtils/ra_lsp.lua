@@ -30,7 +30,7 @@ function M.client_is_ra(client)
     if client.name == "rust_analyzer" or client.name == "rust-analyzer" then
         return true
     end
-    local response = client.request_sync("rust-analyzer/analyzerStatus", {}, 100, 0)
+    local response = client:request_sync("rust-analyzer/analyzerStatus", {}, 100, 0)
     return response ~= nil and response.result ~= nil
 end
 
