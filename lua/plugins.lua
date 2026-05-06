@@ -77,8 +77,6 @@ vim.pack.add({
 })
 
 -- 3. Setup Configurations
-vim.cmd.colorscheme('nord')
-
 require('nvim-tree').setup({
 	view = { width = 40 },
 	filters = { dotfiles = false },
