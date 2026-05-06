@@ -1,6 +1,7 @@
 -- Start of UI Setting
 local opt = vim.opt
 
+opt.cursorline = true
 opt.relativenumber = true
 opt.number = true
 opt.tabstop = 4
@@ -9,7 +10,7 @@ opt.signcolumn = "yes"
 opt.mouse = "a"
 opt.completeopt = [[menuone,noinsert,noselect]]
 opt.guicursor = [[n:block-blinkon250,v:hor100-blinkon250,i:ver100-blinkon250]]
-opt.updatetime = 1000
+opt.updatetime = 4000
 opt.foldmethod = "indent"
 opt.winblend = 20
 opt.termguicolors = true

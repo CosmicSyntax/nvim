@@ -17,6 +17,7 @@ local modes = {
 	["r?"] = "CONFIRM",
 	["!"] = "SHELL",
 	["t"] = "TERMINAL",
+	["u"] = "UNKNOWN",
 }
 
 local colors = {
