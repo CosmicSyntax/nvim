@@ -1,7 +1,7 @@
 -- Start of UI Setting
 local opt = vim.opt
 
-opt.cursorline = true
+-- opt.cursorline = true
 opt.relativenumber = true
 opt.number = true
 opt.tabstop = 4
