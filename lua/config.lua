@@ -10,7 +10,7 @@ ntree.setup {
 	autopairs = { enable = true },
 }
 ntree.install {
-	"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript",
+	"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript", "htmldjango",
 	"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc",
 	"regex", "toml", "yaml", "helm", "dockerfile", "http", "javascript"
 }
