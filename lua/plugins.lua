@@ -142,7 +142,7 @@ for patterns, modules in pairs(lazy_loads) do
 			end
 			local ok, err = pcall(vim.treesitter.start)
 			if not ok then
-				vim.notify("Failed to start treesitter for: " .. mod .. "\n" .. err, vim.log.levels.ERROR)
+				vim.notify("Failed to start treesitter for " .. vim.bo.filetype .. "\n" .. err, vim.log.levels.ERROR)
 			end
 		end
 	})
