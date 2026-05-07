@@ -64,7 +64,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	group = hl_group,
 	pattern = "*",
 	callback = function()
-		vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b", bold = true })
+		vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b", italic = true })
 		vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
 		vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
 		-- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#ebcb8b" })
