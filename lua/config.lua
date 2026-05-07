@@ -67,6 +67,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, 'LineNr', { fg = "#ebcb8b", italic = true })
 		vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = "#4c566a" })
 		vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = "#4c566a" })
+		vim.api.nvim_set_hl(0, 'NormalFloat', { link = "Pmenu" })
+		vim.api.nvim_set_hl(0, 'FloatBorder', { link = "Pmenu" })
 		-- vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = "#ebcb8b" })
 		vim.api.nvim_set_hl(0, 'WinSeparator', { fg = "#4c566a" })
 		vim.api.nvim_set_hl(0, 'NeogitDiffAddHighlight', { link = 'DiffAdd' })
