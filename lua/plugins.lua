@@ -140,6 +140,10 @@ for patterns, modules in pairs(lazy_loads) do
 					vim.notify("Failed to load: " .. mod .. "\n" .. err, vim.log.levels.ERROR)
 				end
 			end
+			local ok, err = pcall(vim.treesitter.start)
+			if not ok then
+				vim.notify("Failed to start treesitter for: " .. mod .. "\n" .. err, vim.log.levels.ERROR)
+			end
 		end
 	})
 end
@@ -151,6 +155,10 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function()
 		if vim.fn.expand('%:t') == 'Cargo.toml' then
 			require('crates').setup()
+		end
+		local ok, err = pcall(vim.treesitter.start)
+		if not ok then
+			vim.notify("Failed to start treesitter for crates.toml\n" .. err, vim.log.levels.ERROR)
 		end
 	end
 })
