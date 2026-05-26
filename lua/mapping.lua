@@ -109,6 +109,7 @@ map("n", "<leader>gg", "<cmd>Neogit<CR>", opts)
 -- Kulala (API testing)
 map("n", "<leader>kr", function() require("kulala").run() end, { silent = true, desc = "Kulala Run" })
 map("n", "<leader>ka", function() require("kulala").run_all() end, { silent = true, desc = "Kulala Run All" })
+map("n", "<leader>ke", function() require("kulala").set_selected_env() end, { silent = true, desc = "Kulala Set Env" })
 
 -- Vimspector
 -- Note: Vimspector uses Vimscript functions extensively, so `<cmd>call...` is still the best approach here.

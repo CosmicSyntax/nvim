@@ -11,7 +11,7 @@ ntree.setup {
 }
 ntree.install {
 	"c", "lua", "vim", "rust", "zig", "go", "python", "bash", "typescript", "htmldjango",
-	"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc",
+	"cpp", "sql", "html", "markdown", "markdown_inline", "terraform", "vimdoc", "css",
 	"regex", "toml", "yaml", "helm", "dockerfile", "http", "javascript"
 }
 
