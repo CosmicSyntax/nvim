@@ -75,6 +75,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		vim.api.nvim_set_hl(0, 'NeogitDiffDeleteHighlight', { link = 'DiffDelete' })
 		vim.api.nvim_set_hl(0, 'NeogitDiffAdd', { link = 'DiffAdd' })
 		vim.api.nvim_set_hl(0, 'NeogitDiffDelete', { link = 'DiffDelete' })
+		-- Ensure the satellite search marks inherit your main search colors
+		vim.api.nvim_set_hl(0, 'SatelliteSearch', { link = 'Search' })
 	end,
 })
 vim.cmd("colorscheme nord")
