@@ -31,6 +31,8 @@ vim.lsp.config["tailwindcss"] = {
 		'vue',
 		'svelte',
 		'templ',
+		-- Dioxus
+		'rust',
 	},
 	settings = {
 		tailwindCSS = {
@@ -50,6 +52,11 @@ vim.lsp.config["tailwindcss"] = {
 				'class:list',
 				'classList',
 				'ngClass',
+			},
+			experimental = {
+				classRegex = {
+					"class:\\s*\"([^\"]*)\""
+				},
 			},
 		},
 	},

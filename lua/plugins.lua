@@ -96,21 +96,21 @@ require('lazyConfigs.tools')
 -- A data-driven approach to lazy loading. This replaces 45+ lines of
 -- repetitive function calls with a single, clean routing table.
 local lazy_loads = {
-	[{ 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' }]                                                    = { 'lazyConfigs.ts.ts', 'lazyConfigs.inlay' },
-	[{ 'rust' }]                                                                                                                 = { 'lazyConfigs.rust.rust', 'lazyConfigs.inlay' },
-	[{ 'go' }]                                                                                                                   = { 'lazyConfigs.go.go', 'lazyConfigs.inlay' },
-	[{ 'python' }]                                                                                                               = { 'lazyConfigs.python.python' },
-	[{ 'sh' }]                                                                                                                   = { 'lazyConfigs.bash.bash', 'lazyConfigs.inlay' },
-	[{ 'c', 'cpp' }]                                                                                                             = { 'lazyConfigs.c.c', 'lazyConfigs.inlay' },
-	[{ 'sql' }]                                                                                                                  = { 'lazyConfigs.sql.sql' },
-	[{ 'vue' }]                                                                                                                  = { 'lazyConfigs.vue.vue' },
-	[{ 'terraform', 'terraform-vars' }]                                                                                          = { 'lazyConfigs.tf.tf' },
-	[{ 'dockerfile' }]                                                                                                           = { 'lazyConfigs.docker.docker' },
-	[{ 'lua' }]                                                                                                                  = { 'lazyConfigs.lua.lua', 'lazyConfigs.inlay' },
-	[{ 'zig' }]                                                                                                                  = { 'lazyConfigs.zig.zig', 'lazyConfigs.inlay' },
-	[{ 'http', 'rest' }]                                                                                                         = { 'lazyConfigs.kulala.kulala', 'lazyConfigs.inlay' },
+	[{ 'typescript', 'typescriptreact', 'javascript', 'html', 'htmldjango' }]                                                            = { 'lazyConfigs.ts.ts', 'lazyConfigs.inlay' },
+	[{ 'rust' }]                                                                                                                         = { 'lazyConfigs.rust.rust', 'lazyConfigs.inlay' },
+	[{ 'go' }]                                                                                                                           = { 'lazyConfigs.go.go', 'lazyConfigs.inlay' },
+	[{ 'python' }]                                                                                                                       = { 'lazyConfigs.python.python' },
+	[{ 'sh' }]                                                                                                                           = { 'lazyConfigs.bash.bash', 'lazyConfigs.inlay' },
+	[{ 'c', 'cpp' }]                                                                                                                     = { 'lazyConfigs.c.c', 'lazyConfigs.inlay' },
+	[{ 'sql' }]                                                                                                                          = { 'lazyConfigs.sql.sql' },
+	[{ 'vue' }]                                                                                                                          = { 'lazyConfigs.vue.vue' },
+	[{ 'terraform', 'terraform-vars' }]                                                                                                  = { 'lazyConfigs.tf.tf' },
+	[{ 'dockerfile' }]                                                                                                                   = { 'lazyConfigs.docker.docker' },
+	[{ 'lua' }]                                                                                                                          = { 'lazyConfigs.lua.lua', 'lazyConfigs.inlay' },
+	[{ 'zig' }]                                                                                                                          = { 'lazyConfigs.zig.zig', 'lazyConfigs.inlay' },
+	[{ 'http', 'rest' }]                                                                                                                 = { 'lazyConfigs.kulala.kulala', 'lazyConfigs.inlay' },
 	-- Tailwind covers multiple overlapping types
-	[{ 'html', 'htmldjango', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'vue' }] = { 'lazyConfigs.tailwind.tailwind', 'lazyConfigs.inlay' },
+	[{ 'html', 'htmldjango', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'svelte', 'vue', 'rust' }] = { 'lazyConfigs.tailwind.tailwind', 'lazyConfigs.inlay' },
 }
 
 local lazy_group = vim.api.nvim_create_augroup('LazyConfigs', { clear = true })
