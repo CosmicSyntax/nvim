@@ -106,6 +106,9 @@ map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk_inline<CR>", opts)
 map("n", "<leader>gb", "<cmd>Git blame_line<CR>", opts)
 map("n", "<leader>gg", "<cmd>Neogit<CR>", opts)
 
+-- DiffView close
+map("n", "<leader>c", "<cmd>DiffviewClose<CR>", opts)
+
 -- Kulala (API testing)
 map("n", "<leader>kr", function() require("kulala").run() end, { silent = true, desc = "Kulala Run" })
 map("n", "<leader>ka", function() require("kulala").run_all() end, { silent = true, desc = "Kulala Run All" })
