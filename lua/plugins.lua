@@ -82,8 +82,12 @@ require('nvim-tree').setup({
 	filters = { dotfiles = false },
 })
 
-require('copilot').setup({})
-require('neogit').setup()
+require('copilot').setup()
+require('neogit').setup({
+	integrations = {
+		telescope = false,
+	},
+})
 require('satellite').setup()
 
 -- Your external tool setups
