@@ -30,10 +30,20 @@ telescope.setup {
 		},
 		mappings = {
 			i = {
-				["<C-q>"] = open_with_trouble,
+				["<C-q>"] = function(prompt_bufnr)
+					-- 1. Send results to the actual quickfix list
+					actions.send_to_qflist(prompt_bufnr)
+					-- 2. Open Trouble using the quickfix list data
+					require("trouble").open("quickfix")
+				end,
 			},
 			n = {
-				["<C-q>"] = open_with_trouble,
+				["<C-q>"] = function(prompt_bufnr)
+					-- 1. Send results to the actual quickfix list
+					actions.send_to_qflist(prompt_bufnr)
+					-- 2. Open Trouble using the quickfix list data
+					require("trouble").open("quickfix")
+				end,
 			},
 		},
 	},
