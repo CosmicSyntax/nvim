@@ -19,11 +19,22 @@ ntree.install {
 -- 2. Telescope
 -- ==========================================
 local telescope = require("telescope")
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
 telescope.setup {
 	defaults = {
 		vimgrep_arguments = {
 			'rg', '--no-heading', '--with-filename', '--line-number',
 			'--column', '--smart-case', '--glob', '!**/Cargo.lock',
+		},
+		mappings = {
+			i = {
+				["<C-q>"] = open_with_trouble,
+			},
+			n = {
+				["<C-q>"] = open_with_trouble,
+			},
 		},
 	},
 	pickers = {
