@@ -16,7 +16,6 @@ vim.lsp.config['rust-analyzer'] = {
 			cargo = {
 				buildScripts = { enable = true },
 				features = { "full" },
-				targetDir = "target/rust-analyzer",
 			},
 			procMacro = { enable = true },
 			-- Disable initial workspace-wide cache building on startup
