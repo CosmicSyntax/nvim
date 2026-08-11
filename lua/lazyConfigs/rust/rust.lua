@@ -11,23 +11,40 @@ vim.lsp.config['rust-analyzer'] = {
 	capabilities = capabilities,
 	settings = {
 		["rust-analyzer"] = {
+			-- Prevents rust-analyzer from locking your main target/ directory
+			-- and fighting with your command-line terminal builds.
+			cargo = {
+				buildScripts = { enable = true },
+				features = { "full" },
+				targetDir = "target/rust-analyzer",
+			},
+			procMacro = { enable = true },
+			-- Disable initial workspace-wide cache building on startup
+			cachePriming = { enable = false },
+			-- Keep clippy but ignore external dependency warnings to save time
+			checkOnSave = {
+				command = "clippy",
+				extraArgs = { "--no-deps" },
+			},
 			imports = {
 				granularity = { group = "module" },
 				prefix = "self",
 			},
-			cargo = {
-				buildScripts = { enable = true },
-				-- features = { "full" },
-			},
-			procMacro = { enable = true },
+			-- Turn off intrusive inlay hints that recompute on every keystroke
 			inlayHints = {
 				enable = true,
-				showParameterNames = true,
+				bindingModeHints = { enable = false },
+				chainingHints = { enable = false },
+				closingBraceHints = { enable = false },
+				parameterHints = { enable = false },
+				typeHints = { enable = true },
 			},
-			checkOnSave = { command = "clippy" },
 			hover = {
 				memoryLayout = { niches = true },
 			},
+			workspace = {
+				discoverConfiguredRoles = false,
+			}
 		}
 	},
 }
