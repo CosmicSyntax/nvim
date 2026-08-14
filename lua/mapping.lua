@@ -113,6 +113,9 @@ map("n", "<leader>c", "<cmd>DiffviewClose<CR>", opts)
 map("n", "<leader>kr", function() require("kulala").run() end, { silent = true, desc = "Kulala Run" })
 map("n", "<leader>ka", function() require("kulala").run_all() end, { silent = true, desc = "Kulala Run All" })
 map("n", "<leader>ke", function() require("kulala").set_selected_env() end, { silent = true, desc = "Kulala Set Env" })
+map("n", "<leader>ks", function() require("kulala").search() end, { silent = true, desc = "Kulala Search" })
+map("n", "<leader>kc", function() require("kulala").copy() end, { silent = true, desc = "Kulala Copy Curl" })
+map("n", "<leader>kj", function() require("kulala").open_cookies_jar() end, { silent = true, desc = "Kulala Cookie Jar" })
 
 -- Vimspector
 -- Note: Vimspector uses Vimscript functions extensively, so `<cmd>call...` is still the best approach here.
